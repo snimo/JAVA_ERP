@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dicPaquete>
+  <defObjsPaquete>
+
+  <defPaquete nombre="Contabilidad">
+             <paqueteAuxiliar>
+               <nombre>Comunes</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+
+ <defPaquete nombre="compras">
+             <paqueteAuxiliar>
+               <nombre>Comunes</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+
+  <defPaquete nombre="impuestos">
+             <paqueteAuxiliar>
+               <nombre>Contabilidad</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+
+  <defPaquete nombre="Parametros">
+             <paqueteAuxiliar>
+               <nombre>Contabilidad</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+
+  <defPaquete nombre="ctasAPagar">
+             <paqueteAuxiliar>
+               <nombre>Comunes</nombre>
+               <nombre>Contabilidad</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+
+  <defPaquete nombre="stock">
+             <paqueteAuxiliar>
+               <nombre>Comunes</nombre>
+               <nombre>Contabilidad</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+
+  <defPaquete nombre="Pagos">
+             <paqueteAuxiliar>
+               <nombre>Comunes</nombre>
+               <nombre>Contabilidad</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+
+  <defPaquete nombre="Tesoreria">
+             <paqueteAuxiliar>
+               <nombre>Contabilidad</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+
+  <defPaquete nombre="Ventas">
+             <paqueteAuxiliar>
+               <nombre>Comunes</nombre>
+               <nombre>Contabilidad</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>
+  
+  <defPaquete nombre="CRM">
+             <paqueteAuxiliar>
+               <nombre>Comunes</nombre>
+             </paqueteAuxiliar>
+  </defPaquete>  
+  
+  <nombre>Comunes</nombre>
+
+  </defObjsPaquete>
+</dicPaquete>
+
+

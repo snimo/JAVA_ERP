@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+<!--  Todo lo que se encuentre dentro de la ruta WS se debería autenticar -->
+<security:http  pattern="/ws/**" auto-config="true"  use-expressions="true" >
+
+	  <security:intercept-url pattern="/ws/seguridad/datosEmpleadoSesion" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/getFotoEmpleado" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/isReseteoDeClavePendDeActivar" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/bajarArchivo" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/resetClavePorUsuario" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/generarNuevaClave" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/abrirSesionPorCorreo" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/isPermisoHabilitado" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/cerrarSesionPorLogin" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/actualizarFecHorUltAccesoWS" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/cerrarSesion" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/cerrarTodasLasSesiones" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/abrirSesionPorLogin" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/abrirSesionPorLegajo" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/activarRegistracionUsuario" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/registrarDatosUsuario" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/OlvidoElUsuario" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+	  <security:intercept-url pattern="/ws/seguridad/loguearOperacionUsuario" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+
+      <security:intercept-url pattern="/ws/infoPayroll/TramosEmpleado" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/infoPayroll/FiltroTramosEmpleado" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      
+      <security:intercept-url pattern="/ws/miGestion/GetParrafo" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetImpresionFormularios" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetProvinciasDomicilio" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetLocalidadesDomicilio" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetPreguntasGenerales" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetTieneNotificacion" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetListaNotificaciones" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/setEstadoLecturaNotificacion" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetFamiliaresEmpleado" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/getTramiteCambioDatosPersonales" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/modifDatosPersonales" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetTipoArchivoAW" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/getArchivoAW" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/OlvidoLaClave" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/ConfirmarEntregaAsignacion" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetAsignacionesVigentes" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetTiposCertificadosADP" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/SolicitarCertificadoADP" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/getRotaFechaACompensarSolicitante" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/getRotaFechaACambiarSolicitante" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/getLegajoCedenteCambioFranco" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/SolicitarCambioFranco" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/ConfirmarSolicitudCambioFranco" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetVistaCambioFrancoEmpleado" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/RechazarCambioFranco" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/AprobarCambioFrancoCedente" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/CumplesDeHoy" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/AreasConCumplesDelMes" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/CumplesDelMesDeUnArea" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/RecordarCumples" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/AprobarCambioFrancoSupervisor" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/AprobarCambioFrancoADP" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/ContactosTelefonicos" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetArchImagenDatosPers" access="hasRole('WEB_SERVICE')" /><security:http-basic />      
+      <security:intercept-url pattern="/ws/miGestion/SectoresContactosTelefonicos" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      
+      <security:intercept-url pattern="/ws/miGestion/GetEncuestasHabilitadas" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+      <security:intercept-url pattern="/ws/miGestion/GetEncuesta" access="hasRole('WEB_SERVICE')" /><security:http-basic />
+    
+                        
+</security:http>
+
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<security:http use-expressions="true">
+	
+	
+	
+	
+		<!-- Habilitar RESTFUL WEB-Services Sistema AUTOGESTION -->
+		
+		<!--  <security:intercept-url pattern="/seguridad/AWLoginUsuarioWEB" access="permitAll" ></security:intercept-url>--> 
+		<!--  <security:intercept-url pattern="/ws/seguridad/registrarDatosUsuario" access="permitAll" ></security:intercept-url>-->
+		
+		
+	<!--  	<security:intercept-url pattern="/ws/seguridad/registrarDatosUsuario" access="hasRole('WEB_SERVICE')" ></security:intercept-url> -->
+	<!--  	<security:intercept-url pattern="/ws/seguridad/activarRegistracionUsuario" access="hasRole('WEB_SERVICE')" ></security:intercept-url> -->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- <security:intercept-url pattern="/seguridad/AWLoginUsuarioWEB" access="hasRole('WEB_SERVICE')" /> --> 
+				
+		
+		<!-- Fin WEB-Services  -->
+	
+	
+		<!-- Esta linea es para habilitar la llamada al servlet desde el navegador 
+			Delphi -->
+			
+		<security:intercept-url pattern="/monitoring/**" access="permitAll" />  
+			
+		<security:intercept-url pattern="/servlet/RequestServlet"
+			access="permitAll" />
+		<security:intercept-url pattern="/resources/css/tem01.css"
+			access="permitAll" />
+			
+		<security:intercept-url pattern="/getSquare.wsdl"
+			access="permitAll" />			
+			
+		<security:intercept-url pattern="/endpoints/squareService"
+			access="permitAll" />			
+			
+		<security:intercept-url pattern="/login"
+			access="permitAll" />
+			
+		<security:intercept-url pattern="/sincronizarRAC"
+			access="permitAll" />			
+			
+		<security:intercept-url pattern="/loginfailed"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/resources/Imagenes/logoSistTIM.jpg"
+			access="permitAll" />
+		<security:intercept-url pattern="/endpoints"
+			access="permitAll" />
+		<security:intercept-url pattern="/endpoints/AccountDetailsService.wsdl"
+			access="permitAll" />
+		<security:intercept-url pattern="/schemas"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/sincronizarAsistencias"
+			access="permitAll" />
+			
+		  <security:intercept-url pattern="/resources/Imagenes/logo_cpm_menu.jpg"
+			access="permitAll" />	
+			
+		 <security:intercept-url pattern="//Imagenes/logo_cpm_menu.jpg"
+			access="permitAll" />	
+			
+			
+		<!-- Esta linea pide autenticacion WINDOWS si se llama a la pagina WEB -->
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />  
+		
+		 <!--  <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>  -->
+
+  
+		<security:form-login login-page="/login"
+			default-target-url="/" authentication-failure-url="/loginfailed" />
+	</security:http>
+	
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:ldap-authentication-provider
+			server-ref="ldapLocal" user-search-filter="(sAMAccountName={0})"
+			user-search-base="cn=Users" group-search-base="cn=Users"
+			group-search-filter="(member={0})" group-role-attribute="cn" user-context-mapper-ref="windowsUserDetailsContextMapper">
+		</security:ldap-authentication-provider>
+ 		<security:authentication-provider>
+	       <security:user-service>
+		   <security:user name="SEBA" password="1234567" authorities="WEB_SERVICE" />
+	       </security:user-service>
+	    </security:authentication-provider>		
+	</security:authentication-manager>
+
+
+
+	<!-- <security:ldap-server id="ldapLocal" url="ldap://172.24.190.51:389/DC=test,DC=corp" 
+		manager-dn="sebastian" manager-password="23091320sebas" /> -->
+
+	<security:ldap-server id="ldapLocal"
+		url="ldap://172.24.195.2:389/DC=OPER,DC=CBASA-CIESA,DC=COM,DC=AR"
+		manager-dn="agenda" manager-password="agendainterna" />
+	
+	<bean id="windowsUserDetailsContextMapper" class="framework.applicarionServer.bm.Seguridad.WindowsUserDetailsContextMapper">
+    </bean>
+
+
+	<!-- Definicion de inicializacion de beans -->
+
+
+	<bean id="cargarServicios" name="cargarServicios"
+		class="framework.applicarionServer.bl.StartUP.CargarServicios"
+		init-method="inicializar" lazy-init="false"></bean>
+	
+	<bean id="applicationContextProvider" class="framework.applicarionServer.bl.Utils.ApplicationContextProvider"></bean>
+		
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<property name="maxUploadSize" value="3000000"/><!-- Max size in bytes. -->
+
+	</bean>	
+
+
+</beans>
+
+
+
+
+	
+	
+		
+

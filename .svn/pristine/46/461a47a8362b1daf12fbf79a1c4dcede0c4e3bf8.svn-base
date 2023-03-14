@@ -1,0 +1,4108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dicTempForm>
+  <defTemplatesForm>
+
+  <defTemplateForm 
+     alias="TFArmadoAyuda"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/userInterface/tfUserInterface029.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFModuloAyuda"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/userInterface/tfUserInterface030.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMostrarAyuda"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/userInterface/tfUserInterface032.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFSugerenciaAyuda"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/userInterface/tfUserInterface031.zip">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFTipoCampania"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/crm/tfCRM001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstadoOportunidad"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/crm/tfCRM005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMotEstOpor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/crm/tfCRM006.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFClasifOpor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/crm/tfCRM007.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSensaCierreOpor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/crm/tfCRM004.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFCampania"
+       zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/crm/tfCRM003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstadoCampania"
+       zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/crm/tfCRM002.zip">
+  </defTemplateForm>
+
+
+  <defTemplateForm 
+     alias="TFSistemasValuacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/bienUso/tfBienUso001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConfColAnexoA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/bienUso/tfBienUso006.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFGruposBienes"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/bienUso/tfBienUso002.zip">
+  </defTemplateForm>
+  
+
+  <defTemplateForm 
+     alias="TFGrupoModeloCubo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cubo/tfCubo001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFFactTableCubo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cubo/tfCubo002.zip">
+  </defTemplateForm>
+
+
+  <defTemplateForm 
+     alias="TFDimensionCubo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cubo/tfCubo003.zip">
+  </defTemplateForm>
+  
+
+  
+  <defTemplateForm 
+     alias="TFIngresoRecibo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cobranza/tfCobranza001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImpresorRecibo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cobranza/tfCobranza002.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFConfCtasIngVar"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cobranza/tfCobranza003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConfMotRecCli"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cobranza/tfCobranza004.zip">
+  </defTemplateForm>
+  
+  
+  
+  <defTemplateForm 
+     alias="TFBoletaDeposito"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/bancos/tfBancos001.zip">
+  </defTemplateForm>
+  
+  
+ 
+  <defTemplateForm 
+     alias="TFFactProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFVerComproAplicProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar015.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFAutorizComproProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar008.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecetaFabricacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFOrdenProduccion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion009.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFUMTiempoProduccion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion007.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAlternativaFabricacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion008.zip">
+  </defTemplateForm>
+    
+  <defTemplateForm 
+     alias="TFTipoRecurso"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion006.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFOperacionProductiva"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion005.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFProcesoProductivo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion004.zip">
+  </defTemplateForm>  
+  
+  
+  <defTemplateForm 
+     alias="TFPlanta"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion003.zip">
+  </defTemplateForm>  
+    
+  
+  <defTemplateForm 
+     alias="TFTipoEstacionTrabajo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/produccion/tfProduccion002.zip">
+  </defTemplateForm>  
+  
+  
+  <defTemplateForm 
+     alias="TFAplicCtaCteProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar014.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAplicCtaCteClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar006.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFVerComproAplicClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar010.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormAntDeudaClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar008.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConAntiguedadCtaCteClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar009.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPreFormConsFactPendAut"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar007.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormConsMovCtaCteProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar009.zip">
+  </defTemplateForm>  
+  
+  
+  <defTemplateForm 
+     alias="TFConsultaMovCtaCteProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar010.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsResuCtaCteProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar013.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFConsultaCtaCteProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar006.zip">
+  </defTemplateForm>
+
+  
+  
+  <defTemplateForm 
+     alias="TFPreFormConsCtaCteProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConfTipoAnuComproProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar012.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCtasConcFactProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar011.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoCtaCteProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConcFactProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasAPagar/tfCtasAPagar002.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreFormConsCtaCteClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsultaCtaCteClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormConsMovCtaCteClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsultaMovCtaCteClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar004.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsResuCtaCteCli"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ctasACobrar/tfCtasACobrar005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormConsMovBancos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/bancos/tfBancos002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsMovBanco"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/bancos/tfBancos003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFNotaBancaria"
+     zipFila="/WEB-INF/classes/com/srn/erp/templatesForms/bancos/tfBancos004.zip">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFConfCtasSistBanco"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/bancos/tfBancos005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoCambio"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFNacionalidad"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral043.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFSubirBaseAlServidor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral042.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFConfDirBaseServ"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral040.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSubirArchDirBase"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral041.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFVerContenidoArchivoLog"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral039.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConfLogsArchivos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral038.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFVisualizarSelect"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral037.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFEtiquetaComprobante"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral032.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSQL"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral036.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFValorEtiquetaComprobante"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral033.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImpresionRepImpFis"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral034.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImplementacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral035.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEntidades"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral030.zip">
+  </defTemplateForm>
+  
+  	
+  <defTemplateForm 
+     alias="TFIndices"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral003.zip">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFFactoresDeConversion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral016.zip">
+  </defTemplateForm>
+
+  
+  <defTemplateForm 
+     alias="TFClasificadorEntidad"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral024.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFDefAtriEnt"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral026.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFGrupoClasificadorEntidad"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral025.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAgregadoAtriEnt"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral031.zip">
+  </defTemplateForm>  
+
+  <defTemplateForm 
+     alias="TFImpresoraComun"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral018.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTalonarios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral019.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImpresoraFiscal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral017.zip">
+  </defTemplateForm>
+  
+   
+  <defTemplateForm 
+     alias="TFValoresIndices"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral007.zip">
+  </defTemplateForm>  
+  
+  
+  <defTemplateForm 
+     alias="TFMotivoComprobante"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral027.zip">
+  </defTemplateForm>  
+  
+  
+  <defTemplateForm 
+     alias="TFPeriodos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral004.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTipoComprobante"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral011.zip">
+  </defTemplateForm>  
+  
+  
+  
+    
+  <defTemplateForm 
+     alias="TFZona"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral015.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFIdioma"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral012.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPais"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral013.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFProvincia"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral014.zip">
+  </defTemplateForm>
+  
+  
+  
+  
+ <defTemplateForm 
+     alias="TFMonedas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral001.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCotizaciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral005.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFPeriodosInc"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral006.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFTipoUnidadOrganizativa"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral008.zip">     
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFUnidadOrganizativa"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral009.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFLugarEmision"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral010.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFEmpresas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral020.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFSucursales"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral021.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFConfigBD"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral023.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFEmpHabUsu"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/general/tfGeneral022.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFClasifPrograma"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/seguridad/tfSegu003.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFFuncEspSeg"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/seguridad/tfSegu008.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFUsuario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/seguridad/tfSegu006.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFPerfilFuncional"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/seguridad/tfSegu005.zip">
+  </defTemplateForm>
+  
+
+ <defTemplateForm 
+     alias="TFPaquete"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/seguridad/tfSegu007.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFPrograma"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/seguridad/tfSegu004.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFTemas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/navegador/tfNavegador008.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFModulos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/navegador/tfNavegador006.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFAplicaciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/navegador/tfNavegador005.zip">
+  </defTemplateForm>
+
+ <defTemplateForm 
+     alias="TFModulosAplicaciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/navegador/tfNavegador007.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFTemas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/navegador/tfNavegador008.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFSelect"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/xlook/tfLook004.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFVista"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/xlook/tfLook005.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFObjetoXLook"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/xlook/tfLook006.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFTipoDominio"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/xlook/tfLook008.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFTablaXLook"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/xlook/tfLook009.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFDominioXLook"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/xlook/tfLook007.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFZonaVenta"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas002.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFLPPorProdGral"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas084.dfm">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFMarcarItemsPedComoEnt"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas083.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFLogsImpFiscal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas058.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFObsCodifPedidoClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas082.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFObsCodifPresuClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas081.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFMotEstPresuClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas080.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFEstadoPresuClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas079.zip">
+  </defTemplateForm>
+   
+  <defTemplateForm 
+     alias="TFIngStockDevolucion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas076.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAltaModifContacto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas055.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMotivoDevolucionCliente"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas077.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFConfigTalonarioDevClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas074.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFAltaItemRequi"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas073.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFIngDevVtas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas075.zip">
+  </defTemplateForm>  
+    
+ <defTemplateForm 
+     alias="TFPrefAnaCumpPed"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas071.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFAnalisisCumpliPedidos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas072.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFResDepDetCompro"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas070.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFImpresorListasPrecios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas068.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFCuboPivotEstadPed"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas069.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFProyecto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas067.zip">
+  </defTemplateForm>  
+  
+  
+  
+ <defTemplateForm 
+     alias="TFCuboPivotEstadVtas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas066.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFAltaModifDomEnt"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas056.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFFormacionPVProdGral"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas065.zip">
+  </defTemplateForm>
+    
+  
+  
+ <defTemplateForm 
+     alias="TFFormacionPVProdStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas064.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFImpresorFactura"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas061.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFImpresorNDCliente"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas062.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFImpresorNCCliente"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas063.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFPreFormConsEstadFact"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas059.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCuboEstadFact"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas060.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFCuboEstadPed"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas052.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFPreFormConsEstadPed"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas051.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFFormaEntrega"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas046.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFLugarEntregaVenta"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas043.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFPreciosListaClasifArt"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas049.zip">
+  </defTemplateForm>
+  
+  
+  
+  
+ <defTemplateForm 
+     alias="TFEstrucListaPrecios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas048.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFVueltoCobranzaVtaMos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas045.zip">
+  </defTemplateForm>
+
+
+ <defTemplateForm 
+     alias="TFFormConsPedidos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas054.zip">
+  </defTemplateForm>
+  
+  
+  
+ <defTemplateForm 
+     alias="TFPreFormConsPedidos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas053.zip">
+  </defTemplateForm>
+  
+  
+<defTemplateForm 
+     alias="TFRemito"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas019.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFImpresorRemito"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas050.zip">
+  </defTemplateForm>
+  
+  
+  
+  
+ <defTemplateForm 
+     alias="TFImpresorPedido"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas047.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFPedido"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas018.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFIngresoValores"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas031.zip">
+  </defTemplateForm>
+  
+  
+  
+ <defTemplateForm 
+     alias="TFVtaMostrador"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas044.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCotizacionCliente"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas039.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFCondVtaExpoImpo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas042.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFSujeto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas006.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFGrupoDetalleVenta"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas041.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCondicionVenta"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas014.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFConfigTalonarioRto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas021.zip">
+  </defTemplateForm>
+
+ <defTemplateForm 
+     alias="TFConfigTalonarioFactClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas023.zip">
+  </defTemplateForm>
+
+  
+ <defTemplateForm 
+     alias="TFFTipoCtaCteClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas025.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFGruposCondPago"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas026.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCondPagoVenta"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas027.zip">
+  </defTemplateForm>
+  
+  
+  
+ <defTemplateForm 
+     alias="TFRelacionSujeto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas001.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFTipoDocumento"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas005.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCobrador"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas007.zip">
+  </defTemplateForm>
+    
+ <defTemplateForm 
+     alias="TFVendedor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas004.zip">
+  </defTemplateForm>
+  
+  
+   <defTemplateForm 
+     alias="TFTiposUnidades"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas003.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFListaPrecios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas016.zip">
+  </defTemplateForm>
+  
+   <defTemplateForm 
+     alias="TFRubro"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas008.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCanal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas009.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFCategoria"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas010.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFClasifSujeto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas011.zip">
+  </defTemplateForm>  
+  
+   <defTemplateForm 
+     alias="TFEstadoCivil"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas012.zip">
+  </defTemplateForm>  	
+  
+   <defTemplateForm 
+     alias="TFEstadoSituacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas013.zip">
+  </defTemplateForm>  	
+  
+ <defTemplateForm 
+     alias="TFPreciosArticulo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas017.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TTFSectorDireccion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas015.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFEsquemaBonificacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas032.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFConsLPConIVA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/ventas/tfVentas040.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFValoresParametros"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/parametros/tfParam003.zip">
+  </defTemplateForm>
+
+ <defTemplateForm 
+     alias="TFClasifParametros"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/parametros/tfParam002.zip">
+  </defTemplateForm>
+
+ <defTemplateForm 
+     alias="TFParametros"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/parametros/tfParam001.zip">
+  </defTemplateForm>
+
+ <defTemplateForm 
+     alias="TFHelpImputables"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes012.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpLiqTar"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes086.dfm">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpTitRepConta"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes085.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFCompoVerAsiento"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes084.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpInfCC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes026.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpCotizacionesProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes019.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpSolCotizProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes018.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFCompoVerComprobante"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes083.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFHelpOrdenesFabricacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes082.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFHelpRecFabProd"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes081.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpRtosPendRecep"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes080.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpProductosParaDepo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes079.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpIngDevStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes078.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpIngDev"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes077.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFHelpReferenciaCompro"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes075.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFHelpReferenciaRequisicion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes076.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFHelpRequisiciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes074.zip">
+  </defTemplateForm>
+    
+ <defTemplateForm 
+     alias="TFHelpAsientosApertura"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes073.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFHelpAsientosCierre"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes072.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFHelpConciliacionesBancarias"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes071.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpHojaExcel"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes070.zip">
+  </defTemplateForm>  
+  
+  
+ <defTemplateForm 
+     alias="TFHelpIngresoAsientos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes055.zip">
+  </defTemplateForm>  
+  
+  
+  
+ <defTemplateForm 
+     alias="TFHelpProyActivosClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes069.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFAltaRapidaProveedores"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes049.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFHelpSujTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes068.zip">
+  </defTemplateForm>  
+  
+  
+  
+  
+ <defTemplateForm 
+     alias="TFHelpBoletasDepositos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes056.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFHelpNotasBancarias"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes057.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFImpresorOP"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes067.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpInventario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes066.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpFactDeSenias"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes065.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpRecibos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes038.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpBancos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes043.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpArchRepo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes064.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpTransfValEntreCajas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes046.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpOPVariasEfectivo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes045.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpOP"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes058.zip">
+  </defTemplateForm>
+  
+  
+  
+ <defTemplateForm 
+     alias="TFHelpRendicionFF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes048.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpComproProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes050.zip">
+  </defTemplateForm>
+    
+ <defTemplateForm 
+     alias="TFHelpInfRec"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes024.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpSelItemPedido"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes063.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFAltaProdLP"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes052.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFAltaValClasif"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes053.zip">
+  </defTemplateForm>
+  
+  
+  
+ <defTemplateForm 
+     alias="TFHelpAcuerdosPrecios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes062.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpOC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes023.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFAltaRapidaClientes"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes040.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHabPorContrasenia"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes042.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpFactNC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes041.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpFactConDet"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes051.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpComproAjuStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes054.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpProveedor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes047.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpRemitos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes061.zip">
+  </defTemplateForm>  
+  
+  
+<defTemplateForm 
+     alias="TFHelpPedidosPendEnt"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes060.zip">
+  </defTemplateForm>
+   
+  
+  
+ <defTemplateForm 
+     alias="TFHelpPresupuestos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes035.zip">
+  </defTemplateForm>
+  
+  
+  
+
+ <defTemplateForm 
+     alias="TFHelpProdStkLP"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes037.zip">
+  </defTemplateForm>
+
+  
+ <defTemplateForm 
+     alias="TFHelpCtaCteClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes059.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCompoCotizacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes033.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFIdentificacionCompro"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes001.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFCompoVarios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes032.zip">
+  </defTemplateForm>
+
+ <defTemplateForm 
+     alias="TFHelpProductos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes004.zip">
+  </defTemplateForm>
+
+ <defTemplateForm 
+     alias="TFHelpCotizaciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes021.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpClientes"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes005.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpPedidos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes006.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpCotizClie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes035.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFImpresorCotizacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes036.zip">
+  </defTemplateForm>  
+  
+  
+ <defTemplateForm 
+     alias="TFCustomHelpProveedores"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes034.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFIdentificacionCompro"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes001.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFHelpCotizaciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes021.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFCompoVarios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes032.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCompoCotizacion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes033.zip">
+  </defTemplateForm>  
+  
+  
+ <defTemplateForm 
+     alias="TFHelpValCompo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/comunes/tfComunes031.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFEjercicios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable005.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFGrupoCuentas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable046.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFConsSubdiarioResCompro"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable045.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFPreFormConsSubDiario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable044.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFSubDiario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable043.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFConsPlanDeCtas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable042.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFPreFormConsLibroDiario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable040.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFLibroDiario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable041.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFGenLibroDiario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable039.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFAperturaContable"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable038.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFCierreContable"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable037.zip">
+  </defTemplateForm>  
+  
+  
+<defTemplateForm 
+     alias="TFConciliacionManual"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable036.zip">
+  </defTemplateForm>  
+    
+  
+ <defTemplateForm 
+     alias="TFEjecucionSubReparto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable035.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFArmadoSubReparto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable034.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFFaseDriverSubRepa"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable033.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFCompoDriverSubReparto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable032.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFExcel"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable031.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFConsMayorPivot"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable030.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFConsMayorComproGrilla"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable029.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFIngresoAsientos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable008.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFPreFormConsMayor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable020.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCuboConsultaMayor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable021.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCuboConsultaMayorTipoCompro"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable022.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFPreFormConsBalance"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable023.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFCuboConsultaBalance"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable024.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFListaComproContables"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable017.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFPreFormConsAsientos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable016.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFGrupoDeAtributos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable028.zip">
+  </defTemplateForm>
+  
+ 
+  <defTemplateForm 
+     alias="TFReporteContable"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable010.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFAgregarItemReporte"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable011.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFValoresComponentes"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable006.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFCuentas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable009.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFLeyendas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable007.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFConsultaAsientos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable018.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAnulacionAsiento"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable019.zip">
+  </defTemplateForm>
+  
+  
+ <defTemplateForm 
+     alias="TFConcCtasContables"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable027.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFEstructuras"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable004.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFComponentes"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable002.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFAtributosCompo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable003.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFGrupoDeAtributos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/contable/tfContable028.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFCategoriaIVA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFFactFaltLibroIVAVentas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos015.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormComproFaltIVAVtas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos014.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPadronIBBsAs"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos013.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFImpArchPercIB"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos012.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPreFormLibroIVACompras"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos007.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFConsLibroIVACompras"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos008.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormLibroIVAVentas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos009.zip">
+  </defTemplateForm>
+  
+  
+
+  <defTemplateForm 
+     alias="TFConsLibroIVAVentas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos010.zip">
+  </defTemplateForm>
+  
+  
+  
+  <defTemplateForm 
+     alias="TFCategoriaIB"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImpuesto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFColLibroIVA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos004.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCategoriaGan"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConceptoImpuesto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/impuestos/tfImpuestos006.zip">
+  </defTemplateForm>
+    
+  <defTemplateForm 
+     alias="TFCatRetIVA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCtasNetoFF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos017.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConcOPVarias"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos014.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConfCtasFondoFijo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos016.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMotivosPagos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFFormasDePago"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos003.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFOrdenDePago"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRendFondoFijo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos013.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPagosVarios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos015.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFCatRetGan"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos004.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTablaRetIB"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos012.zip">
+  </defTemplateForm>
+  
+    
+  <defTemplateForm 
+     alias="TFCatRetIB"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos006.zip">
+  </defTemplateForm>
+
+
+  <defTemplateForm 
+     alias="TFPeriRetIVA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos007.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPeriRetIB"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos008.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPeriRetGan"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos009.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFTablaRetIVA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos010.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTablaRetGan"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/pagos/tfPagos011.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFUnidadMedida"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsGenStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock047.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConfConsStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock046.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRtoIntPendRecep"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock045.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormRtoIntPendRec"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock044.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPedDepoPendEnvio"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock043.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreFormPedDepPendEnv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock042.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFHelpPedidosDepoPendEnvio"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock041.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPedidoProdParaDepo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock040.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTranfIntEntreDepo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock038.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSolicitarMercaderiaA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock039.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFHelpProductosInfRecep"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock037.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFStockAFuturoProducto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock036.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFStockValorizPivot"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock035.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFGenCodProdStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock034.zip">
+  </defTemplateForm>  
+   
+  
+  <defTemplateForm 
+     alias="TFReconstruirStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock033.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTomaInventario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock032.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFTransporte"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFGeneradorProductos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock025.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFFormConsMasivaProductos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock023.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreFormConsMasivaProd"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock022.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFConfGenMasProd"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock026.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFFormConsPedidosReservas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock031.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFReserProdPed"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock030.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFUbicacionDeposito"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock009.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFProductosGenerales"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock029.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFConfigTalonarioAjuStk"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock013.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPeriodosStockReales"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock011.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoMovStkTalonario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock010.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAgrupadorEstadoStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock014.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFDeposito"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock004.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAgrupadorDepositos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock021.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstadoStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock006.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCuboValorizStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock028.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSerie"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock008.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPartida"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock007.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsValorizStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock027.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsMasStkProd"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock024.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsMovStockPorCompro"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock019.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreFormConsComproStk"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock018.zip">
+  </defTemplateForm>
+  
+
+
+
+  <defTemplateForm 
+     alias="TFConsMovStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock017.zip">
+  </defTemplateForm>
+
+
+
+  <defTemplateForm 
+     alias="TFPreFormConsMovStk"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock016.zip">
+  </defTemplateForm>
+  
+
+  <defTemplateForm 
+     alias="TFConsSaldoStockProducto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock015.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAjusteStock"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock012.zip">
+  </defTemplateForm>    
+  
+  
+  <defTemplateForm 
+     alias="TFProducto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock003.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFTipoProducto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/stock/tfStock001.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFGrupoComponente"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto001.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFCompoPresupuestario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSelCompoPresu"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto003.zip">
+  </defTemplateForm>    
+      
+  
+  <defTemplateForm 
+     alias="TFABMCompoPresu"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto004.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFHelpValCompoPresu"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMonedaPresu"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto006.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEscenario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto007.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFTipoPresupuesto"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto008.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFDefVarEscenario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto009.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFDefinicionMetricas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto010.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFTipoUPC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto011.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFUPC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto012.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstrucPlanif"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto013.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFTipoPeriodo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto014.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFValorPeriodo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto015.zip">
+  </defTemplateForm>    
+ 
+  <defTemplateForm 
+     alias="TFValorVarEscenario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto016.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFDiccionarioDatos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto017.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFGruposTiposUPC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto018.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFTipoCiclo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto019.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFSelCompoPresuParaReal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto020.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFABMCompoReal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto021.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFDefRepoReal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto022.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFGrupoRepoReal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto023.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFSelRepoReal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto024.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFFiltroCargaValReales"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto025.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFHelpValCompoReal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto026.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFNavegPresu"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto027.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFCicloPresupuestario"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto028.zip">
+  </defTemplateForm>    
+
+  <defTemplateForm 
+     alias="TFSelEstrucPlanif"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto029.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFGrupoEstrucPlanif"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto030.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFElemPresPlanilla"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto031.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoPlan"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto032.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFEstructuraPlan"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto033.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFCrearPlan"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/presupuesto/tfPresupuesto034.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFPreFormConsValoresCaja"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores008.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTransfClie"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores033.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFLiquidacionDeTarjetas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores032.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreEvoEgreVal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores029.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsEvolEgreValGrilla"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores030.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConceptoLiqTar"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores031.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFConsEvolIngValGrilla"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores028.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreEvoIngVal"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores027.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsConsCajas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores026.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFGrupoCajas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores025.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFBuscarValorEnCajas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores023.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFVistaBusqValores"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores024.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFValCajaParaPagos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores022.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFValoresClienteEnCaja"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores020.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFIngTarjetaDebito"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores018.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFIngChequeTercero"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores019.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFIngChequeCliente"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores012.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFIngCertRetIB"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores013.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFIngCertRetGan"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores015.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFIngCertRetSUS"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores016.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFIngTarjetaCredito"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores017.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFIngCertRetIVA"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores014.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsValores"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores009.zip">
+  </defTemplateForm>    
+      
+  <defTemplateForm 
+     alias="TFTipoValores"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores001.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFBancos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCuentasBancarias"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores003.zip">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFTarjetasCredito"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores004.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTickets"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores005.zip">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFCajas"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores006.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAperturaCierreCaja"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores007.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTransfValores"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/valores/tfValores021.zip">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFOrdenDeCompra"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras019.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCuboPivotEstadComproProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras053.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormConsEstadCompras"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras050.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormConsEstadComproProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras052.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCuboPivotEstadCompras"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras051.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsEstadoInfCC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras035.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsEstadoInfRec"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras028.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreFormConsInfRec"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras027.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormConsInfCC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras034.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAltaSolCotizProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras049.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCanastaItemsSolCotProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras048.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImpresorSolCotiz"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras047.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFConsEstadoCotizProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras025.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreFormConsCotizProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras024.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFCotizacionProveedor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras013.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFInformeControlCalidad"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras029.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSolicitudCotizProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras012.zip">
+  </defTemplateForm>
+    
+  <defTemplateForm 
+     alias="TFCanastaItemsRequisicion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras046.zip">
+  </defTemplateForm>
+    
+  <defTemplateForm 
+     alias="TFCanastaItemsPedido"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras045.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFAltaItemOC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras044.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImpresorRequi"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras043.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPedPendEntParaAnaCompra"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras042.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsEstadoRequisiciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras009.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPreFormConsRequisiciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras008.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPreciosProvProdGral"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras041.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsEstadoOCParaAutoriz"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras038.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFSolicitudCompras"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras007.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFMotivosRechazosCC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras030.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFMotivoDecisionAdju"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras023.zip">
+  </defTemplateForm>    
+  
+  <defTemplateForm 
+     alias="TFViasDespacho"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras014.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormAutorizOC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras037.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFEsqHabProdRequi"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras036.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCondCompraImpo"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras015.zip">
+  </defTemplateForm>
+  
+
+  <defTemplateForm 
+     alias="TFConsEstadoOC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras021.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFPreFormEstadoOC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras020.zip">
+  </defTemplateForm>	  
+  
+  <defTemplateForm 
+     alias="TFInformeRecepcion"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras026.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFHelpDetPedParaOC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras040.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFProveedor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAutorizCompras"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras018.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFLugarEntrega"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras016.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTiposAcuerdos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras010.zip">
+  </defTemplateForm>
+      
+  <defTemplateForm 
+     alias="TFCertificacionProveedor"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAcuerdosPreciosLP"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras011.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFImpresorOC"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras031.zip">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFEsqAutorizFactProv"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras039.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFAutorizRequisiciones"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras006.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFSectorCompra"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras004.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRolAutorizCompras"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras005.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFCondicionCompra"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras002.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFObsGeneralCodificada"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/compras/tfCompras017.zip">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFTableroTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTurnosGrupoEntidades"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEntidadTurno"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTurnosPlantillaHorarios"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos004.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFMotivoReservasTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFReglamentoTurno"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos006.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFParteTableroTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos007.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstrucTabTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos008.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFProgramacionTablero"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos009.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCorrimientoTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos010.zip">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFAdministrarTurno"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos011.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCategoriaSujetoTurno"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos012.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRelacionSujetoTurno"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos013.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImportacionSujTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos014.zip">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFABMSujetosTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos015.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFABMSujetosTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos015.zip">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFEstadTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos016.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFDeudaPorConcTurnos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos017.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSelMotResTurno"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos018.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFBuscarPersonaTablero"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos019.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFInvitadoTurno"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/turnos/tfTurnos020.zip">
+  </defTemplateForm>
+  
+ <defTemplateForm 
+     alias="TFCentroCostos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/costos/tfCostos001.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFCentroImputacion"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/costos/tfCostos005.dfm">
+  </defTemplateForm>  
+  
+  
+ <defTemplateForm 
+     alias="TFGenAsiCostos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/costos/tfCostos004.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFProcesoCostos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/costos/tfCostos003.zip">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFCostosProductos"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/costos/tfCostos002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFLegajos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/sueldos/tfSueldos001.dfm">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFDefAccClasifLeg"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/sueldos/tfSueldos003.dfm">
+  </defTemplateForm>
+
+
+  <defTemplateForm 
+     alias="TFClasificadorLegajos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/sueldos/tfSueldos002.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFExcelReport"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/excelReport/tfExcelReport001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFDefFuncExcel001"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/excelReport/tfExcelReport002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAgrupadorRepExcel"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/excelReport/tfExcelReport003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFVisuaInfExcel"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/excelReport/tfExcelReport004.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFVisualizarInfExcel"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/excelReport/tfExcelReport005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTemplateWorkFlow"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/workflow/tfWorkFlow001.zip">
+  </defTemplateForm>
+    
+  <defTemplateForm 
+     alias="TFEstadoWorkFlow"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/workflow/tfWorkFlow002.zip">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFTareaWorkFlow"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/workflow/tfWorkFlow003.zip">
+  </defTemplateForm>
+  
+    <defTemplateForm 
+     alias="TFClaseRecursoWF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/workflow/tfWorkFlow004.zip">
+  </defTemplateForm>  
+  
+    <defTemplateForm 
+     alias="TFUniTiempoWF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/workflow/tfWorkFlow005.zip">
+  </defTemplateForm>  
+  
+    <defTemplateForm 
+     alias="TFRecursosWF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/workflow/tfWorkFlow006.zip">
+  </defTemplateForm>  
+  
+    <defTemplateForm 
+     alias="TFMapaWorkFlow"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/workflow/tfWorkFlow007.zip">
+  </defTemplateForm>  
+
+  <defTemplateForm 
+     alias="TFEscenarioCashFlow"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cashflow/cfCashFlow001.zip">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFGrupoConcCF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cashflow/cfCashFlow002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConceptoCF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cashflow/cfCashFlow003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFProcGenCF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cashflow/cfCashFlow004.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFVisualizaWF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cashflow/cfCashFlow005.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAltaPlanifConceptoCF"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/cashflow/cfCashFlow006.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFGrupoJobSchedule"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/schedule/tfSchedule001.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFJobSchedule"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/schedule/tfSchedule002.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTriggerSchedule"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/schedule/tfSchedule003.zip">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFProgramarJob"
+     zipFile="/WEB-INF/classes/com/srn/erp/templatesForms/schedule/tfSchedule004.zip">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFCipINOUTOficina"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP066.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRotas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP001.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFLogImpDatosCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP061.dfm">
+  </defTemplateForm>
+  
+<defTemplateForm 
+     alias="TFPermIntPuertas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP062.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFProcImpHipo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP060.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsLegEnPredio"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP059.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsVisEnPredio"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP058.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFMotivoVisita"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP056.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFHabIngVis"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP057.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFGrupoVisitas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP055.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsMovVisCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP054.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFEstadMovVisita"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP053.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFBuscarEmpCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP052.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFSelVisita"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP051.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPuertaMaqVis"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP050.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFClasificadorVisitas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP049.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFAltaEmpresaCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP048.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TTFEntVisita"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP047.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAltaAccIntLeg"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP046.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSubGruCategAccesos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP045.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFGrupoCategAccesos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP044.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFCategAccesoCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP043.dfm">
+  </defTemplateForm>
+  
+    
+  <defTemplateForm 
+     alias="TFMotEntIntermedias"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP040.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTipoZona"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP039.dfm">
+  </defTemplateForm>  
+  
+    <defTemplateForm 
+     alias="TFGrupoTarjeta"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP036.dfm">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFMotivoBajaTarjeta"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP037.dfm">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFTarjetaCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP038.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFProcPlanifCacheo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP035.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConfAlgoCacheo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP034.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsCacheosPend"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP031.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsCacheosPendF"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP030.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPersonalSeguridad"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP029.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsCacheosReaF"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP032.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsCacheosRea"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP033.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFCacheoPersona"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP028.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFDefDiasCacheo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP027.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFEstadoCacheo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP024.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFResPlanifCacheo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP026.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPlanifCacheos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP025.dfm">
+  </defTemplateForm>  
+  
+  
+  <defTemplateForm 
+     alias="TFSacarFotoVisita"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP023.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFZonaCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP022.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoDocumentacionCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP021.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFEmpresasCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP020.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPasesNoValidos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP019.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPreFormPasesNoValidos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP018.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsMovCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP016.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFEstadisticaMovCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP015.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFTabControlCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP017.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFInhaIngCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP014.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPermisoSemanal"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP010.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFMotivosNovCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP007.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFHabIngCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP013.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFBiometricos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP002.dfm">
+  </defTemplateForm>  
+
+  <defTemplateForm 
+     alias="TFSelLegParaPlanifRotas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP003.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPlanifRotas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP004.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPuerta"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP005.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFGrupoPuerta"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP006.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFVisitas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP008.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstadoAccesoCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP009.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFAccesoPorLegajo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP012.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAgrupadorPlanos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP041.dfm">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFPlanoCIP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP042.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPtoFichada"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP063.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFAltaMotivoFichada"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP064.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFMovCIPPtoFichada"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/cip/tfCIP065.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFCargoEmpleadoEXC"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc002.dfm">
+  </defTemplateForm>
+  
+<defTemplateForm 
+     alias="TFConsActasLevanExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc029.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFAnteojoExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc027.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRasgoExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc026.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFMarcaExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc025.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFGerenteExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc024.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFCaracterExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc023.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFProcesoActEstInd"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc022.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsMasivaIndExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc021.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFBuscadorIndExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc020.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFSeRetiraEn"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc017.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFLugarHechoExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc016.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFMotNovEstExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc015.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFIndividuoExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc001.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAlturaExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc003.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFComplexionExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc004.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoBarbaExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc005.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoNarizExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc006.dfm">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFSectorLegajoExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc007.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRazaExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc008.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFEdadesExcluidos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc009.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstadosExcluidos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc010.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFColorCabelloExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc011.dfm">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFTipoCabello"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc012.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFColoresExcluidos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc013.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMotDifPagoExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc014.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTurnoExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc018.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFSupervisorExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc019.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFUltNrosActasyRev"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc028.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPredioExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc030.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFPeligrosidadExcluido"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc031.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFArchExcJSON"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc032.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSeguEmpPredioExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc033.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFSeguEmpPredioExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc033.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFGrupoExcAImportar"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc034.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFDispMovExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc035.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPerfSeguExc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/excluidos/tfExc036.dfm">
+  </defTemplateForm>  
+  
+ <defTemplateForm 
+     alias="TFMaquinas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/mensajero/tfMensajero001.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFGrupoUsuMens"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/mensajero/tfMensajero002.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFGrupoMaquinas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/mensajero/tfMensajero003.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFRing"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/mensajero/tfMensajero004.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFImagen"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/mensajero/tfMensajero005.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFEmpresaTarjeta"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj001.dfm">
+  </defTemplateForm>           
+  
+  <defTemplateForm 
+     alias="TFUniNegConciTar"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj002.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTerminalConciTar"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj003.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConciTarj"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj004.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFFiltroCupImp"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj005.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoArchConciTar"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj006.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTarjetaConcil"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj007.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAnulArchPOSNET"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj008.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFImpArchCobranzaConci"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj009.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsArchImpTarj"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj010.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFAgrupadorTarjeta"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj011.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTarjConciAuto"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj012.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFInfoConciAut"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj013.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMovManualConci"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj014.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsArchImpConci"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj015.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFGenAsiCobTarj"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj016.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFModLiquiTarj"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj017.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFCtasBcoTarj"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj018.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFAsiLiqTarj"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj019.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImpMasArchPOSNETS"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj020.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsAsientoTarjDebCre"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj021.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsMayorTarjDebCre"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/conciTarjeta/tfConciTarj022.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFImpLegPAYROLL"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH001.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsPlanifRotas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH045.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTareaDesempeneada"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH046.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFImpLegPAYROLLSQLServer"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH043.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFDefEvalCompe"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH002.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCompetencia"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH003.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFObsCodifEvalRH"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH004.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCargaEvalLeg"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH005.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsEvalRH"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH006.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEvalLegajos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH007.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFVerCompetencia"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH008.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFClaseSindicato"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH009.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMotivoEgresoEmp"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH010.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFGradoLegajo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH011.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMotivoSancion"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH012.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMotivoFaltasRRHH"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH013.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAparatoRH"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH014.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMotFalloVisita"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH015.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEnfermedadRRHH"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH016.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFPrestMedRRHH"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH017.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMedicoRRHH"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH018.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFFamiliaresRRHH"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH019.dfm">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFTipoNovedad"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH020.dfm">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFImpresorEvaluacion"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH021.dfm">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFCronoDesa"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH022.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFFiltroCronoDesa"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH023.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsPlanDesa"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH024.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCantJuegos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH025.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstadoPromocion"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH026.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRankearCab"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH027.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFComposiCalif"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH028.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFImpHoraRempLeg"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH029.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoObsLegajo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH030.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFCargaEvalPot"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH032.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFImpresorEvalPot"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH033.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFLogAgrupAntEmp"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH034.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMigraSECLOS1"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH035.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsFilSeclos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH036.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsSECLOS"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH037.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsFilJuicios"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH038.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsJUICIOS"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH039.dfm">
+  </defTemplateForm>
+  
+    <defTemplateForm 
+     alias="TFCargaEvalLegMas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH040.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsDiasRempTrans"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH041.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFActuJerarLeg"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH042.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFFiltroLegajo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH044.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFNomGrabConsRot"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH047.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFSelConsGrabRota"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/rrhh/tfRRHH048.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTipoCausa"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales001.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsPagosSecJui"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales013.dfm">
+  </defTemplateForm>  
+    
+  <defTemplateForm 
+     alias="TFEstadoSeclo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales002.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoReclamoLeg"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales003.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConcPagoSeclo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales004.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFJuzgado"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales005.dfm">
+  </defTemplateForm>
+
+  <defTemplateForm 
+     alias="TFEstadoJuicio"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales006.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstadoProcesal"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales007.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFTipoAudiencia"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales008.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFAbogado"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales009.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFResultadoJuicio"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales010.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRubroCondena"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales011.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEmpresasJuicio"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales012.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFSeguiLega"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales014.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFTipoPericias"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales015.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFFuero"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales016.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFFormaExtincion"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales017.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFCompaniaSeguro"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales018.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFConsCartasRemitidas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/legales/tfLegales019.dfm">
+  </defTemplateForm>  
+  
+   <defTemplateForm 
+     alias="TFConsAusentismo"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/Ausentismo/tfAdmRH001.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFABMGruposRotas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/Ausentismo/tfAdmRH002.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFABMGruposAusencias"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/Ausentismo/tfAdmRH003.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFABMGruposGenerales"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/Ausentismo/tfAdmRH004.dfm">
+  </defTemplateForm> 
+  
+  <defTemplateForm 
+     alias="TFRecluMotBusq"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta001.dfm">
+  </defTemplateForm> 
+  
+  <defTemplateForm 
+     alias="TFRecluTipoContrato"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta002.dfm">
+  </defTemplateForm> 
+  
+  <defTemplateForm 
+     alias="TFRecluSelector"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta003.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluPuesto"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta004.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluOperacion"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta005.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluEstAprobBusq"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta006.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluBusquedas"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta007.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluAltaModifBusq"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta008.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluSector"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta009.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluConvenio"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta010.dfm">
+  </defTemplateForm>  
+  
+    <defTemplateForm 
+     alias="TFGrupoCompetencia"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta011.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluCompetencias"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta012.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluProceso"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta013.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluEstadoProceso"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta014.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluPostulante"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta015.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFEstBusquedaCandi"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta016.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFDefProcesoEnBusq"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta017.dfm">
+  </defTemplateForm>
+  
+<defTemplateForm 
+     alias="TFRecluAgregarCand"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta018.dfm">
+  </defTemplateForm>
+  
+   
+  <defTemplateForm 
+     alias="TFRecluAltaProcCandi"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta019.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluMotEstCandB"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta020.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluMotEstBusq"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta021.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluConsBusq"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta022.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluConsBusqDet"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta023.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluAltaCompBusq"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta024.dfm">
+  </defTemplateForm>  
+  
+  
+<defTemplateForm 
+     alias="TFRecluFuente"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta025.dfm">
+  </defTemplateForm>
+  
+<defTemplateForm 
+     alias="TFRecluTipoFormulario"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta026.dfm">
+  </defTemplateForm>
+  
+<defTemplateForm 
+     alias="TFRecluEstadoPostulante"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta027.dfm">
+  </defTemplateForm>
+  
+<defTemplateForm 
+     alias="TFRecluConsEstCandi"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta028.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluConsBasePostu"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta029.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFConsRecluProcesos"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta030.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFRecluDetConsProc"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta031.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFRecluConsRecepcion"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/reclutamiento/tfRecluta032.dfm">
+  </defTemplateForm>  
+  
+  <defTemplateForm 
+     alias="TFMCAltaNuevoProvMaterial"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/MaterialControl/tfMaterialControl001.dfm">
+  </defTemplateForm>
+  
+   <defTemplateForm 
+     alias="TFMCGrupoProvUnif"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/MaterialControl/tfMaterialControl002.dfm">
+  </defTemplateForm>
+  
+   <defTemplateForm 
+     alias="TFMCCondPagoProv"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/MaterialControl/tfMaterialControl003.dfm">
+  </defTemplateForm>
+  
+  <defTemplateForm 
+     alias="TFMCModifProv"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/MaterialControl/tfMaterialControl004.dfm">
+  </defTemplateForm>
+  
+  
+  <defTemplateForm 
+     alias="TFEstadSACOP"
+     file="/WEB-INF/classes/com/srn/erp/templatesForms/sacop/tfSACOP002.dfm">
+  </defTemplateForm>
+  
+  
+  
+  
+
+  
+   
+        
+  </defTemplatesForm>
+
+</dicTempForm>

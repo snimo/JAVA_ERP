@@ -1,0 +1,289 @@
+package com.srn.erp.ventas.op;
+
+import com.srn.erp.ctacte.bm.TipoCtaCteClie;
+import com.srn.erp.general.bm.ComproCab;
+import com.srn.erp.general.bm.Moneda;
+import com.srn.erp.general.bm.Provincia;
+import com.srn.erp.general.bm.Sucursal;
+import com.srn.erp.general.bm.Talonario;
+import com.srn.erp.impuestos.bm.ConceptoImpuesto;
+import com.srn.erp.stock.bm.Producto;
+import com.srn.erp.stock.bm.TipoConfMovStkTalonario;
+import com.srn.erp.stock.bm.UnidadMedida;
+import com.srn.erp.tesoreria.bm.Caja;
+import com.srn.erp.tesoreria.bm.MedioPago;
+import com.srn.erp.tesoreria.bm.TarjetaCredito;
+import com.srn.erp.tesoreria.bm.Ticket;
+import com.srn.erp.tesoreria.bm.TipoValor;
+import com.srn.erp.tesoreria.bm.Valor;
+import com.srn.erp.ventas.bm.CompoStkTalonarioFactClie;
+import com.srn.erp.ventas.bm.CondicionPago;
+import com.srn.erp.ventas.bm.FacturaCab;
+import com.srn.erp.ventas.bm.FacturaDet;
+import com.srn.erp.ventas.bm.ListaPrecios;
+import com.srn.erp.ventas.bm.PedidoCab;
+import com.srn.erp.ventas.bm.PedidoDet;
+import com.srn.erp.ventas.bm.Proyecto;
+import com.srn.erp.ventas.bm.RemitoDet;
+import com.srn.erp.ventas.bm.Sujeto;
+import com.srn.erp.ventas.bm.Vendedor;
+
+import framework.applicarionServer.bm.Varios.ValorCotizacion;
+import framework.request.bl.Operaciones.Operation;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.ExceptionValidation;
+import framework.request.bl.Utils.HashTableDatos;
+import framework.request.bl.Utils.MapDatos;
+import framework.request.bl.XML.IDataSet;
+
+public class SaveFactura extends Operation {
+	
+  FacturaCab facturaCab = null;	
+  HashTableDatos listaCotiz = null;
+
+  public SaveFactura() {
+  }
+
+  public void execute(MapDatos mapaDatos) throws BaseException {
+	  
+	if (mapaDatos.containsKey("TCotizaciones"))
+		listaCotiz = cargarCotizaciones(mapaDatos.getDataSet("TCotizaciones"));  
+    IDataSet dataset = mapaDatos.getDataSet("TFacturaCab");
+    procesarRegistros(dataset,mapaDatos);
+  }
+
+  private void procesarRegistros(IDataSet dataset,MapDatos mapaDatos) throws BaseException {
+    dataset.first();
+      while (!dataset.EOF()) {
+    	facturaCab = FacturaCab.findByOid(dataset.getInteger("oid_cco"),getSesion());
+    	
+    	// Analizar si se trata de una Anulacion
+		if ((facturaCab.isNew()==false) && 
+				(facturaCab.isActivo().booleanValue()) && 
+				(dataset.getBoolean("activo").booleanValue()==false)) {
+			facturaCab.delete();
+			this.addTransaccion(facturaCab);
+			return;
+		}    	
+    	
+    	// Datos principales de la cabecera
+    	Talonario talonario = Talonario.findByOidProxy(dataset.getInteger("oid_talonario"),getSesion());
+    	if (talonario==null)
+    		throw new ExceptionValidation(null,"Debe seleccionar un talonario");
+    	facturaCab.addCotizacionesMonedas(listaCotiz);
+    	facturaCab.setTalonario(talonario);
+    	facturaCab.setContabiliza(true);
+    	facturaCab.setEmision(dataset.getDate("fec_emision"));
+    	facturaCab.setImputac(dataset.getDate("fec_emision"));
+    	facturaCab.setTipoCompro(talonario.getTipo_comprobante());
+    	facturaCab.setLetra(talonario.getLetra());
+    	facturaCab.setLugarEmision(talonario.getLugar_emision());
+    	facturaCab.setNrolugemision(talonario.getLugar_emision().getLugemi());
+    	facturaCab.setComentario(dataset.getString("comentario"));
+    	facturaCab.setMoneda(Moneda.findByOidProxy(dataset.getInteger("oid_moneda"),getSesion()));
+    	facturaCab.setCotizacion(dataset.getCotizacion("cotizacion"));
+    	facturaCab.setNroInterno(dataset.getInteger("nro_interno"));
+    	facturaCab.setTipoCtaCteClie(TipoCtaCteClie.getTipoCtaCteClie(getSesion()));
+    	
+    	Sujeto sujeto = Sujeto.findByOidProxy(dataset.getInteger("oid_cliente"),getSesion());
+    	facturaCab.setSujeto(sujeto);
+    	Sucursal sucursal = Sucursal.findByOid(getSesion().getLogin().getOidSucursal(),getSesion());
+    	facturaCab.setSucursal(sucursal);
+    	facturaCab.setOC(dataset.getString("oc"));
+    	
+    	
+    	// Otros datos principales
+    	facturaCab.setTipo_oper(dataset.getString("tipo_oper_factu"));
+    	facturaCab.setTipo_cliente(dataset.getString("tipo_cliente"));
+    	facturaCab.setCaja(Caja.findByOidProxy(dataset.getInteger("oid_caja"),getSesion()));
+    	facturaCab.setFec_caja(dataset.getDate("fec_caja"));
+    	if (dataset.getPorcentaje("porc_bonif_cli")!=null)
+    		facturaCab.setPorc_bonif_cli(new Double(dataset.getPorcentaje("porc_bonif_cli").doubleValue()));
+    	if (dataset.getPorcentaje("porc_reca_cli")!=null)
+    		facturaCab.setPorc_bonif_cli(new Double(dataset.getPorcentaje("porc_reca_cli").doubleValue()));
+    	facturaCab.setLista_precios(ListaPrecios.findByOidProxy(dataset.getInteger("oid_lp"),getSesion()));
+    	facturaCab.setProvincia(Provincia.findByOidProxy(dataset.getInteger("oid_provincia"),getSesion()));
+    	facturaCab.setProyecto(Proyecto.findByOidProxy(dataset.getInteger("oid_proyecto"),getSesion()));
+    	facturaCab.setVendedor(Vendedor.findByOidProxy(dataset.getInteger("oid_vendedor"),getSesion()));
+    	facturaCab.setCond_pago(CondicionPago.findByOidProxy(dataset.getInteger("oid_cond_pago"),getSesion()));
+    	facturaCab.setCompo_stk_fact(CompoStkTalonarioFactClie.findByOidProxy(dataset.getInteger("oid_compo_stk_fac"),getSesion()));
+    	if (dataset.getPorcentaje("porc_bonif_fp")!=null)
+    		facturaCab.setPorc_bonif_cp(new Double(dataset.getPorcentaje("porc_bonif_fp").doubleValue()));
+    	else
+    		facturaCab.setPorc_bonif_cp(new Double(0));
+    	if (dataset.getPorcentaje("porc_recar_fp")!=null)
+    		facturaCab.setPorc_recar_cp(new Double(dataset.getPorcentaje("porc_recar_fp").doubleValue()));
+    	else
+    		facturaCab.setPorc_recar_cp(new Double(0));
+    	facturaCab.setFec_base(dataset.getDate("fec_emision"));
+    	facturaCab.setSujeto_impositivo(sujeto.getSujeto_impositivo());
+    	if (facturaCab.isFacturaNotaDebito())
+    		facturaCab.setSigno(1);
+    	else
+    		facturaCab.setSigno(-1);
+    	facturaCab.setOC(dataset.getString("oc"));
+//    	
+    	// En moneda Origen
+    	facturaCab.setBruto(dataset.getMoney("total_bruto"));
+    	facturaCab.setPorc_dto(dataset.getPorcentaje("porc_dto"));
+    	facturaCab.setDescuento(dataset.getMoney("descuento"));
+    	facturaCab.setPorc_recar(dataset.getPorcentaje("porc_recar"));
+    	facturaCab.setRecargo(dataset.getMoney("recargo"));
+    	facturaCab.setNeto(dataset.getMoney("total_neto"));
+    	facturaCab.setNetoGravado(dataset.getMoney("neto_gravado"));
+    	facturaCab.setNetoNoGravado(dataset.getMoney("neto_no_gravado"));
+    	facturaCab.setIva(dataset.getMoney("iva"));
+    	facturaCab.setIva2(dataset.getMoney("iva_2"));
+    	
+    	facturaCab.setPerc_iva(dataset.getMoney("perc_iva"));
+    	facturaCab.setImp_internos(dataset.getMoney("imp_internos"));
+    	facturaCab.setPercIBBsAs(dataset.getMoney("perc_ib_ba"));
+    	facturaCab.setPercIBCapFed(dataset.getMoney("perc_ib_cf"));
+    	facturaCab.setTotal(dataset.getMoney("total_total"));
+    	facturaCab.setNroext(dataset.getInteger("nro_ext"));
+    	facturaCab.setFactura(dataset.getString("factura"));
+    	
+    	facturaCab.setConcImpIVA(ConceptoImpuesto.findByOidProxy(dataset.getInteger("oid_conc_impu_iva"),getSesion()));
+    	facturaCab.setConcImpIVA2(ConceptoImpuesto.findByOidProxy(dataset.getInteger("oid_conc_impu_iva_2"),getSesion()));
+    	facturaCab.setConcImpPercIVA(ConceptoImpuesto.findByOidProxy(dataset.getInteger("oid_conc_impu_perc_iva"),getSesion()));
+    	facturaCab.setConcImpPercIB(ConceptoImpuesto.findByOidProxy(dataset.getInteger("oid_conc_impu_perc_ib"),getSesion()));
+    	facturaCab.setConcImpInt(ConceptoImpuesto.findByOidProxy(dataset.getInteger("oid_conc_impu_int"),getSesion()));
+    	
+    	
+    	// Asignar los campos correspondientes a la Impresion o Visualizacion
+    	facturaCab.setImpre_bruto(dataset.getMoney("impre_bruto"));
+    	facturaCab.setImprePorcBonif(dataset.getMoney("impre_porc_dto"));
+    	facturaCab.setImpre_bonif(dataset.getMoney("impre_descuento"));
+    	facturaCab.setImprePorcRecar(dataset.getMoney("impre_porc_recar"));
+    	facturaCab.setImpre_recar(dataset.getMoney("impre_recargo"));
+    	facturaCab.setImpre_neto(dataset.getMoney("impre_neto"));
+    	facturaCab.setImpre_iva(dataset.getMoney("impre_iva"));
+    	facturaCab.setImpre_iva2(dataset.getMoney("impre_iva_2"));
+    	facturaCab.setImpre_perc_iva(dataset.getMoney("impre_perc_iva"));
+    	facturaCab.setImpre_imp_int(dataset.getMoney("impre_imp_internos"));
+    	facturaCab.setImprePercIBBsAs(dataset.getMoney("impre_perc_ib_ba"));
+    	facturaCab.setImprePercIBCapFed(dataset.getMoney("impre_perc_ib_cf"));
+    	facturaCab.setImpre_total(dataset.getMoney("impre_total"));
+    	
+    	if (dataset.containstAttribute("oid_cco_fact_senia") && (dataset.getInteger("oid_cco_fact_senia")!=null))
+    		if (dataset.getInteger("oid_cco_fact_senia").intValue()>0)
+    			facturaCab.setFacturaSenia(ComproCab.findByOidProxyCompro(dataset.getInteger("oid_cco_fact_senia"),this.getSesion()));    	
+    	
+    	// Para el manejo de Stock
+    	facturaCab.setTipoConfMovStkTalonario(TipoConfMovStkTalonario.findByOidProxy(dataset.getInteger("oid_tipo_conf_mov"),getSesion()));
+    	
+    	// Traer Detalles de las Facturas
+    	IDataSet dsFacturaDet = dataset.getDataSet("TFacturaDet");
+    	dsFacturaDet.first();
+    	while (!dsFacturaDet.EOF()) {
+    		
+    		// Si el Item No esta activo no pasarlo
+    		if (dsFacturaDet.getBoolean("activo").booleanValue() == false) {
+    			dsFacturaDet.next();
+    			continue;
+    		}
+    		
+    		FacturaDet facturaDet = facturaCab.addDetalle();
+    		facturaDet.setProducto(Producto.findByOidProxy(dsFacturaDet.getInteger("oid_art"),getSesion()));
+    		facturaDet.setCantidad(dsFacturaDet.getDouble("cantidad"));
+    		
+    		if (dsFacturaDet.getDouble("cantidad").doubleValue() == 0) {
+    			dsFacturaDet.next();
+    			continue;
+    		}
+    		
+    		facturaDet.setUnidad_medida(UnidadMedida.findByOidProxy(dsFacturaDet.getInteger("oid_uni_med"),getSesion()));
+    		facturaDet.setPrecio_lista(dsFacturaDet.getMoney("precio_lista"));
+    		facturaDet.setPrecio_sugerido(dsFacturaDet.getMoney("precio_lista_bonif"));
+    		facturaDet.setPrecio_ingresado(dsFacturaDet.getMoney("precio_factura"));
+    		facturaDet.setPorc_bonif_1(dsFacturaDet.getPorcentaje("porc_bonif_1"));
+    		facturaDet.setPorc_bonif_2(dsFacturaDet.getPorcentaje("porc_bonif_2"));
+    		facturaDet.setPorc_bonif_3(dsFacturaDet.getPorcentaje("porc_bonif_3"));
+    		facturaDet.setPrecio_bonificado(dsFacturaDet.getMoney("precio_bonif"));
+    		facturaDet.setImporte(dsFacturaDet.getMoney("importe"));
+    		facturaDet.setConcImpuIVA(ConceptoImpuesto.findByOidProxy(dsFacturaDet.getInteger("oid_conc_imp_iva"),getSesion()));
+    		facturaDet.setConcImpuPercIVA(ConceptoImpuesto.findByOidProxy(dsFacturaDet.getInteger("oid_conc_imp_perc_iva"),getSesion()));
+    		facturaDet.setConcImpuPercIB(ConceptoImpuesto.findByOidProxy(dsFacturaDet.getInteger("oid_conc_imp_perc_ib"),getSesion()));
+    		facturaDet.setConcImpuInt(ConceptoImpuesto.findByOidProxy(dsFacturaDet.getInteger("oid_conc_imp_int"),getSesion()));
+    		facturaDet.setNetoGravado(dsFacturaDet.getMoney("importe_neto_gravado"));
+    		facturaDet.setNetoNoGravado(dsFacturaDet.getMoney("importe_neto_no_gravado"));
+    		facturaDet.setTasaIVA(dsFacturaDet.getPorcentaje("tasa_iva"));
+    		facturaDet.setIVA(dsFacturaDet.getMoney("iva"));
+    		facturaDet.setComentario(dsFacturaDet.getString("comentario"));    		
+    		facturaDet.setPedidoDet(PedidoDet.findByOidProxy(dsFacturaDet.getInteger("oid_cco_ped_det"),getSesion()));
+    		facturaDet.setRemitoDet(RemitoDet.findByOidProxy(dsFacturaDet.getInteger("oid_cco_rem_det"),getSesion()));
+    		
+    		// Si se carga un pedido a nivel cabecera asignarlo
+    		if (facturaDet.getPedidoCab()==null) {
+    			PedidoCab pedidoCabecera = PedidoCab.findByOid(dataset.getInteger("oid_cco_ped"), this.getSesion());
+    			if (pedidoCabecera!=null)
+    				facturaDet.setPedidoCab(pedidoCabecera);
+    		}
+    		
+    		
+    		dsFacturaDet.next();
+    	}
+    	
+    	tratarValores(mapaDatos);
+    	
+    	
+    	addTransaccion(facturaCab);
+        dataset.next();
+    }
+  }
+  
+  private void tratarValores(MapDatos mapaDatos) throws BaseException {
+  	// Tratar los Medios de pago
+  	if (!mapaDatos.containsKey("TValores")) return;
+  	
+  	IDataSet dsValores = mapaDatos.getDataSet("TValores");
+  	dsValores.first();
+  	while (!dsValores.EOF()) {
+  	     MedioPago medioPago = facturaCab.addMedioPago();
+  	       medioPago.setValor(Valor.findByOidProxy(dsValores.getInteger("oid_valor"),this.getSesion()));
+           medioPago.setSujeto(this.facturaCab.getSujeto());
+           medioPago.setOidOPMedioPago(dsValores.getInteger("secu"));
+           medioPago.setFechaContable(facturaCab.getEmision());
+           medioPago.setTipoValor(TipoValor.findByOid(dsValores.getInteger("oid_tipo_valor"),getSesion()));
+           medioPago.setProvincia(Provincia.findByOid(dsValores.getInteger("oid_provincia"),getSesion()));
+           medioPago.setOidEntidad(dsValores.getInteger("oid_entidad"));
+           medioPago.setNro_cheque(dsValores.getInteger("nro"));
+           medioPago.setFecEmision(dsValores.getDate("fec_emision"));
+           medioPago.setFecVencimiento(dsValores.getDate("fec_vto"));
+           medioPago.setCUIT(dsValores.getString("cuit_cuil"));
+           medioPago.setImporteMonedaPago(dsValores.getMoney("impo_mon_fact"));
+           medioPago.setImporteMonedaValor(dsValores.getMoney("importe"));
+           medioPago.setLote(dsValores.getInteger("lote"));
+           medioPago.setCupon(dsValores.getInteger("cupon"));
+           medioPago.setCuotas(dsValores.getInteger("cuotas"));
+           medioPago.setNroTarjeta(dsValores.getString("nro_tarjeta"));
+           medioPago.setCotizMonedaValor(dsValores.getCotizacion("cotizacion"));
+           medioPago.setTarjetaCredito(TarjetaCredito.findByOidProxy(dsValores.getInteger("oid_tarjeta_credito"),getSesion()));
+           medioPago.setTicket(Ticket.findByOidProxy(dsValores.getInteger("oid_ticket"),getSesion()));
+           medioPago.setNroCertificado(dsValores.getString("nro_certificado"));
+           medioPago.setCodigoAutorizacion(dsValores.getString("codigo_autorizacion"));
+           
+           medioPago.setCaja(facturaCab.getCaja());
+           medioPago.setImportesContables(
+         		  facturaCab.getImportesContables(dsValores.getMoney("importe"),
+         				  						  medioPago.getTipoValor().getMoneda(),
+         				  						  facturaCab.getEmision()));    		
+  		dsValores.next();
+  	}
+	
+  }
+  
+  private HashTableDatos cargarCotizaciones(IDataSet dsCotizaciones) throws BaseException {
+	  HashTableDatos listaCotizaciones = new HashTableDatos();
+	  dsCotizaciones.first();
+	  while (!dsCotizaciones.EOF()) {
+		  Moneda moneda              = Moneda.findByOidProxy(dsCotizaciones.getInteger("oid_moneda"),getSesion());
+		  ValorCotizacion valorCotiz = dsCotizaciones.getCotizacion("cotizacion");
+		  listaCotizaciones.put(moneda,valorCotiz);
+		  dsCotizaciones.next();
+	  }
+	  return listaCotizaciones;
+  }
+  
+
+}

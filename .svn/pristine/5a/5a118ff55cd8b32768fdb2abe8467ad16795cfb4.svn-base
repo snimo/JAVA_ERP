@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defPoolBD>
+  <defParamPoolBD
+     dataBaseName="vtatlas:1433:sig"
+     username="sig"
+     password="sig" idleOut="30" minSize="2" maxSize="5" loginTimeOut="10" tipoBD="sqlserver">
+  </defParamPoolBD>
+</defPoolBD>

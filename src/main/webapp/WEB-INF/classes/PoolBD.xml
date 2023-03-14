@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defPoolBD>
+  <defParamPoolBD
+     dataBaseName="127.0.0.1/3050:c:/desarrollo/erp/bd/abastecer_pr.GDB"
+     username="sysdba"
+     password="masterkey" idleOut="30" minSize="2" maxSize="5" loginTimeOut="10" tipoBD="firebird">
+  </defParamPoolBD>
+</defPoolBD>

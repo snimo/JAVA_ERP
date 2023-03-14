@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defPoolBD>
+  <defParamPoolBD
+     dataBaseName="localhost/3050:C:/Desarrollo/ERP/BD/Prueba.GDB"
+     username="sysdba"
+     password="masterkey" idleOut="30" minSize="2" maxSize="5" loginTimeOut="10">
+  </defParamPoolBD>
+</defPoolBD>
+
+
+
+
+

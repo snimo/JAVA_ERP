@@ -1,0 +1,371 @@
+package com.srn.erp.legales.op;
+
+import java.util.Iterator;
+
+import com.srn.erp.general.bm.ClasificadorEntidad;
+import com.srn.erp.general.bm.ValorClasificadorEntidad;
+import com.srn.erp.legales.bm.PagoJuicio;
+import com.srn.erp.legales.bm.PagoSeclo;
+import com.srn.erp.rrhh.op.TraerLeyendasRepEval;
+
+import framework.applicarionServer.bm.Varios.CalculadorMoney;
+import framework.applicarionServer.bm.Varios.Money;
+import framework.request.bl.Operaciones.Operation;
+import framework.request.bl.Tablas.Field;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.HashTableDatos;
+import framework.request.bl.Utils.MapDatos;
+import framework.request.bl.XML.IDataSet;
+import framework.request.bl.XML.TDataSet;
+
+public class TraerPagosJuiciosSeclos extends Operation {
+
+	private int secu = 0;
+	ClasificadorEntidad clasifEmpresa = null;
+	ClasificadorEntidad clasifSector = null;
+	ClasificadorEntidad clasifPuesto = null;
+	ClasificadorEntidad clasifEstado = null;
+
+	private HashTableDatos juicios = new HashTableDatos();
+	private HashTableDatos seclos = new HashTableDatos();
+
+	public TraerPagosJuiciosSeclos() {
+	}
+
+	public void execute(MapDatos mapaDatos) throws BaseException {
+
+		clasifEmpresa = TraerLeyendasRepEval.getClasificadorEmpresa(this.getSesion());
+		clasifSector = TraerLeyendasRepEval.getClasificadorSector(this.getSesion());
+		clasifPuesto = TraerLeyendasRepEval.getClasificadorPuesto(this.getSesion());
+		clasifEstado = TraerLeyendasRepEval.getClasificadorEstado(this.getSesion());
+
+		java.util.Date fecDesde = mapaDatos.getDate("fec_desde");
+		java.util.Date fecHasta = mapaDatos.getDate("fec_hasta");
+		String tipo = mapaDatos.getString("tipo");
+
+		IDataSet dsPagoJuicio = this.getDataSetConsultaPagos();
+
+		
+		if ((tipo.equals("JUICIO")) || (tipo.equals("AMBOS"))) {
+		
+			Iterator iterPagosJuicios = PagoJuicio.getPagosJuicio(fecDesde, fecHasta, this.getSesion()).iterator();
+			while (iterPagosJuicios.hasNext()) {
+				PagoJuicio pagoJuicio = (PagoJuicio) iterPagosJuicios.next();
+				cargarRegistroPagoJuicio(dsPagoJuicio, pagoJuicio);
+			}
+			
+		}
+
+		if ((tipo.equals("SECLO")) || (tipo.equals("AMBOS"))) {
+					
+			Iterator iterPagosSeclos = PagoSeclo.getPagosSeclo(fecDesde, fecHasta, this.getSesion()).iterator();
+			while (iterPagosSeclos.hasNext()) {
+				PagoSeclo pagoSeclo = (PagoSeclo) iterPagosSeclos.next();
+				cargarRegistroPagoSeclo(dsPagoJuicio, pagoSeclo);
+			}
+			
+		}
+
+		writeCliente(dsPagoJuicio);
+
+	}
+
+	private IDataSet getDataSetConsultaPagos() {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TConsultaPagos");
+		dataset.fieldDef(new Field("secu", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("juicio_seclo", Field.STRING, 20));
+		dataset.fieldDef(new Field("codigo_interno", Field.STRING, 255));
+		dataset.fieldDef(new Field("oid_legajo", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("legajo", Field.STRING, 50));
+		dataset.fieldDef(new Field("ape_y_nom", Field.STRING, 255));
+		dataset.fieldDef(new Field("procedencia", Field.STRING, 255));
+		dataset.fieldDef(new Field("puesto", Field.STRING, 255));
+		dataset.fieldDef(new Field("sector", Field.STRING, 255));
+		dataset.fieldDef(new Field("fec_ant_rec", Field.DATE, 0));
+		dataset.fieldDef(new Field("fec_ing_rea", Field.DATE, 0));
+		dataset.fieldDef(new Field("fec_egreso", Field.DATE, 0));
+		dataset.fieldDef(new Field("estado_juicio", Field.STRING, 100));
+		dataset.fieldDef(new Field("nro_expediente", Field.STRING, 100));
+		dataset.fieldDef(new Field("causal_distracto", Field.STRING, 100));
+		dataset.fieldDef(new Field("tipo_reclamo", Field.STRING, 100));
+		dataset.fieldDef(new Field("monto_reclamo", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("etapa_procesal", Field.STRING, 100));
+
+		dataset.fieldDef(new Field("monto_acuerdo", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("monto_conciliador", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("monto_letrado", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("monto_perito", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("monto_justicia", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("monto_total", Field.CURRENCY, 0));
+
+		dataset.fieldDef(new Field("fec_pago", Field.DATE, 0));
+		dataset.fieldDef(new Field("pago_acuerdo", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("pago_conciliador", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("pago_letrado", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("pago_perito", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("pago_justicia", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("total_pagado", Field.CURRENCY, 0));
+
+		dataset.fieldDef(new Field("concepto_pago", Field.STRING, 100));
+		dataset.fieldDef(new Field("obs_pago", Field.MEMO, 0));
+		dataset.fieldDef(new Field("cant_pagos", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cant_jui_seclos", Field.INTEGER, 0));
+		
+		dataset.fieldDef(new Field("fec_recepcion", Field.DATE, 0));
+		dataset.fieldDef(new Field("requeridos", Field.MEMO, 0));
+		dataset.fieldDef(new Field("primera_instancia", Field.MEMO, 0));
+		dataset.fieldDef(new Field("segunda_instancia", Field.MEMO, 0));
+		
+		
+
+		return dataset;
+	}
+
+	private void cargarRegistroPagoJuicio(IDataSet dataset, PagoJuicio pagoJuicio) throws BaseException {
+		dataset.append();
+		
+		++secu;
+		
+		dataset.fieldValue("secu", secu);
+		dataset.fieldValue("juicio_seclo", "JUICIO");
+		dataset.fieldValue("codigo_interno", pagoJuicio.getJuicio().getCodigoInterno());
+		dataset.fieldValue("oid_legajo", pagoJuicio.getJuicio().getLegajo().getOIDInteger());
+		dataset.fieldValue("legajo", pagoJuicio.getJuicio().getLegajo().getNro_legajo());
+		dataset.fieldValue("ape_y_nom", pagoJuicio.getJuicio().getLegajo().getApellidoyNombre());
+		
+		ValorClasificadorEntidad valorClasifEmp = pagoJuicio.getJuicio().getLegajo().getValorClasifEnt(clasifEmpresa);
+		String empresa = "";
+		if (valorClasifEmp != null)
+			empresa = valorClasifEmp.getDescripcion();		
+		
+		dataset.fieldValue("procedencia", empresa);
+		
+		ValorClasificadorEntidad valorClasifPue = pagoJuicio.getJuicio().getLegajo().getValorClasifEnt(clasifPuesto);
+		String puesto = "";
+		if (valorClasifPue != null)
+			puesto = valorClasifPue.getDescripcion();		
+		
+		ValorClasificadorEntidad valorClasifSec = pagoJuicio.getJuicio().getLegajo().getValorClasifEnt(clasifSector);
+		String sector = "";
+		if (valorClasifSec != null)
+			sector = valorClasifSec.getDescripcion();		
+		
+		dataset.fieldValue("puesto", puesto);
+		dataset.fieldValue("sector", sector);
+		
+		
+		dataset.fieldValue("fec_ant_rec", pagoJuicio.getJuicio().getLegajo().getFecAntReconocimiento());
+		dataset.fieldValue("fec_ing_rea", pagoJuicio.getJuicio().getLegajo().getFecIngreso());
+		dataset.fieldValue("fec_egreso", pagoJuicio.getJuicio().getLegajo().getFecRetiro());
+		
+		if (pagoJuicio.getJuicio().getEstado_juicio()!=null)
+			dataset.fieldValue("estado_juicio", pagoJuicio.getJuicio().getEstado_juicio().getDescripcion());
+		else
+			dataset.fieldValue("estado_juicio", "");
+		
+		dataset.fieldValue("nro_expediente", pagoJuicio.getJuicio().getNro_expediente());
+		
+		String motivoEgreso = "";
+		if (pagoJuicio.getJuicio().getLegajo().getMotivoEgresoEmp() != null)
+			motivoEgreso = pagoJuicio.getJuicio().getLegajo().getMotivoEgresoEmp().getDescripcion();
+		
+		dataset.fieldValue("causal_distracto", motivoEgreso);
+		
+		if (pagoJuicio.getJuicio().getTipo_reclamo()!=null)
+			dataset.fieldValue("tipo_reclamo", pagoJuicio.getJuicio().getTipo_reclamo().getDescripcion());
+		else
+			dataset.fieldValue("tipo_reclamo", "");
+		
+		dataset.fieldValue("monto_reclamo", pagoJuicio.getJuicio().getMonto_reclamo());
+		
+		String etapaProcesal = null;
+		if (pagoJuicio.getJuicio().getEstado_procesal() != null)
+			etapaProcesal = pagoJuicio.getJuicio().getEstado_procesal().getDescripcion();
+		
+		dataset.fieldValue("etapa_procesal", etapaProcesal);
+		
+		
+		CalculadorMoney calcTotal = new CalculadorMoney(new Money(0));
+		Money montoAcuerdo = pagoJuicio.getJuicio().getMontoAcuerdo();
+		Money honorarioLetra = pagoJuicio.getJuicio().getMontoLetrado();
+		Money montoConciliador = pagoJuicio.getJuicio().getMontoConciliador();
+		Money montoPerito = pagoJuicio.getJuicio().getMontoPerito();
+		Money montoJusticia = pagoJuicio.getJuicio().getMontoTasaJusticia();		
+		
+		dataset.fieldValue("monto_acuerdo", montoAcuerdo);
+		dataset.fieldValue("monto_conciliador", montoConciliador);
+		dataset.fieldValue("monto_letrado", honorarioLetra);
+		dataset.fieldValue("monto_perito", montoPerito);
+		dataset.fieldValue("monto_justicia", montoJusticia);
+		
+		if (montoAcuerdo != null)
+			calcTotal.sumar(montoAcuerdo);
+		if (honorarioLetra != null)
+			calcTotal.sumar(honorarioLetra);
+		if (montoConciliador != null)
+			calcTotal.sumar(montoConciliador);
+		if (montoPerito != null)
+			calcTotal.sumar(montoPerito);
+		if (montoJusticia != null)
+			calcTotal.sumar(montoJusticia);		
+		
+		dataset.fieldValue("monto_total", calcTotal.getResultMoney());
+		
+		dataset.fieldValue("fec_pago", pagoJuicio.getFec_pago());
+		dataset.fieldValue("pago_acuerdo", pagoJuicio.getPago_acuerdo());
+		dataset.fieldValue("pago_conciliador", pagoJuicio.getPago_horario());
+		dataset.fieldValue("pago_letrado", pagoJuicio.getPagoLetrado());
+		dataset.fieldValue("pago_perito", pagoJuicio.getPago_perito());
+		dataset.fieldValue("pago_justicia", pagoJuicio.getPago_tasa_just());
+		
+		dataset.fieldValue("total_pagado", pagoJuicio.getTotalPago());
+		
+		if (pagoJuicio.getConcepto_pago_seclo()!=null)
+			dataset.fieldValue("concepto_pago", pagoJuicio.getConcepto_pago_seclo().getDescripcion());
+		else
+			dataset.fieldValue("concepto_pago", "");
+		dataset.fieldValue("obs_pago", pagoJuicio.getObservacion());
+		dataset.fieldValue("cant_pagos", 1);
+		
+		String encontro = (String) juicios.get(pagoJuicio.getJuicio().getOIDInteger());
+		
+		if (encontro == null)
+			dataset.fieldValue("cant_jui_seclos", 1);
+		else
+			dataset.fieldValue("cant_jui_seclos", 0);
+		
+		juicios.put(pagoJuicio.getJuicio().getOIDInteger(), "");
+		
+		dataset.fieldValue("fec_recepcion", pagoJuicio.getJuicio().getFec_rec_dem());
+		dataset.fieldValue("requeridos", pagoJuicio.getJuicio().getStringRequeridos());
+		
+		if (pagoJuicio.getJuicio()!=null)
+			dataset.fieldValue("primera_instancia", pagoJuicio.getJuicio().getPrimeraInstancia());
+		else
+			dataset.fieldValue("primera_instancia", "");
+		
+		if (pagoJuicio.getJuicio()!=null)
+			dataset.fieldValue("segunda_instancia", pagoJuicio.getJuicio().getSegundaInstancia());
+		else
+			dataset.fieldValue("segunda_instancia", "");
+		
+		
+	}
+
+	private void cargarRegistroPagoSeclo(IDataSet dataset, PagoSeclo pagoSeclo) throws BaseException {
+		dataset.append();
+
+		++secu;
+
+		dataset.fieldValue("secu", secu);
+		dataset.fieldValue("juicio_seclo", "SECLO");
+		dataset.fieldValue("codigo_interno", pagoSeclo.getSeclo().getCodigoInterno());
+		dataset.fieldValue("oid_legajo", pagoSeclo.getSeclo().getLegajo().getOIDInteger());
+		dataset.fieldValue("legajo", pagoSeclo.getSeclo().getLegajo().getNro_legajo());
+		dataset.fieldValue("ape_y_nom", pagoSeclo.getSeclo().getLegajo().getApellidoyNombre());
+
+		ValorClasificadorEntidad valorClasifEmp = pagoSeclo.getSeclo().getLegajo().getValorClasifEnt(clasifEmpresa);
+		String empresa = "";
+		if (valorClasifEmp != null)
+			empresa = valorClasifEmp.getDescripcion();
+
+		dataset.fieldValue("procedencia", empresa);
+
+		ValorClasificadorEntidad valorClasifPue = pagoSeclo.getSeclo().getLegajo().getValorClasifEnt(clasifPuesto);
+		String puesto = "";
+		if (valorClasifPue != null)
+			puesto = valorClasifPue.getDescripcion();
+
+		ValorClasificadorEntidad valorClasifSec = pagoSeclo.getSeclo().getLegajo().getValorClasifEnt(clasifSector);
+		String sector = "";
+		if (valorClasifSec != null)
+			sector = valorClasifSec.getDescripcion();
+
+		dataset.fieldValue("puesto", puesto);
+		dataset.fieldValue("sector", sector);
+
+		dataset.fieldValue("fec_ant_rec", pagoSeclo.getSeclo().getLegajo().getFecAntReconocimiento());
+		dataset.fieldValue("fec_ing_rea", pagoSeclo.getSeclo().getLegajo().getFecIngreso());
+		dataset.fieldValue("fec_egreso", pagoSeclo.getSeclo().getLegajo().getFecRetiro());
+
+		if (pagoSeclo.getSeclo().getEstado_seclo() != null)
+			dataset.fieldValue("estado_juicio", pagoSeclo.getSeclo().getEstado_seclo().getDescripcion());
+		else
+			dataset.fieldValue("estado_juicio", "");
+
+		dataset.fieldValue("nro_expediente", "");
+
+		String motivoEgreso = "";
+		if (pagoSeclo.getSeclo().getLegajo().getMotivoEgresoEmp() != null)
+			motivoEgreso = pagoSeclo.getSeclo().getLegajo().getMotivoEgresoEmp().getDescripcion();
+
+		dataset.fieldValue("causal_distracto", motivoEgreso);
+
+		if (pagoSeclo.getSeclo().getTipo_reclamo() != null)
+			dataset.fieldValue("tipo_reclamo", pagoSeclo.getSeclo().getTipo_reclamo().getDescripcion());
+		else
+			dataset.fieldValue("tipo_reclamo", "");
+
+		dataset.fieldValue("monto_reclamo", pagoSeclo.getSeclo().getMonto_reclamo());
+
+		dataset.fieldValue("etapa_procesal", "");
+
+		CalculadorMoney calcTotal = new CalculadorMoney(new Money(0));
+		Money montoAcuerdo = pagoSeclo.getSeclo().getMonto_acuerdo();
+		Money honorarioLetra = pagoSeclo.getSeclo().getHono_letrado();
+		Money montoConciliador = pagoSeclo.getSeclo().getHono_conciliado();
+		Money montoPerito = pagoSeclo.getSeclo().getOtros_hono();
+		Money montoJusticia = new Money(0);
+
+		dataset.fieldValue("monto_acuerdo", montoAcuerdo);
+		dataset.fieldValue("monto_conciliador", montoConciliador);
+		dataset.fieldValue("monto_letrado", honorarioLetra);
+		dataset.fieldValue("monto_perito", montoPerito);
+		dataset.fieldValue("monto_justicia", montoJusticia);
+
+		if (montoAcuerdo != null)
+			calcTotal.sumar(montoAcuerdo);
+		if (honorarioLetra != null)
+			calcTotal.sumar(honorarioLetra);
+		if (montoConciliador != null)
+			calcTotal.sumar(montoConciliador);
+		if (montoPerito != null)
+			calcTotal.sumar(montoPerito);
+		if (montoJusticia != null)
+			calcTotal.sumar(montoJusticia);
+
+		dataset.fieldValue("monto_total", calcTotal.getResultMoney());
+
+		dataset.fieldValue("fec_pago", pagoSeclo.getFec_pago());
+		dataset.fieldValue("pago_acuerdo", pagoSeclo.getPago_acuerdo());
+		dataset.fieldValue("pago_conciliador", pagoSeclo.getPago_conciliador());
+		dataset.fieldValue("pago_letrado", pagoSeclo.getPago_letrado());
+		dataset.fieldValue("pago_perito", pagoSeclo.getPago_otros());
+		dataset.fieldValue("pago_justicia", "");
+
+		dataset.fieldValue("total_pagado", pagoSeclo.getTotalPago());
+		
+		if (pagoSeclo.getConc_pago()!=null)
+			dataset.fieldValue("concepto_pago", pagoSeclo.getConc_pago().getDescripcion());
+		else
+			dataset.fieldValue("concepto_pago", "");
+		dataset.fieldValue("obs_pago", pagoSeclo.getObservacion());
+		dataset.fieldValue("cant_pagos", 1);
+		
+		String encontro = (String) seclos.get(pagoSeclo.getSeclo().getOIDInteger());
+		
+		if (encontro == null)
+			dataset.fieldValue("cant_jui_seclos", 1);
+		else
+			dataset.fieldValue("cant_jui_seclos", 0);
+		
+		seclos.put(pagoSeclo.getSeclo().getOIDInteger(), "");
+		
+		dataset.fieldValue("fec_recepcion", pagoSeclo.getSeclo().getFec_recepcion());
+		dataset.fieldValue("requeridos", pagoSeclo.getSeclo().getStringRequeridos());
+		dataset.fieldValue("primera_instancia" , "");
+		dataset.fieldValue("segunda_instancia" , "");
+
+	}
+}

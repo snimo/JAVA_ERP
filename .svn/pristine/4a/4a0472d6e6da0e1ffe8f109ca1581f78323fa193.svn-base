@@ -1,0 +1,940 @@
+package com.srn.erp.legales.da;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.Iterator;
+import java.util.List;
+
+import com.srn.erp.cip.bm.UtilCIP;
+import com.srn.erp.general.bm.ClasificadorEntidad;
+import com.srn.erp.general.bm.ValorClasificadorEntidad;
+import com.srn.erp.legales.bm.Abogado;
+import com.srn.erp.legales.bm.EmpresaJuicio;
+import com.srn.erp.legales.bm.EstadoJuicio;
+import com.srn.erp.legales.bm.EstadoProcesal;
+import com.srn.erp.legales.bm.Fuero;
+import com.srn.erp.legales.bm.Juicio;
+import com.srn.erp.legales.bm.Juzgado;
+import com.srn.erp.legales.bm.ResultadoJuicio;
+import com.srn.erp.legales.bm.TipoReclamoLeg;
+import com.srn.erp.rrhh.op.TraerLeyendasRepEval;
+import com.srn.erp.sueldos.bm.Legajo;
+
+import framework.applicarionServer.bl.ObjetosAplicacion.ObjetoLogico;
+import framework.applicarionServer.bl.Persistencia.DBObjetoPersistente;
+import framework.applicarionServer.bl.Persistencia.IDBObjetoPersistente;
+import framework.applicarionServer.bl.Persistencia.IObjetoPersistente;
+import framework.applicarionServer.bl.Sesion.ISesion;
+import framework.applicarionServer.bl.Utils.Fecha;
+import framework.applicarionServer.bl.Utils.ListObserver;
+import framework.applicarionServer.bm.Varios.Money;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.HashTableDatos;
+
+public class DBJuicio extends DBObjetoPersistente {
+
+	public static final String OID_JUICIO = "oid_juicio";
+	public static final String OID_TIPO_RECLAMO = "oid_tipo_reclamo";
+	public static final String FEC_REC_DEM = "fec_rec_dem";
+	public static final String OID_JUZGADO = "oid_juzgado";
+	public static final String NRO_EXPEDIENTE = "nro_expediente";
+	public static final String MONTO_RECLAMO = "monto_reclamo";
+	public static final String PROB_RESULTADO = "prob_resultado";
+	public static final String PORC_PREVISION = "porc_prevision";
+	public static final String OID_EST_PROCESAL = "oid_est_procesal";
+	public static final String OID_EST_JUICIO = "oid_est_juicio";
+	public static final String ACTIVO = "activo";
+	public static final String OBSERVACIONES = "observaciones";
+	public static final String OID_PERI_MENS_PREV = "oid_peri_mens_prev";
+	public static final String PREVISION = "prevision";
+	public static final String OID_ABOGADO = "oid_abogado";
+	public static final String OID_LEGAJO = "oid_legajo";
+	public static final String CBU = "cbu";
+	public static final String EMBARGO = "embargo";
+	public static final String ESTIMADO = "estimado";
+	public static final String OID_RESUL_JUICIO = "oid_resul_juicio";
+	public static final String CODIGO_INTERNO = "codigo_interno";
+	public static final String FEC_NOVEDAD = "fec_novedad";
+
+	public static final String MONTO_ACUERDO = "monto_acuerdo";
+	public static final String MONTO_HONORARIO = "monto_honorario";
+	public static final String MONTO_PERITO = "monto_perito";
+	public static final String TASA_JUSTICIA = "tasa_justicia";
+	public static final String MONTO_LETRADO = "monto_letrado";
+	public static final String TIPO_PERICIA = "oid_tipo_pericia";
+	public static final String OID_FUERO = "oid_fuero";
+	public static final String OID_COMP_SEG_CAU = "oid_comp_seg_cau";
+	public static final String CARATULA = "caratula";
+	public static final String PORC_INCAPACIDAD = "porc_incapacidad";
+	public static final String MONTO_INTERESES = "monto_intereses";
+	public static final String PORC_LETRADO = "porc_letrado";
+	public static final String PORC_PERITO = "porc_perito";
+	public static final String PORC_TASA_JUST = "porc_tasa_just";
+	public static final String PRIMERA_INSTANCIA = "primera_instancia";
+	public static final String SEGUNDA_INSTANCIA = "segunda_instancia";
+	
+
+	public static final int SELECT_BY_LEGAJO = 100;
+	public static final int SELECT_BY_CONDICIONES = 101;
+
+	public DBJuicio() {
+	}
+
+	protected void insert(IObjetoPersistente objetoPersistente) throws BaseException, SQLException {
+
+		final int OID_JUICIO = 1;
+		final int OID_TIPO_RECLAMO = 2;
+		final int FEC_REC_DEM = 3;
+		final int OID_JUZGADO = 4;
+		final int NRO_EXPEDIENTE = 5;
+		final int MONTO_RECLAMO = 6;
+		final int PROB_RESULTADO = 7;
+		final int PORC_PREVISION = 8;
+		final int OID_EST_PROCESAL = 9;
+		final int OID_EST_JUICIO = 10;
+		final int ACTIVO = 11;
+		final int OBSERVACIONES = 12;
+		final int OID_PERI_MENS_PREV = 13;
+		final int PREVISION = 14;
+		final int OID_ABOGADO = 15;
+		final int OID_LEGAJO = 16;
+		final int CBU = 17;
+		final int EMBARGO = 18;
+		final int ESTIMADO = 19;
+		final int OID_RESUL_JUICIO = 20;
+		final int CODIGO_INTERNO = 21;
+		final int FEC_NOVEDAD = 22;
+		final int MONTO_ACUERDO = 23;
+		final int MONTO_HONORARIO = 24;
+		final int MONTO_PERITO = 25;
+		final int TASA_JUSTICIA = 26;
+		final int MONTO_LETRADO = 27;
+		final int OID_TIPO_PERICIA = 28;
+		final int OID_FUERO = 29;
+		final int OID_COMP_SEG_CAU = 30;
+		final int CARATULA = 31;
+		final int PORC_INCAPACIDAD = 32;
+		final int MONTO_INTERESES = 33;
+		final int PORC_LETRADO = 34;
+		final int PORC_PERITO = 35;
+		final int PORC_TASA_JUST = 36;
+		final int PRIMERA_INSTANCIA = 37;
+		final int SEGUNDA_INSTANCIA = 38;
+
+		Juicio pers = (Juicio) objetoPersistente;
+
+		StringBuffer sqlInsert = new StringBuffer();
+		sqlInsert
+				.append(" insert into legJuicios "
+						+ " ( "
+						+ "OID_JUICIO,"
+						+ "OID_TIPO_RECLAMO,"
+						+ "FEC_REC_DEM,"
+						+ "OID_JUZGADO,"
+						+ "NRO_EXPEDIENTE,"
+						+ "MONTO_RECLAMO,"
+						+ "PROB_RESULTADO,"
+						+ "PORC_PREVISION,"
+						+ "OID_EST_PROCESAL,"
+						+ "OID_EST_JUICIO,"
+						+ "ACTIVO,"
+						+ "OBSERVACIONES,"
+						+ "OID_PERI_MENS_PREV,"
+						+ "PREVISION,"
+						+ "OID_ABOGADO , OID_LEGAJO , CBU , EMBARGO , ESTIMADO , OID_RESUL_JUICIO , CODIGO_INTERNO , FEC_NOVEDAD , MONTO_ACUERDO , MONTO_HONORARIO , MONTO_PERITO , TASA_JUSTICIA , MONTO_LETRADO,OID_TIPO_PERICIA,OID_FUERO , OID_COMP_SEG_CAU , CARATULA , PORC_INCAPACIDAD , MONTO_INTERESES , PORC_LETRADO , PORC_PERITO , PORC_TASA_JUST , PRIMERA_INSTANCIA , SEGUNDA_INSTANCIA)"
+						+ " values " + "(" + "?,"+ "?," + "?," + "?," + "?," + "?," + "?,"+ "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?,"+ "?," + "?," + "?,"+ "?,"+ "?,"+ "?,"
+						+ "?," +"?," + "?," + "? , ? , ? , ? , ? , ? , ?) ");
+
+		PreparedStatement qInsert = getSesion().getConexionBD().prepareStatement(sqlInsert.toString());
+		qInsert.setInt(OID_JUICIO, pers.getOID());
+		if (pers.getTipo_reclamo() != null)
+			qInsert.setInt(OID_TIPO_RECLAMO, pers.getTipo_reclamo().getOID());
+		else
+			qInsert.setNull(OID_TIPO_RECLAMO, Types.INTEGER);
+		if (pers.getFec_rec_dem() != null)
+			qInsert.setDate(FEC_REC_DEM, new java.sql.Date(pers.getFec_rec_dem().getTime()));
+		else
+			qInsert.setNull(FEC_REC_DEM, Types.DATE);
+		if (pers.getJuzgado() != null)
+			qInsert.setInt(OID_JUZGADO, pers.getJuzgado().getOID());
+		else
+			qInsert.setNull(OID_JUZGADO, java.sql.Types.INTEGER);
+		if (pers.getNro_expediente() != null)
+			qInsert.setString(NRO_EXPEDIENTE, pers.getNro_expediente());
+		else
+			qInsert.setNull(NRO_EXPEDIENTE, Types.VARCHAR);
+		if (pers.getMonto_reclamo() != null)
+			qInsert.setDouble(MONTO_RECLAMO, pers.getMonto_reclamo().doubleValue());
+		else
+			qInsert.setNull(MONTO_RECLAMO, java.sql.Types.DOUBLE);
+		if (pers.getProb_resultado() != null)
+			qInsert.setString(PROB_RESULTADO, pers.getProb_resultado());
+		else
+			qInsert.setNull(PROB_RESULTADO, Types.VARCHAR);
+		if (pers.getPorc_prevision() != null)
+			qInsert.setDouble(PORC_PREVISION, pers.getPorc_prevision().doubleValue());
+		else
+			qInsert.setNull(PORC_PREVISION, java.sql.Types.DOUBLE);
+		if (pers.getEstado_procesal() != null)
+			qInsert.setInt(OID_EST_PROCESAL, pers.getEstado_procesal().getOID());
+		else
+			qInsert.setNull(OID_EST_PROCESAL, java.sql.Types.INTEGER);
+		if (pers.getEstado_juicio() != null)
+			qInsert.setInt(OID_EST_JUICIO, pers.getEstado_juicio().getOID());
+		else
+			qInsert.setNull(OID_EST_JUICIO, java.sql.Types.INTEGER);
+		qInsert.setBoolean(ACTIVO, pers.isActivo().booleanValue());
+		qInsert.setString(OBSERVACIONES, pers.getObservaciones());
+		if (pers.getPeriodo_mensual() != null)
+			qInsert.setInt(OID_PERI_MENS_PREV, pers.getPeriodo_mensual().getOID());
+		else
+			qInsert.setNull(OID_PERI_MENS_PREV, java.sql.Types.INTEGER);
+		if (pers.getPrevision() != null)
+			qInsert.setDouble(PREVISION, pers.getPrevision().doubleValue());
+		else
+			qInsert.setNull(PREVISION, java.sql.Types.DOUBLE);
+		if (pers.getAbogado() != null)
+			qInsert.setInt(OID_ABOGADO, pers.getAbogado().getOID());
+		else
+			qInsert.setNull(OID_ABOGADO, java.sql.Types.INTEGER);
+		if (pers.getLegajo() != null)
+			qInsert.setInt(OID_LEGAJO, pers.getLegajo().getOID());
+		else
+			qInsert.setNull(OID_LEGAJO, java.sql.Types.INTEGER);
+		if (pers.getCBU() != null)
+			qInsert.setString(CBU, pers.getCBU());
+		else
+			qInsert.setNull(CBU, java.sql.Types.VARCHAR);
+		if (pers.getEmbargo() != null)
+			qInsert.setDouble(EMBARGO, pers.getEmbargo().doubleValue());
+		else
+			qInsert.setNull(EMBARGO, java.sql.Types.DOUBLE);
+
+		if (pers.getEstimado() != null)
+			qInsert.setDouble(ESTIMADO, pers.getEstimado().doubleValue());
+		else
+			qInsert.setNull(ESTIMADO, java.sql.Types.DOUBLE);
+
+		if (pers.getResultadoJuicio() != null)
+			qInsert.setInt(OID_RESUL_JUICIO, pers.getResultadoJuicio().getOID());
+		else
+			qInsert.setNull(OID_RESUL_JUICIO, java.sql.Types.INTEGER);
+		if (pers.getCodigoInterno() != null)
+			qInsert.setString(CODIGO_INTERNO, pers.getCodigoInterno());
+		else
+			qInsert.setNull(CODIGO_INTERNO, Types.VARCHAR);
+		if (pers.getFecNovedad() != null)
+			qInsert.setDate(FEC_NOVEDAD, new java.sql.Date(pers.getFecNovedad().getTime()));
+		else
+			qInsert.setNull(FEC_NOVEDAD, Types.DATE);
+
+		if (pers.getMontoAcuerdo() != null)
+			qInsert.setDouble(MONTO_ACUERDO, pers.getMontoAcuerdo().doubleValue());
+		else
+			qInsert.setNull(MONTO_ACUERDO, Types.DOUBLE);
+
+		if (pers.getMontoConciliador() != null)
+			qInsert.setDouble(MONTO_HONORARIO, pers.getMontoConciliador().doubleValue());
+		else
+			qInsert.setNull(MONTO_HONORARIO, Types.DOUBLE);
+
+		if (pers.getMontoPerito() != null)
+			qInsert.setDouble(MONTO_PERITO, pers.getMontoPerito().doubleValue());
+		else
+			qInsert.setNull(MONTO_PERITO, Types.DOUBLE);
+
+		if (pers.getMontoTasaJusticia() != null)
+			qInsert.setDouble(TASA_JUSTICIA, pers.getMontoTasaJusticia().doubleValue());
+		else
+			qInsert.setNull(TASA_JUSTICIA, Types.DOUBLE);
+
+		if (pers.getMontoLetrado() != null)
+			qInsert.setDouble(MONTO_LETRADO, pers.getMontoLetrado().doubleValue());
+		else
+			qInsert.setNull(MONTO_LETRADO, Types.DOUBLE);
+
+		if (pers.getTipoPericia() != null)
+			qInsert.setInt(OID_TIPO_PERICIA, pers.getTipoPericia().getOID());
+		else
+			qInsert.setNull(OID_TIPO_PERICIA, Types.INTEGER);
+
+		if (pers.getFuero() != null)
+			qInsert.setInt(OID_FUERO, pers.getFuero().getOID());
+		else
+			qInsert.setNull(OID_FUERO, Types.INTEGER);
+		
+		if (pers.getCompaniaSeguroCaucion() != null)
+			qInsert.setInt(OID_COMP_SEG_CAU, pers.getCompaniaSeguroCaucion().getOID());
+		else
+			qInsert.setNull(OID_COMP_SEG_CAU, Types.INTEGER);		
+		
+		if (pers.getCaratula() != null)
+			qInsert.setString(CARATULA, pers.getCaratula());
+		else
+			qInsert.setNull(CARATULA, Types.VARCHAR);		
+		
+		if (pers.getPorcIncapacidad() != null)
+			qInsert.setDouble(PORC_INCAPACIDAD, pers.getPorcIncapacidad().doubleValue());
+		else
+			qInsert.setNull(PORC_INCAPACIDAD, Types.DOUBLE);
+		
+		if (pers.getMontoIntereses() != null)
+			qInsert.setDouble(MONTO_INTERESES, pers.getMontoIntereses().doubleValue());
+		else
+			qInsert.setNull(MONTO_INTERESES, Types.DOUBLE);		
+		
+		if (pers.getPorcLetrado() != null)
+			qInsert.setDouble(PORC_LETRADO, pers.getPorcLetrado().doubleValue());
+		else
+			qInsert.setNull(PORC_LETRADO, Types.DOUBLE);		
+		
+		if (pers.getPorcPerito() != null)
+			qInsert.setDouble(PORC_PERITO, pers.getPorcPerito().doubleValue());
+		else
+			qInsert.setNull(PORC_PERITO, Types.DOUBLE);		
+		
+		if (pers.getPorcTasaJusticia() != null)
+			qInsert.setDouble(PORC_TASA_JUST, pers.getPorcTasaJusticia().doubleValue());
+		else
+			qInsert.setNull(PORC_TASA_JUST, Types.DOUBLE);		
+		
+		if (pers.getPrimeraInstancia() != null)
+			qInsert.setString(PRIMERA_INSTANCIA, pers.getPrimeraInstancia());
+		else
+			qInsert.setNull(PRIMERA_INSTANCIA, Types.VARCHAR);		
+		
+		if (pers.getSegundaInstancia() != null)
+			qInsert.setString(SEGUNDA_INSTANCIA, pers.getSegundaInstancia());
+		else
+			qInsert.setNull(SEGUNDA_INSTANCIA, Types.VARCHAR);		
+		
+				
+
+		qInsert.executeUpdate();
+		qInsert.close();
+	}
+
+	protected void update(IObjetoPersistente objetoPersistente) throws BaseException, SQLException {
+
+		final int OID_TIPO_RECLAMO = 1;
+		final int FEC_REC_DEM = 2;
+		final int OID_JUZGADO = 3;
+		final int NRO_EXPEDIENTE = 4;
+		final int MONTO_RECLAMO = 5;
+		final int PROB_RESULTADO = 6;
+		final int PORC_PREVISION = 7;
+		final int OID_EST_PROCESAL = 8;
+		final int OID_EST_JUICIO = 9;
+		final int ACTIVO = 10;
+		final int OBSERVACIONES = 11;
+		final int OID_PERI_MENS_PREV = 12;
+		final int PREVISION = 13;
+		final int OID_ABOGADO = 14;
+		final int OID_LEGAJO = 15;
+		final int CBU = 16;
+		final int EMBARGO = 17;
+		final int ESTIMADO = 18;
+		final int OID_RESUL_JUICIO = 19;
+		final int CODIGO_INTERNO = 20;
+		final int FEC_NOVEDAD = 21;
+		final int MONTO_ACUERDO = 22;
+		final int MONTO_HONORARIO = 23;
+		final int MONTO_PERITO = 24;
+		final int TASA_JUSTICIA = 25;
+		final int MONTO_LETRADO = 26;
+		final int OID_TIPO_PERICIA = 27;
+		final int OID_FUERO = 28;
+		final int OID_COMP_SEG_CAU = 29;
+		final int CARATULA  =30;
+		final int PORC_INCAPACIDAD = 31;
+		final int MONTO_INTERESES = 32;
+		final int PORC_LETRADO = 33;
+		final int PORC_PERITO = 34;
+		final int PORC_TASA_JUST = 35;		
+		final int PRIMERA_INSTANCIA = 36;
+		final int SEGUNDA_INSTANCIA = 37;
+		final int OID_JUICIO = 38;
+
+		Juicio pers = (Juicio) objetoPersistente;
+
+		StringBuffer sqlUpdate = new StringBuffer();
+		sqlUpdate
+				.append(" update legJuicios set "
+						+ "oid_tipo_reclamo=?"
+						+ ",fec_rec_dem=?"
+						+ ",oid_juzgado=?"
+						+ ",nro_expediente=?"
+						+ ",monto_reclamo=?"
+						+ ",prob_resultado=?"
+						+ ",porc_prevision=?"
+						+ ",oid_est_procesal=?"
+						+ ",oid_est_juicio=?"
+						+ ",activo=?"
+						+ ",observaciones=?"
+						+ ",oid_peri_mens_prev=?"
+						+ ",prevision=?"
+						+ ",oid_abogado=? , oid_legajo=? , cbu = ? , embargo = ? , estimado = ? , oid_resul_juicio = ? , codigo_interno = ? , fec_novedad = ? , MONTO_ACUERDO = ? , MONTO_HONORARIO = ? , MONTO_PERITO = ? , TASA_JUSTICIA = ? , MONTO_LETRADO = ? , OID_TIPO_PERICIA = ? , OID_FUERO = ? , oid_comp_seg_cau = ? , caratula = ? , porc_incapacidad = ? , monto_intereses = ? , porc_letrado=? , porc_perito = ? , porc_tasa_just = ? , primera_instancia = ? , segunda_instancia = ? "
+						+ " where " + " oid_juicio=? ");
+
+		PreparedStatement qUpdate = getSesion().getConexionBD().prepareStatement(sqlUpdate.toString());
+		qUpdate.setInt(OID_JUICIO, pers.getOID());
+		if (pers.getTipo_reclamo() != null)
+			qUpdate.setInt(OID_TIPO_RECLAMO, pers.getTipo_reclamo().getOID());
+		else
+			qUpdate.setNull(OID_TIPO_RECLAMO, Types.INTEGER);
+		if (pers.getFec_rec_dem() != null)
+			qUpdate.setDate(FEC_REC_DEM, new java.sql.Date(pers.getFec_rec_dem().getTime()));
+		else
+			qUpdate.setNull(FEC_REC_DEM, Types.DATE);
+		if (pers.getJuzgado() != null)
+			qUpdate.setInt(OID_JUZGADO, pers.getJuzgado().getOID());
+		else
+			qUpdate.setNull(OID_JUZGADO, java.sql.Types.INTEGER);
+		if (pers.getNro_expediente() != null)
+			qUpdate.setString(NRO_EXPEDIENTE, pers.getNro_expediente());
+		else
+			qUpdate.setNull(NRO_EXPEDIENTE, Types.VARCHAR);
+		if (pers.getMonto_reclamo() != null)
+			qUpdate.setDouble(MONTO_RECLAMO, pers.getMonto_reclamo().doubleValue());
+		else
+			qUpdate.setNull(MONTO_RECLAMO, java.sql.Types.DOUBLE);
+		qUpdate.setString(PROB_RESULTADO, pers.getProb_resultado());
+		if (pers.getPorc_prevision() != null)
+			qUpdate.setDouble(PORC_PREVISION, pers.getPorc_prevision().doubleValue());
+		else
+			qUpdate.setNull(PORC_PREVISION, java.sql.Types.DOUBLE);
+		if (pers.getEstado_procesal() != null)
+			qUpdate.setInt(OID_EST_PROCESAL, pers.getEstado_procesal().getOID());
+		else
+			qUpdate.setNull(OID_EST_PROCESAL, java.sql.Types.INTEGER);
+		if (pers.getEstado_juicio() != null)
+			qUpdate.setInt(OID_EST_JUICIO, pers.getEstado_juicio().getOID());
+		else
+			qUpdate.setNull(OID_EST_JUICIO, java.sql.Types.INTEGER);
+		qUpdate.setBoolean(ACTIVO, pers.isActivo().booleanValue());
+		qUpdate.setString(OBSERVACIONES, pers.getObservaciones());
+		if (pers.getPeriodo_mensual() != null)
+			qUpdate.setInt(OID_PERI_MENS_PREV, pers.getPeriodo_mensual().getOID());
+		else
+			qUpdate.setNull(OID_PERI_MENS_PREV, java.sql.Types.INTEGER);
+		if (pers.getPrevision() != null)
+			qUpdate.setDouble(PREVISION, pers.getPrevision().doubleValue());
+		else
+			qUpdate.setNull(PREVISION, java.sql.Types.DOUBLE);
+		if (pers.getAbogado() != null)
+			qUpdate.setInt(OID_ABOGADO, pers.getAbogado().getOID());
+		else
+			qUpdate.setNull(OID_ABOGADO, java.sql.Types.INTEGER);
+
+		if (pers.getLegajo() != null)
+			qUpdate.setInt(OID_LEGAJO, pers.getLegajo().getOID());
+		else
+			qUpdate.setNull(OID_LEGAJO, java.sql.Types.INTEGER);
+		if (pers.getCBU() != null)
+			qUpdate.setString(CBU, pers.getCBU());
+		else
+			qUpdate.setNull(CBU, java.sql.Types.VARCHAR);
+		if (pers.getEmbargo() != null)
+			qUpdate.setDouble(EMBARGO, pers.getEmbargo().doubleValue());
+		else
+			qUpdate.setNull(EMBARGO, java.sql.Types.DOUBLE);
+
+		if (pers.getEstimado() != null)
+			qUpdate.setDouble(ESTIMADO, pers.getEstimado().doubleValue());
+		else
+			qUpdate.setNull(ESTIMADO, java.sql.Types.DOUBLE);
+
+		if (pers.getResultadoJuicio() != null)
+			qUpdate.setInt(OID_RESUL_JUICIO, pers.getResultadoJuicio().getOID());
+		else
+			qUpdate.setNull(OID_RESUL_JUICIO, java.sql.Types.INTEGER);
+
+		if (pers.getCodigoInterno() != null)
+			qUpdate.setString(CODIGO_INTERNO, pers.getCodigoInterno());
+		else
+			qUpdate.setNull(CODIGO_INTERNO, Types.VARCHAR);
+
+		if (pers.getFecNovedad() != null)
+			qUpdate.setDate(FEC_NOVEDAD, new java.sql.Date(pers.getFecNovedad().getTime()));
+		else
+			qUpdate.setNull(FEC_NOVEDAD, Types.DATE);
+
+		if (pers.getMontoAcuerdo() != null)
+			qUpdate.setDouble(MONTO_ACUERDO, pers.getMontoAcuerdo().doubleValue());
+		else
+			qUpdate.setNull(MONTO_ACUERDO, Types.DOUBLE);
+
+		if (pers.getMontoConciliador() != null)
+			qUpdate.setDouble(MONTO_HONORARIO, pers.getMontoConciliador().doubleValue());
+		else
+			qUpdate.setNull(MONTO_HONORARIO, Types.DOUBLE);
+
+		if (pers.getMontoPerito() != null)
+			qUpdate.setDouble(MONTO_PERITO, pers.getMontoPerito().doubleValue());
+		else
+			qUpdate.setNull(MONTO_PERITO, Types.DOUBLE);
+
+		if (pers.getMontoTasaJusticia() != null)
+			qUpdate.setDouble(TASA_JUSTICIA, pers.getMontoTasaJusticia().doubleValue());
+		else
+			qUpdate.setNull(TASA_JUSTICIA, Types.DOUBLE);
+
+		if (pers.getMontoLetrado() != null)
+			qUpdate.setDouble(MONTO_LETRADO, pers.getMontoLetrado().doubleValue());
+		else
+			qUpdate.setNull(MONTO_LETRADO, Types.DOUBLE);
+
+		if (pers.getTipoPericia() != null)
+			qUpdate.setInt(OID_TIPO_PERICIA, pers.getTipoPericia().getOID());
+		else
+			qUpdate.setNull(OID_TIPO_PERICIA, Types.INTEGER);
+
+		if (pers.getFuero() != null)
+			qUpdate.setInt(OID_FUERO, pers.getFuero().getOID());
+		else
+			qUpdate.setNull(OID_FUERO, Types.INTEGER);
+		
+		if (pers.getCompaniaSeguroCaucion() != null)
+			qUpdate.setInt(OID_COMP_SEG_CAU, pers.getCompaniaSeguroCaucion().getOID());
+		else
+			qUpdate.setNull(OID_COMP_SEG_CAU, Types.INTEGER);		
+
+		if (pers.getCaratula() != null)
+			qUpdate.setString(CARATULA, pers.getCaratula());
+		else
+			qUpdate.setNull(CARATULA, Types.VARCHAR);	
+		
+		if (pers.getPorcIncapacidad() != null)
+			qUpdate.setDouble(PORC_INCAPACIDAD, pers.getPorcIncapacidad().doubleValue());
+		else
+			qUpdate.setNull(PORC_INCAPACIDAD, Types.DOUBLE);
+		
+		if (pers.getMontoIntereses() != null)
+			qUpdate.setDouble(MONTO_INTERESES, pers.getMontoIntereses().doubleValue());
+		else
+			qUpdate.setNull(MONTO_INTERESES, Types.DOUBLE);
+		
+		if (pers.getPorcLetrado() != null)
+			qUpdate.setDouble(PORC_LETRADO, pers.getPorcLetrado().doubleValue());
+		else
+			qUpdate.setNull(PORC_LETRADO, Types.DOUBLE);		
+		
+		if (pers.getPorcPerito() != null)
+			qUpdate.setDouble(PORC_PERITO, pers.getPorcPerito().doubleValue());
+		else
+			qUpdate.setNull(PORC_PERITO, Types.DOUBLE);		
+		
+		if (pers.getPorcTasaJusticia() != null)
+			qUpdate.setDouble(PORC_TASA_JUST, pers.getPorcTasaJusticia().doubleValue());
+		else
+			qUpdate.setNull(PORC_TASA_JUST, Types.DOUBLE);	
+		
+		if (pers.getPrimeraInstancia() != null)
+			qUpdate.setString(PRIMERA_INSTANCIA, pers.getPrimeraInstancia());
+		else
+			qUpdate.setNull(PRIMERA_INSTANCIA, Types.VARCHAR);		
+		
+		if (pers.getSegundaInstancia() != null)
+			qUpdate.setString(SEGUNDA_INSTANCIA, pers.getSegundaInstancia());
+		else
+			qUpdate.setNull(SEGUNDA_INSTANCIA, Types.VARCHAR);				
+		
+		
+		qUpdate.executeUpdate();
+		qUpdate.close();
+	}
+
+	protected void delete(IObjetoPersistente objetoPersistente) throws BaseException, SQLException {
+		final int OID_JUICIO = 1;
+		Juicio pers = (Juicio) objetoPersistente;
+		StringBuffer sqlUpdate = new StringBuffer();
+		sqlUpdate.append("update legJuicios " + " set activo=0 " + " where " + " oid_juicio=? ");
+		PreparedStatement qUpdate = getSesion().getConexionBD().prepareStatement(sqlUpdate.toString());
+		qUpdate.setInt(OID_JUICIO, pers.getOID());
+		qUpdate.executeUpdate();
+		qUpdate.close();
+	}
+
+	protected void rehabilitar(IObjetoPersistente objetoPersistente) throws BaseException, SQLException {
+		final int OID_JUICIO = 1;
+		Juicio pers = (Juicio) objetoPersistente;
+		StringBuffer sqlUpdate = new StringBuffer();
+		sqlUpdate.append("update legJuicios " + " set activo=1 " + " where " + " oid_juicio=? ");
+		PreparedStatement qUpdate = getSesion().getConexionBD().prepareStatement(sqlUpdate.toString());
+		qUpdate.setInt(OID_JUICIO, pers.getOID());
+		qUpdate.executeUpdate();
+		qUpdate.close();
+	}
+
+	public PreparedStatement prepararSelect(int aSelect, Object aCondiciones) throws BaseException, SQLException {
+		PreparedStatement ps = null;
+		switch (aSelect) {
+		case IDBObjetoPersistente.SELECT_BY_OID: {
+			ps = this.selectByOID(aCondiciones);
+			break;
+		}
+		case IDBObjetoPersistente.SELECT_BY_CODIGO: {
+			ps = this.selectByCodigo(aCondiciones);
+			break;
+		}
+		case IDBObjetoPersistente.SELECT_ALL_HELP: {
+			ps = this.selectAllHelp(aCondiciones);
+			break;
+		}
+		case SELECT_BY_LEGAJO: {
+			ps = this.selectByLegajo(aCondiciones);
+			break;
+		}
+		case SELECT_BY_CONDICIONES: {
+			ps = this.selectByCondiciones(aCondiciones);
+			break;
+		}
+		}
+		return ps;
+	}
+
+	private PreparedStatement selectByOID(Object aCondiciones) throws BaseException, SQLException {
+
+		final int OID_JUICIO = 1;
+
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * FROM  legJuicios ");
+		textSQL.append(" WHERE oid_juicio = ? ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		int oid = ((Integer) aCondiciones).intValue();
+		querySelect.setInt(OID_JUICIO, oid);
+		return querySelect;
+	}
+
+	private PreparedStatement selectByLegajo(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * FROM  legJuicios ");
+		textSQL.append(" WHERE oid_legajo = ? and activo = 1 ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		Legajo legajo = (Legajo) aCondiciones;
+		querySelect.setInt(1, legajo.getOID());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByCodigo(Object aCondiciones) throws BaseException, SQLException {
+
+		final int CODIGO = 1;
+
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * FROM  legJuicios ");
+		textSQL.append(" WHERE  = ? ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		String codigo = (String) aCondiciones;
+		querySelect.setString(CODIGO, codigo);
+		return querySelect;
+	}
+
+	private PreparedStatement selectAllHelp(Object aCondiciones) throws BaseException, SQLException {
+
+		StringBuffer textSQL = new StringBuffer();
+
+		textSQL.append("SELECT oid_juicio oid, codigo,  descripcion ,activo ");
+		textSQL.append(" from legJuicios");
+
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+
+	public static List getJuicios(Legajo aLegajo, ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Juicio.NICKNAME, DBJuicio.SELECT_BY_LEGAJO, aLegajo, new ListObserver(), aSesion);
+	}
+
+	public static List getJuicios(HashTableDatos condiciones, ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Juicio.NICKNAME, DBJuicio.SELECT_BY_CONDICIONES, condiciones, new ListObserver(), aSesion);
+	}
+
+	private PreparedStatement selectByCondiciones(Object aCondiciones) throws BaseException, SQLException {
+
+		HashTableDatos condiciones = (HashTableDatos) aCondiciones;
+		java.util.Date fecDesde = (java.util.Date) condiciones.get("FEC_DESDE");
+		java.util.Date fecHasta = (java.util.Date) condiciones.get("FEC_HASTA");
+		Money montoDesde = (Money) condiciones.get("MONTO_DESDE");
+		Money montoHasta = (Money) condiciones.get("MONTO_HASTA");
+		String codigoInterno = (String) condiciones.get("CODIGO_INTERNO");
+		Boolean soloConAudiPend = (Boolean) condiciones.get("SOLO_CON_AUDI_PEND");
+		Boolean soloConPrevFinan = (Boolean) condiciones.get("SOLO_CON_PREV_FINAN");
+		Boolean soloConEmbargos = (Boolean) condiciones.get("SOLO_CON_EMBARGOS");
+
+		List juzgados = (List) condiciones.get("JUZGADOS");
+		List estadosProcesales = (List) condiciones.get("ESTADOS_PROCESALES");
+		List resulProbJuicio = (List) condiciones.get("RESUL_PROB_JUICIO");
+		List tiposReclamos = (List) condiciones.get("TIPOS_RECLAMOS");
+		List abogados = (List) condiciones.get("ABOGADOS");
+		List resulJuicios = (List) condiciones.get("RESUL_JUICIOS");
+		List estadosJuicios = (List) condiciones.get("ESTADO_JUICIOS");
+		List legajos = (List) condiciones.get("LEGAJOS");
+		List empresa = (List) condiciones.get("EMPRESAS");
+		List sectores = (List) condiciones.get("SECTORES");
+		List puestos = (List) condiciones.get("PUESTOS");
+		List estados = (List) condiciones.get("ESTADOS");
+		List fueros = (List) condiciones.get("FUEROS");
+
+		ClasificadorEntidad clasifEmpresa = TraerLeyendasRepEval.getClasificadorEmpresa(this.getSesion());
+		ClasificadorEntidad clasifSector = TraerLeyendasRepEval.getClasificadorSector(this.getSesion());
+		ClasificadorEntidad clasifPuesto = TraerLeyendasRepEval.getClasificadorPuesto(this.getSesion());
+		ClasificadorEntidad clasifEstado = TraerLeyendasRepEval.getClasificadorEstado(this.getSesion());
+
+		// Aplicar los filtros correspondientes
+
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * FROM  legJuicios where 1=1 AND ACTIVO = 1");
+
+		if (fecDesde != null)
+			textSQL.append(" and fec_rec_dem>=? ");
+
+		if (fecHasta != null)
+			textSQL.append(" and fec_rec_dem<=? ");
+
+		if ((montoDesde != null) && (montoDesde.doubleValue() != 0))
+			textSQL.append(" and monto_reclamo>=? ");
+
+		if ((montoHasta != null) && (montoHasta.doubleValue() != 0))
+			textSQL.append(" and monto_reclamo<=? ");
+
+		if ((codigoInterno != null) && (codigoInterno.trim() != ""))
+			textSQL.append(" and codigo_interno=? ");
+
+		if (soloConAudiPend != null) {
+
+			if (soloConAudiPend.booleanValue()) {
+				textSQL.append(" and oid_juicio in (select oid_juicio from legAudJuicio where activo=1 and fecha>=?) ");
+			}
+		}
+
+		if (soloConPrevFinan != null) {
+
+			if (soloConPrevFinan.booleanValue()) {
+
+				textSQL.append(" and ((oid_peri_mens_prev is not null) or ((prevision is not null) and (prevision>0))) ");
+
+			}
+		}
+
+		if (soloConEmbargos != null) {
+
+			if (soloConEmbargos.booleanValue()) {
+
+				textSQL.append(" and  ((embargo is not null) and (embargo>0)) ");
+
+			}
+		}
+
+		if (juzgados != null) {
+			StringBuffer condINJuzgados = new StringBuffer("-1");
+			Iterator iterJuzgados = juzgados.iterator();
+			while (iterJuzgados.hasNext()) {
+				Juzgado juzgado = (Juzgado) iterJuzgados.next();
+				if (juzgado != null)
+					condINJuzgados.append("," + juzgado.getOIDInteger());
+			}
+			if ((!condINJuzgados.toString().equals("-1")))
+				textSQL.append(" and oid_juzgado in (" + condINJuzgados.toString() + ") ");
+		}
+
+		if (estadosProcesales != null) {
+			StringBuffer condINEstadosProcesales = new StringBuffer("-1");
+			Iterator iterEstadosProcesales = estadosProcesales.iterator();
+			while (iterEstadosProcesales.hasNext()) {
+				EstadoProcesal estadoProcesal = (EstadoProcesal) iterEstadosProcesales.next();
+				if (estadoProcesal != null)
+					condINEstadosProcesales.append("," + estadoProcesal.getOIDInteger());
+			}
+			if ((!condINEstadosProcesales.toString().equals("-1")))
+				textSQL.append(" and oid_est_procesal in (" + condINEstadosProcesales.toString() + ") ");
+		}
+
+		if (fueros != null) {
+			StringBuffer condINFueros = new StringBuffer("-1");
+			Iterator iterFueros = fueros.iterator();
+			while (iterFueros.hasNext()) {
+				Fuero fuero = (Fuero) iterFueros.next();
+				if (fuero != null)
+					condINFueros.append("," + fuero.getOIDInteger());
+			}
+			if ((!condINFueros.toString().equals("-1")))
+				textSQL.append(" and oid_fuero in (" + condINFueros.toString() + ") ");
+		}
+
+		if (resulProbJuicio != null) {
+			StringBuffer condINResulProbJuicio = new StringBuffer("'-1'");
+			Iterator iterResulProbJuicio = resulProbJuicio.iterator();
+			while (iterResulProbJuicio.hasNext()) {
+				String resulProbJui = (String) iterResulProbJuicio.next();
+				if (resulProbJui != null)
+					condINResulProbJuicio.append(",'" + resulProbJui + "' ");
+			}
+			if ((!condINResulProbJuicio.toString().equals("'-1'")))
+				textSQL.append(" and prob_resultado in (" + condINResulProbJuicio.toString() + ") ");
+		}
+
+		if (tiposReclamos != null) {
+			StringBuffer condINTiposReclamo = new StringBuffer("-1");
+			Iterator iterReclamos = tiposReclamos.iterator();
+			while (iterReclamos.hasNext()) {
+				TipoReclamoLeg tipoReclamo = (TipoReclamoLeg) iterReclamos.next();
+				if (tipoReclamo != null)
+					condINTiposReclamo.append("," + tipoReclamo.getOIDInteger());
+			}
+			if ((!condINTiposReclamo.toString().equals("-1")))
+				textSQL.append(" and oid_tipo_reclamo in (" + condINTiposReclamo.toString() + ") ");
+		}
+
+		if (abogados != null) {
+			StringBuffer condINAbogados = new StringBuffer("-1");
+			Iterator iterAbogados = abogados.iterator();
+			while (iterAbogados.hasNext()) {
+				Abogado abogado = (Abogado) iterAbogados.next();
+				if (abogado != null)
+					condINAbogados.append("," + abogado.getOIDInteger());
+			}
+			if ((!condINAbogados.toString().equals("-1")))
+				textSQL.append(" and oid_abogado in (" + condINAbogados.toString() + ") ");
+		}
+
+		if (resulJuicios != null) {
+			StringBuffer condINResulJuicios = new StringBuffer("-1");
+			Iterator iterResulJuicios = resulJuicios.iterator();
+			while (iterResulJuicios.hasNext()) {
+				ResultadoJuicio resultadoJuicio = (ResultadoJuicio) iterResulJuicios.next();
+				if (resultadoJuicio != null)
+					condINResulJuicios.append("," + resultadoJuicio.getOIDInteger());
+			}
+			if ((!condINResulJuicios.toString().equals("-1")))
+				textSQL.append(" and oid_resul_juicio in (" + condINResulJuicios.toString() + ") ");
+		}
+
+		if (estadosJuicios != null) {
+			StringBuffer condINEstadosJuicios = new StringBuffer("-1");
+			Iterator iterEstadosJuicios = estadosJuicios.iterator();
+			while (iterEstadosJuicios.hasNext()) {
+				EstadoJuicio estadoJuicio = (EstadoJuicio) iterEstadosJuicios.next();
+				if (estadoJuicio != null)
+					condINEstadosJuicios.append("," + estadoJuicio.getOIDInteger());
+			}
+			if ((!condINEstadosJuicios.toString().equals("-1")))
+				textSQL.append(" and oid_est_juicio in (" + condINEstadosJuicios.toString() + ") ");
+		}
+
+		Iterator iterLegajos = legajos.iterator();
+		StringBuffer condINLegajo = new StringBuffer("-1");
+		while (iterLegajos.hasNext()) {
+			Legajo legajo = (Legajo) iterLegajos.next();
+			condINLegajo.append("," + legajo.getOIDInteger());
+		}
+		if (!condINLegajo.toString().equals("-1")) {
+			textSQL.append(" and oid_legajo in (" + condINLegajo.toString() + ") ");
+		}
+
+		Iterator iterEmpresas = empresa.iterator();
+		StringBuffer condINEmpresas = new StringBuffer("-1");
+		while (iterEmpresas.hasNext()) {
+			EmpresaJuicio empresaJuicio = (EmpresaJuicio) iterEmpresas.next();
+			condINEmpresas.append("," + empresaJuicio.getOIDInteger());
+		}
+		if (!condINEmpresas.toString().equals("-1"))
+			textSQL.append(" and oid_juicio in (select oid_juicio from legJuiEmp where oid_emp_jui IN (" + condINEmpresas.toString() + ")) ");
+
+		Iterator iterSectores = sectores.iterator();
+		StringBuffer condINSectores = new StringBuffer("-1");
+		while (iterSectores.hasNext()) {
+			ValorClasificadorEntidad valorClasifEnt = (ValorClasificadorEntidad) iterSectores.next();
+			condINSectores.append("," + valorClasifEnt.getOIDInteger());
+		}
+		if (!condINSectores.toString().equals("-1"))
+			textSQL.append(" and oid_legajo in (select oid_legajo from suLegajo where " + clasifSector.getCampoFisico() + " IN (" + condINSectores.toString() + ")) ");
+
+		Iterator iterPuestos = puestos.iterator();
+		StringBuffer condINPuestos = new StringBuffer("-1");
+		while (iterPuestos.hasNext()) {
+			ValorClasificadorEntidad valorClasifEnt = (ValorClasificadorEntidad) iterPuestos.next();
+			condINPuestos.append("," + valorClasifEnt.getOIDInteger());
+		}
+		if (!condINPuestos.toString().equals("-1"))
+			textSQL.append(" and oid_legajo in (select oid_legajo from suLegajo where " + clasifPuesto.getCampoFisico() + " IN (" + condINPuestos.toString() + ")) ");
+
+		Iterator iterEstados = estados.iterator();
+		StringBuffer condINEstados = new StringBuffer("-1");
+		while (iterEstados.hasNext()) {
+			ValorClasificadorEntidad valorClasifEnt = (ValorClasificadorEntidad) iterEstados.next();
+			condINEstados.append("," + valorClasifEnt.getOIDInteger());
+		}
+		if (!condINEstados.toString().equals("-1"))
+			textSQL.append(" and oid_legajo in (select oid_legajo from suLegajo where " + clasifEstado.getCampoFisico() + " IN (" + condINEstados.toString() + ")) ");
+
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+
+		int nroParam = 0;
+		if (fecDesde != null) {
+			++nroParam;
+			querySelect.setDate(nroParam, new java.sql.Date(fecDesde.getTime()));
+		}
+
+		if (fecHasta != null) {
+			++nroParam;
+			querySelect.setDate(nroParam, new java.sql.Date(fecHasta.getTime()));
+		}
+
+		if ((montoDesde != null) && (montoDesde.doubleValue() != 0)) {
+			++nroParam;
+			querySelect.setDouble(nroParam, montoDesde.doubleValue());
+		}
+
+		if ((montoHasta != null) && (montoHasta.doubleValue() != 0)) {
+			++nroParam;
+			querySelect.setDouble(nroParam, montoHasta.doubleValue());
+		}
+
+		if ((codigoInterno != null) && (codigoInterno.trim() != "")) {
+			++nroParam;
+			querySelect.setString(nroParam, codigoInterno);
+		}
+
+		java.util.Date fecActual = Fecha.getFechaTruncada(UtilCIP.getFechaHoraActual(this.getSesion()));
+
+		if (soloConAudiPend != null) {
+			if (soloConAudiPend.booleanValue()) {
+				++nroParam;
+				querySelect.setDate(nroParam, new java.sql.Date(fecActual.getTime()));
+			}
+		}
+
+		return querySelect;
+	}
+	
+	public static double getTotalEmbargoEmpleado(Legajo aLegajo, ISesion aSesion) throws BaseException {
+
+		try {
+			
+			
+			StringBuffer textSQL = new StringBuffer();
+
+			textSQL.append("SELECT sum(embargo) embargo ");
+			textSQL.append(" from legJuicios where  activo = 1 and oid_legajo = ? ");
+
+			PreparedStatement querySelect = aSesion.getConexionBD().prepareStatement(textSQL.toString());
+
+			querySelect.setInt(1, aLegajo.getOID());
+			
+			ResultSet rs = querySelect.executeQuery();
+			double total = 0;
+			if (rs.next())
+				total = rs.getDouble(1);
+			rs.close();
+			querySelect.close();
+
+			Money redondear = new Money(total); 
+			
+			return redondear.doubleValue(2);
+		}
+		catch (Exception e) {
+			throw new BaseException(null, e.getMessage());
+		}
+	}	
+}

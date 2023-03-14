@@ -1,0 +1,168 @@
+package com.srn.erp.compras.op;
+
+import java.util.Iterator;
+
+import com.srn.erp.compras.bm.OrdenDeCompraCab;
+import com.srn.erp.compras.bm.OrdenDeCompraDet;
+import com.srn.erp.compras.bm.Proveedor;
+import com.srn.erp.general.bm.Talonario;
+import com.srn.erp.stock.bm.Producto;
+
+import framework.request.bl.Operaciones.Operation;
+import framework.request.bl.Tablas.Field;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.HashTableDatos;
+import framework.request.bl.Utils.MapDatos;
+import framework.request.bl.XML.IDataSet;
+import framework.request.bl.XML.TDataSet;
+
+public class TraerConsultaEstadoOC extends Operation {
+
+	HashTableDatos condiciones = new HashTableDatos();
+	
+	public TraerConsultaEstadoOC() {
+	}
+
+	public void execute(MapDatos mapaDatos) throws BaseException {
+		cargarParametros(mapaDatos);
+		traerConsultaEstadosOC();
+	}
+
+	public void traerConsultaEstadosOC() throws BaseException {
+
+		IDataSet dataSetConsulta = getDataSetConsultaEstadoOC();
+		Iterator iterConsOC = OrdenDeCompraDet.getDetallesByCondiciones(condiciones,getSesion()).iterator();
+		while (iterConsOC.hasNext()) {
+			OrdenDeCompraDet ordenDeCompraDet = (OrdenDeCompraDet) iterConsOC.next();
+			cargarRegistroEstadoOC(dataSetConsulta,ordenDeCompraDet);
+		} 
+		
+		writeCliente(dataSetConsulta);
+
+	}
+	
+	private void cargarParametros(MapDatos mapaDatos) throws BaseException {
+		
+		if (mapaDatos.containsKey("fec_emi_desde")) {
+			java.util.Date fecEmiDesde = mapaDatos.getDate("fec_emi_desde");
+			condiciones.put("FEC_EMI_DESDE",fecEmiDesde);
+		}
+		if (mapaDatos.containsKey("fec_emi_hasta")) {
+			java.util.Date fecEmiHasta = mapaDatos.getDate("fec_emi_hasta");
+			condiciones.put("FEC_EMI_HASTA",fecEmiHasta);
+		}		
+		if (mapaDatos.containsKey("nro_desde")) 
+			condiciones.put("NRO_DESDE",mapaDatos.getInteger("nro_desde"));
+		if (mapaDatos.containsKey("nro_hasta")) 
+			condiciones.put("NRO_HASTA",mapaDatos.getInteger("nro_hasta"));
+		
+		if (mapaDatos.containsKey("oid_talonario")) {
+			Integer oidTalonario = mapaDatos.getInteger("oid_talonario");
+			Talonario talonario = Talonario.findByOidProxy(oidTalonario,getSesion());
+			condiciones.put(Talonario.NICKNAME,talonario);
+		}
+		
+		if (mapaDatos.containsKey("oid_producto")) {
+			Integer oidProducto = mapaDatos.getInteger("oid_producto");
+			Producto producto = Producto.findByOidProxy(oidProducto,getSesion());
+			condiciones.put(Producto.NICKNAME,producto);
+		}
+
+		if (mapaDatos.containsKey("oid_prov")) {
+			Integer oidProveedor = mapaDatos.getInteger("oid_prov");
+			Proveedor proveedor = Proveedor.findByOidProxy(oidProveedor,getSesion());
+			condiciones.put(Proveedor.NICKNAME,proveedor);
+		}
+		
+		if (mapaDatos.containsKey("oid_oc")) {
+			Integer oidOC = mapaDatos.getInteger("oid_oc");
+ 			OrdenDeCompraCab ordenDeCompraCab = OrdenDeCompraCab.findByOidProxy(oidOC,getSesion());
+			condiciones.put(OrdenDeCompraCab.NICKNAME,ordenDeCompraCab);
+		}		
+		
+		if (mapaDatos.containsKey("filtro_oc")) {
+			String  filtro_oc = mapaDatos.getString("filtro_oc");
+			condiciones.put("FILTRO_OC",filtro_oc);
+		}		
+		
+		if (mapaDatos.containsKey("estado_autoriz")) {
+			Integer  estado_autoriz = mapaDatos.getInteger("estado_autoriz");
+			condiciones.put("ESTADO_AUTORIZACION",estado_autoriz);
+		}		
+		
+	}
+
+	
+	private IDataSet getDataSetConsultaEstadoOC() {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TConsEstadoOC");
+		dataset.fieldDef(new Field("seleccionar",Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("oid_oc_det_ent", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_oc", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("codigo_oc", Field.STRING, 50));
+		dataset.fieldDef(new Field("nro_ext", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_producto",Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cod_producto", Field.STRING, 50));
+		dataset.fieldDef(new Field("desc_producto", Field.STRING, 100));
+		dataset.fieldDef(new Field("desc_adic", Field.STRING, 255));
+		dataset.fieldDef(new Field("oid_um_cpra",Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cant_comprada_uc",Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("oid_moneda",Field.INTEGER, 0));
+		dataset.fieldDef(new Field("precio",Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("total",Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("comentario",Field.STRING, 255));
+		dataset.fieldDef(new Field("fec_entrega",Field.DATE, 0));
+		dataset.fieldDef(new Field("cant_recep_uc",Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("oid_prov",Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cod_prov",Field.STRING, 50));
+		dataset.fieldDef(new Field("rs_proveedor",Field.STRING, 100));
+		dataset.fieldDef(new Field("fec_emision",Field.DATE, 0));
+		dataset.fieldDef(new Field("oid_lug_ent",Field.INTEGER, 0));
+		dataset.fieldDef(new Field("pend_recep",Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("pend_fact",Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("estado_autorizacion",Field.STRING, 20));
+		dataset.fieldDef(new Field("desc_est_autoriz",Field.STRING, 50));
+		dataset.fieldDef(new Field("anulado",Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("cant_pend_entrega_uc",Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("roles_autorizadores",Field.STRING, 1000));
+		return dataset;
+	}
+
+	private void cargarRegistroEstadoOC(IDataSet dataset,
+										OrdenDeCompraDet ordenDeCompraDet) throws BaseException {
+		
+		dataset.append();
+		dataset.fieldValue("seleccionar", new Boolean(false));
+		dataset.fieldValue("oid_oc_det_ent", ordenDeCompraDet.getOIDInteger());
+		dataset.fieldValue("oid_oc", ordenDeCompraDet.getOrden_de_compra().getOIDInteger());
+		dataset.fieldValue("codigo_oc", ordenDeCompraDet.getOrden_de_compra().getCodigo());
+		dataset.fieldValue("nro_ext", ordenDeCompraDet.getOrden_de_compra().getNroExt());
+		dataset.fieldValue("oid_producto",ordenDeCompraDet.getOIDInteger());
+		dataset.fieldValue("cod_producto", ordenDeCompraDet.getProducto().getCodigo());
+		dataset.fieldValue("desc_producto", ordenDeCompraDet.getProducto().getDescripcion());
+		dataset.fieldValue("desc_adic", ordenDeCompraDet.getDesc_adic_sku());
+		dataset.fieldValue("oid_um_cpra",ordenDeCompraDet.getUnidad_compra().getOIDInteger());
+		dataset.fieldValue("cant_comprada_uc",ordenDeCompraDet.getCant_comprada_uc());
+		dataset.fieldValue("oid_moneda",ordenDeCompraDet.getOrden_de_compra().getMoneda().getOIDInteger());
+		dataset.fieldValue("precio",ordenDeCompraDet.getPrecio_neto_bonif());
+		dataset.fieldValue("total",ordenDeCompraDet.getTotal());
+		dataset.fieldValue("comentario",ordenDeCompraDet.getComentario());
+		dataset.fieldValue("fec_entrega",ordenDeCompraDet.getFecRequerida());
+		dataset.fieldValue("cant_recep_uc",ordenDeCompraDet.getCantRecepUC());
+		dataset.fieldValue("oid_prov",ordenDeCompraDet.getOrden_de_compra().getProveedor().getOIDInteger());
+		dataset.fieldValue("cod_prov",ordenDeCompraDet.getOrden_de_compra().getProveedor().getCodigo());
+		dataset.fieldValue("rs_proveedor",ordenDeCompraDet.getOrden_de_compra().getProveedor().getRazonsocial());
+		dataset.fieldValue("fec_emision",ordenDeCompraDet.getOrden_de_compra().getEmision());
+		if ((ordenDeCompraDet.getOrden_de_compra()!=null) && (ordenDeCompraDet.getOrden_de_compra().getLugarEntrega()!=null))
+			dataset.fieldValue("oid_lug_ent",ordenDeCompraDet.getOrden_de_compra().getLugarEntrega().getOIDInteger());
+		else
+			dataset.fieldValue("oid_lug_ent",new Integer(0));
+		dataset.fieldValue("pend_recep",ordenDeCompraDet.isPendienteRecepcion());
+		dataset.fieldValue("pend_fact",new Boolean(false));
+		dataset.fieldValue("estado_autorizacion",ordenDeCompraDet.getOrden_de_compra().getEstado_autorizacion());
+		dataset.fieldValue("desc_est_autoriz",ordenDeCompraDet.getOrden_de_compra().getDescEstadoAutoriz());
+		dataset.fieldValue("anulado",new Boolean(!ordenDeCompraDet.getOrden_de_compra().isActivo().booleanValue()));
+		dataset.fieldValue("cant_pend_entrega_uc", ordenDeCompraDet.getCantPendRecepUC());
+		dataset.fieldValue("roles_autorizadores", ordenDeCompraDet.getOrden_de_compra().getAutorizadoresOC());
+	}
+}

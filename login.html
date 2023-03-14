@@ -1,0 +1,34 @@
+<HEAD></HEAD>
+<BODY>
+<H1> Login al Sistema </H1>
+<BR> 
+<H5>Ingrese el Login y Password</H5>
+<BR>
+<FORM ACTION="/ERP/servlet/RequestServlet" METHOD="POST">
+Usuario:    <INPUT TYPE='TEXT' SIZE='20' NAME='login'><BR>
+Password:   <INPUT TYPE='PASSWORD' SIZE='20' NAME='password'><BR>
+Empresa: 
+<SELECT NAME='oid_empresa'>
+	<OPTION VALUE='1'>Pinturerias Marcos
+	<OPTION VALUE='2'>Pinturerias (qa)
+</SELECT><BR>
+Sucursal:
+<SELECT NAME='oid_sucursal'>
+	<OPTION VALUE='1'>Galicia
+	<OPTION VALUE='2'>Lanus
+</SELECT><BR>
+
+<INPUT TYPE='HIDDEN' NAME='sys_nombre_oper' VALUE='LoginSistema'>
+<INPUT TYPE='HIDDEN' NAME='sys_oid_sesion' VALUE='0'>
+<INPUT TYPE='HIDDEN' NAME='aplicacion' VALUE='ERP'>
+<INPUT TYPE='HIDDEN' NAME='host' VALUE='localhost'>
+<INPUT TYPE='HIDDEN' NAME='puerto' VALUE='8080'>
+
+
+
+<INPUT TYPE='reset' NAME='salir' VALUE='salir'>
+<INPUT TYPE='submit' NAME='submit' VALUE='login'>
+
+</FORM>
+</BODY>
+</HTML>

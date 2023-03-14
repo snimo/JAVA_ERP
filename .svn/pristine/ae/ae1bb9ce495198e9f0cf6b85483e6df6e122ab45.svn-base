@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defPoolBD>
+  <defParamPoolBD
+     dataBaseName="jdbc:oracle:thin:@//172.22.22.79:1521/uterrhh.oper.cbasa-ciesa.com.ar"      
+     username="SIG_RRHH"
+     password="dameunbesoconbaba" idleOut="5" minSize="2" maxSize="3" loginTimeOut="10" tipoBD="oracle" locale="Locale.ENGLISH">        
+  </defParamPoolBD>
+</defPoolBD>

@@ -1,0 +1,209 @@
+package com.srn.erp.cip.op;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import com.srn.erp.cip.bm.CIPFichadaOficina;
+import com.srn.erp.cip.bm.MotivoFichadaCIP;
+import com.srn.erp.cip.bm.ProcesadorFichadasOficina;
+import com.srn.erp.cip.bm.PuntoFichadaCIP;
+import com.srn.erp.cip.bm.RegistroFichada;
+import com.srn.erp.cip.da.DBFechaCIP;
+import com.srn.erp.sueldos.bm.Legajo;
+
+import framework.applicarionServer.bl.Utils.Fecha;
+import framework.applicarionServer.bm.Parametros.ValorParametro;
+import framework.applicarionServer.da.Varios.DBFecha;
+import framework.request.bl.Operaciones.Operation;
+import framework.request.bl.Tablas.Field;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.ExceptionValidation;
+import framework.request.bl.Utils.HashTableDatos;
+import framework.request.bl.Utils.MapDatos;
+import framework.request.bl.XML.IDataSet;
+import framework.request.bl.XML.TDataSet;
+
+public class TraerINOUTOficina extends Operation {
+
+	public TraerINOUTOficina() {
+	}
+
+	HashTableDatos puntoFichada = new HashTableDatos();
+	HashTableDatos motivoFichada = new HashTableDatos();
+
+	public void execute(MapDatos mapaDatos) throws BaseException {
+
+		java.util.Date fecDesde = mapaDatos.getDate("fec_desde");
+		java.util.Date fecHasta = mapaDatos.getDate("fec_hasta");
+		Integer horaDesde = mapaDatos.getInteger("hora_desde");
+		Integer horaHasta = mapaDatos.getInteger("hora_hasta");
+
+		cargarCache();
+
+		Legajo legajo = null;
+		if (mapaDatos.containsKey("oid_legajo"))
+			legajo = Legajo.findByOidProxy(mapaDatos.getInteger("oid_legajo"), this.getSesion());
+
+		int dia = 0;
+		int mes = 0;
+		int anio = 0;
+
+		dia = Fecha.getDia(fecDesde);
+		mes = Fecha.getMes(fecDesde);
+		anio = Fecha.getAnio(fecDesde);
+
+		fecDesde = Fecha.getFecha(dia, mes, anio, horaDesde, 0, 0);
+
+		dia = Fecha.getDia(fecHasta);
+		mes = Fecha.getMes(fecHasta);
+		anio = Fecha.getAnio(fecHasta);
+
+		fecHasta = Fecha.getFecha(dia, mes, anio, horaHasta, 0, 0);
+
+		if (fecHasta.before(fecDesde))
+			throw new ExceptionValidation("La fecha desde debe ser mayor a la fecha hasta.");
+
+		cargaDetallada(fecDesde, fecHasta, legajo);
+
+	}
+
+	private void cargaDetallada(java.util.Date fecDesde, java.util.Date fecHasta, Legajo legajo) throws BaseException {
+
+		IDataSet ds = this.getDataSetCabecera();
+		IDataSet dsDet = getDataSetFichada();
+
+		Date auxFecDesde = this.sumarRestarDias(fecDesde, -1);
+		Date auxFecHasta = this.sumarRestarDias(fecHasta, 1);
+
+		List<CIPFichadaOficina> fichadas = null;
+
+		if (legajo != null)
+			fichadas = CIPFichadaOficina.getFichadasOficinaAsc(auxFecDesde, auxFecHasta, legajo, this.getSesion());
+		else
+			fichadas = CIPFichadaOficina.getFichadasOficinaOrderByLegFec(auxFecDesde, auxFecHasta, this.getSesion());
+
+		ProcesadorFichadasOficina procesador = new ProcesadorFichadasOficina(fecDesde, fecHasta, DBFecha.getFechaActual(this.getSesion()), ValorParametro.findByCodigoParametro(
+				"CANT_MIN_NUEVA_JORNADA", this.getSesion()).getValorEntero());
+		List<RegistroFichada> registros = procesador.procesarFichadas(fichadas);
+		
+		Integer cantMinPersJD = ValorParametro.findByCodigoParametro("CANT_MIN_PERS_JD", this.getSesion()).getValorEntero();
+		Integer cantMInPersJH = ValorParametro.findByCodigoParametro("CANT_MIN_PERS_JH", this.getSesion()).getValorEntero();
+		Integer cantSalD = ValorParametro.findByCodigoParametro("CANT_SAL_D", this.getSesion()).getValorEntero();
+		Integer cantSalH = ValorParametro.findByCodigoParametro("CANT_SAL_H", this.getSesion()).getValorEntero();
+		Integer cantMinAfuD = ValorParametro.findByCodigoParametro("CANT_MIN_AFU_D", this.getSesion()).getValorEntero();
+		Integer cantTMInAfuH = ValorParametro.findByCodigoParametro("CANT_MIN_AFU_H", this.getSesion()).getValorEntero();
+		Integer cantPermOficD = ValorParametro.findByCodigoParametro("CANT_PERM_OFIC_D", this.getSesion()).getValorEntero();
+		Integer cantPermOficH = ValorParametro.findByCodigoParametro("CANT_PERM_OFIC_H", this.getSesion()).getValorEntero();
+		
+		for (RegistroFichada registro : registros) {
+			cargarRegistro(ds, registro, cantMinPersJD, cantMInPersJH, cantSalD, cantSalH, cantMinAfuD, cantTMInAfuH, cantPermOficD, cantPermOficH);
+			for (CIPFichadaOficina fichada : registro.getFichadas()) {
+				cargarFichada(dsDet, registro.getSecu(), fichada);
+			}
+		}
+
+		writeCliente(ds);
+		writeCliente(dsDet);
+
+	}
+
+	private Date sumarRestarDias(Date fecha, int dias) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha);
+		calendar.add(Calendar.DAY_OF_YEAR, dias);
+		return calendar.getTime();
+	}
+
+	private IDataSet getDataSetCabecera() {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TCabecera");
+		dataset.fieldDef(new Field("secu", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_legajo", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("legajo", Field.STRING, 50));
+		dataset.fieldDef(new Field("ape_y_nom", Field.STRING, 100));
+		dataset.fieldDef(new Field("cant_salidas", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("tiempo_tot_salida", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("tiempo_permanencia", Field.STRING, 50));
+		dataset.fieldDef(new Field("fec_hor_desde", Field.DATE, 0));
+		dataset.fieldDef(new Field("hor_desde", Field.STRING, 8));
+		dataset.fieldDef(new Field("fec_hor_hasta", Field.DATE, 0));
+		dataset.fieldDef(new Field("hor_hasta", Field.STRING, 8));
+		dataset.fieldDef(new Field("permanencia_jornada", Field.STRING, 50));
+		dataset.fieldDef(new Field("ok_permanencia_jornada", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("ok_cant_sal", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("ok_cant_min_afu", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("ok_perm_ofic", Field.INTEGER, 0));
+		return dataset;
+	}
+
+	private void cargarRegistro(IDataSet dataset, RegistroFichada registro, Integer cantMinPersJD, Integer cantMInPersJH, Integer cantSalD, Integer cantSalH, Integer cantMinAfuD, Integer cantTMInAfuH, Integer cantPermOficD, Integer cantPermOficH) throws BaseException {
+		dataset.append();
+		dataset.fieldValue("secu", registro.getSecu());
+		dataset.fieldValue("oid_legajo", registro.getOidLegajo());
+		dataset.fieldValue("legajo", registro.getLegajo());
+		dataset.fieldValue("ape_y_nom", registro.getApellidoNombre());
+		dataset.fieldValue("cant_salidas", registro.getCantSalInt());
+		dataset.fieldValue("tiempo_tot_salida", registro.getMinTiempoSal());
+		dataset.fieldValue("tiempo_permanencia", registro.getHoraMinTiempoPermanencia());
+		dataset.fieldValue("fec_hor_desde", registro.getFecHorEntrada());
+		dataset.fieldValue("hor_desde", registro.getHoraMinFecDesde());
+		dataset.fieldValue("fec_hor_hasta", registro.getFecHorSalida());
+		dataset.fieldValue("hor_hasta", registro.getHoraMinFecHasta());
+		dataset.fieldValue("permanencia_jornada", registro.getHoraMinPermanenciaJornada());
+		dataset.fieldValue("ok_permanencia_jornada", registro.getOKPermanenciaJornada(cantMinPersJD, cantMInPersJH));
+		dataset.fieldValue("ok_cant_sal", registro.getOkCantSal(cantSalD, cantSalH));
+		dataset.fieldValue("ok_cant_min_afu", registro.getOKCantMinAfu(cantMinAfuD, cantTMInAfuH));
+		dataset.fieldValue("ok_perm_ofic", registro.getOKPermOfic(cantPermOficD, cantPermOficH));
+		
+
+	}
+
+	private IDataSet getDataSetFichada() {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TFichadaOficina");
+		dataset.fieldDef(new Field("oid_in_out_ofic", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("secu", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("fec_hor", Field.STRING, 30));
+		dataset.fieldDef(new Field("sentido", Field.STRING, 1));
+		dataset.fieldDef(new Field("oid_pto_fichada", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("pto_fichada", Field.STRING, 100));
+		dataset.fieldDef(new Field("oid_motivo_fichada", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("motivo", Field.STRING, 100));
+		dataset.fieldDef(new Field("observacion", Field.STRING, 100));
+		dataset.fieldDef(new Field("activo", Field.BOOLEAN, 0));
+		return dataset;
+	}
+
+	private void cargarFichada(IDataSet dataset, Integer secu, CIPFichadaOficina fichada) throws BaseException {
+		dataset.append();
+		dataset.fieldValue("oid_in_out_ofic", fichada.getOIDInteger());
+		dataset.fieldValue("secu", secu);
+		dataset.fieldValue("fec_hor", Fecha.getFormatoFecHoraMin(fichada.getFec_hor()));
+		dataset.fieldValue("sentido", fichada.getSentido());
+		dataset.fieldValue("oid_pto_fichada", fichada.getOid_pto_fichada().getOID());
+		dataset.fieldValue("pto_fichada", (String) this.puntoFichada.get(fichada.getOid_pto_fichada().getOIDInteger()));
+		dataset.fieldValue("oid_motivo_fichada", fichada.getMotivo_fichada().getOIDInteger());
+		dataset.fieldValue("motivo", (String) this.motivoFichada.get(fichada.getMotivo_fichada().getOIDInteger()));
+		dataset.fieldValue("observacion", fichada.getObservacion() != null ? fichada.getObservacion() : " ");
+		dataset.fieldValue("activo", fichada.isActivo());
+	}
+
+	private void cargarCache() throws BaseException {
+
+		Iterator iterPuntoFichadas = PuntoFichadaCIP.getAllPuntosFichada(this.getSesion()).iterator();
+		while (iterPuntoFichadas.hasNext()) {
+			PuntoFichadaCIP ptoFichadaCIP = (PuntoFichadaCIP) iterPuntoFichadas.next();
+			this.puntoFichada.put(ptoFichadaCIP.getOIDInteger(), ptoFichadaCIP.getDescripcion());
+		}
+
+		Iterator iterMotFichadas = MotivoFichadaCIP.getMotivosFichadas(this.getSesion()).iterator();
+		while (iterMotFichadas.hasNext()) {
+			MotivoFichadaCIP motFichadaCIP = (MotivoFichadaCIP) iterMotFichadas.next();
+			this.motivoFichada.put(motFichadaCIP.getOIDInteger(), motFichadaCIP.getDescripcion());
+		}
+
+	}
+
+}

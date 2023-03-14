@@ -1,0 +1,322 @@
+package com.srn.erp.rrhh.op;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.srn.erp.cip.bm.UtilCIP;
+import com.srn.erp.general.bm.ClasificadorEntidad;
+import com.srn.erp.general.bm.ValorClasificadorEntidad;
+import com.srn.erp.legales.bm.EstadoSeclo;
+import com.srn.erp.legales.bm.Seclo;
+import com.srn.erp.legales.bm.TipoReclamoLeg;
+import com.srn.erp.sueldos.bm.Legajo;
+
+import framework.applicarionServer.bl.Utils.Fecha;
+import framework.applicarionServer.bm.Varios.Money;
+import framework.request.bl.Operaciones.Operation;
+import framework.request.bl.Tablas.Field;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.MapDatos;
+import framework.request.bl.XML.IDataSet;
+import framework.request.bl.XML.TDataSet;
+
+public class TraerConsultaSECLOS extends Operation {
+
+	ClasificadorEntidad clasifEmpresa = null;
+	ClasificadorEntidad clasifSector = null;
+	ClasificadorEntidad clasifPuesto = null;
+	ClasificadorEntidad clasifEstado = null;
+
+	public TraerConsultaSECLOS() {
+	}
+
+	public void execute(MapDatos mapaDatos) throws BaseException {
+
+		IDataSet dsInput = mapaDatos.getDataSet("Tinput");
+		IDataSet dsTipoReclamo = mapaDatos.getDataSet("TSelTipoReclamo");
+		IDataSet dsEstadoSECLO = mapaDatos.getDataSet("TSelEstadoSECLO");
+		IDataSet dsLegajos = mapaDatos.getDataSet("TSelLegajos");
+		IDataSet dsEmpresas = mapaDatos.getDataSet("TSelEmpresas");
+		IDataSet dsSector = mapaDatos.getDataSet("TSelSector");
+		IDataSet dsPuesto = mapaDatos.getDataSet("TSelPuesto");
+		IDataSet dsEstado = mapaDatos.getDataSet("TSelEstado");
+
+		traerDatos(dsInput, dsTipoReclamo, dsEstadoSECLO, dsLegajos, dsEmpresas, dsSector, dsPuesto, dsEstado);
+
+	}
+
+	private void traerDatos(IDataSet dsInput, IDataSet dsTipoReclamos, IDataSet dsEstadosSECLOS, IDataSet dsLegajos, IDataSet dsEmpresas, IDataSet dsSectores, IDataSet dsPuestos, IDataSet dsEstados)
+			throws BaseException {
+
+		clasifEmpresa = TraerLeyendasRepEval.getClasificadorEmpresa(this.getSesion());
+		clasifSector = TraerLeyendasRepEval.getClasificadorSector(this.getSesion());
+		clasifPuesto = TraerLeyendasRepEval.getClasificadorPuesto(this.getSesion());
+		clasifEstado = TraerLeyendasRepEval.getClasificadorEstado(this.getSesion());
+
+		java.util.Date fecDesde = null;
+		java.util.Date fecHasta = null;
+		Money montoDesde = null;
+		Money montoHasta = null;
+		String codigoInterno = null;
+		boolean soloCondAudPend = false;
+		List tiposReclamos = new ArrayList();
+		List estadosSeclos = new ArrayList();
+		List legajos = new ArrayList();
+		List empresas = new ArrayList();
+		List sectores = new ArrayList();
+		List puestos = new ArrayList();
+		List estados = new ArrayList();
+		String tipo = "";
+
+		java.util.Date fecActual = Fecha.getFechaTruncada(UtilCIP.getFechaHoraActual(this.getSesion()));
+
+		dsInput.first();
+		while (!dsInput.EOF()) {
+			fecDesde = dsInput.getDate("fec_rec_desde");
+			fecHasta = dsInput.getDate("fec_rec_hasta");
+			montoDesde = dsInput.getMoney("monto_desde");
+			montoHasta = dsInput.getMoney("monto_hasta");
+			codigoInterno = dsInput.getString("codigo_interno");
+			tipo = dsInput.getString("tipo"); 
+			if (dsInput.getBoolean("solo_con_aud_pend") != null)
+				soloCondAudPend = dsInput.getBoolean("solo_con_aud_pend");
+			dsInput.next();
+		}
+
+		dsTipoReclamos.first();
+		while (!dsTipoReclamos.EOF()) {
+			if (dsTipoReclamos.getBoolean("sel")) {
+				TipoReclamoLeg tipoReclamo = TipoReclamoLeg.findByOidProxy(dsTipoReclamos.getInteger("oid_tipo_reclamo"), this.getSesion());
+				tiposReclamos.add(tipoReclamo);
+			}
+			dsTipoReclamos.next();
+		}
+
+		dsEstadosSECLOS.first();
+		while (!dsEstadosSECLOS.EOF()) {
+			if (dsEstadosSECLOS.getBoolean("sel")) {
+				EstadoSeclo estadoSeclo = EstadoSeclo.findByOidProxy(dsEstadosSECLOS.getInteger("oid_estado_seclo"), this.getSesion());
+				estadosSeclos.add(estadoSeclo);
+			}
+			dsEstadosSECLOS.next();
+		}
+
+		dsLegajos.first();
+		while (!dsLegajos.EOF()) {
+			if (dsLegajos.getBoolean("sel")) {
+				Legajo legajo = Legajo.findByOidProxy(dsLegajos.getInteger("oid_legajo"), this.getSesion());
+				legajos.add(legajo);
+			}
+			dsLegajos.next();
+		}
+
+		dsEmpresas.first();
+		while (!dsEmpresas.EOF()) {
+			if (dsEmpresas.getBoolean("sel")) {
+				ValorClasificadorEntidad empresa = ValorClasificadorEntidad.findByOidProxy(dsEmpresas.getInteger("oid_empresa"), this.getSesion());
+				empresas.add(empresa);
+			}
+			dsEmpresas.next();
+		}
+
+		dsSectores.first();
+		while (!dsSectores.EOF()) {
+			if (dsSectores.getBoolean("sel")) {
+				ValorClasificadorEntidad sector = ValorClasificadorEntidad.findByOidProxy(dsSectores.getInteger("oid_sector"), this.getSesion());
+				sectores.add(sector);
+			}
+			dsSectores.next();
+		}
+
+		dsPuestos.first();
+		while (!dsPuestos.EOF()) {
+			if (dsPuestos.getBoolean("sel")) {
+				ValorClasificadorEntidad puesto = ValorClasificadorEntidad.findByOidProxy(dsPuestos.getInteger("oid_puesto"), this.getSesion());
+				puestos.add(puesto);
+			}
+			dsPuestos.next();
+		}
+
+		dsEstados.first();
+		while (!dsEstados.EOF()) {
+			if (dsEstados.getBoolean("sel")) {
+				ValorClasificadorEntidad estado = ValorClasificadorEntidad.findByOidProxy(dsEstados.getInteger("oid_estado"), this.getSesion());
+				estados.add(estado);
+			}
+			dsEstados.next();
+		}
+
+		IDataSet ds = getDataSetConsSECLO();
+
+		Iterator iterSeclos = Seclo.getSECLOS(tipo,fecDesde, fecHasta, montoDesde, montoHasta, codigoInterno, soloCondAudPend, tiposReclamos, estadosSeclos, legajos, empresas, sectores, puestos, estados,
+				this.getSesion()).iterator();
+		while (iterSeclos.hasNext()) {
+
+			Seclo seclo = (Seclo) iterSeclos.next();
+
+			seclo.getLegajo().supportRefresh();
+
+			ValorClasificadorEntidad valorClasifEmp = seclo.getLegajo().getValorClasifEnt(clasifEmpresa);
+			String empresa = "";
+			if (valorClasifEmp != null)
+				empresa = valorClasifEmp.getDescripcion();
+
+			ValorClasificadorEntidad valorClasifPue = seclo.getLegajo().getValorClasifEnt(clasifPuesto);
+			String puesto = "";
+			if (valorClasifPue != null)
+				puesto = valorClasifPue.getDescripcion();
+
+			ValorClasificadorEntidad valorClasifSec = seclo.getLegajo().getValorClasifEnt(clasifSector);
+			String sector = "";
+			if (valorClasifSec != null)
+				sector = valorClasifSec.getDescripcion();
+
+			String descTipoReclamo = null;
+			if (seclo.getTipo_reclamo() != null)
+				descTipoReclamo = seclo.getTipo_reclamo().getDescripcion();
+
+			String descEstadoSeclo = null;
+			if (seclo.getEstado_seclo() != null)
+				descEstadoSeclo = seclo.getEstado_seclo().getDescripcion();
+			
+			String formaExtincion = "";
+			if (seclo.getFormaExtincion()!=null)
+				formaExtincion = seclo.getFormaExtincion().getDescripcion(); 
+				
+
+			cargaConsSECLO(ds, seclo.getCodigoInterno(), seclo.getLegajo().getNro_legajo(), seclo.getLegajo().getApellidoyNombre(), empresa, seclo.getStringRequeridos(), puesto, sector, seclo
+					.getLegajo().getFecAntReconocimiento(), seclo.getLegajo().getFecIngreso(), seclo.getLegajo().getFecRetiro(), descTipoReclamo, seclo.getMonto_reclamo(), descEstadoSeclo, seclo
+					.getObservaciones(), seclo.getFec_recepcion(), seclo.getMonto_acuerdo(), seclo.getHono_letrado(), seclo.getHono_conciliado(), seclo.getOtros_hono(), seclo.getTotalAPagar(), seclo
+					.getPagado(), seclo.getSaldo(), seclo.getLeyendasAudiencias(fecActual), seclo.getLeyendasDocEnviada(), seclo.getLeyendasPagosRealizados() , seclo.getLeyendaRubrosReclamos(), seclo.getLegajo().isSeguiLegales(),
+					formaExtincion , seclo.getFechaNovedad() , seclo.getCausaAcuerdo() , seclo.getTipo());
+
+		}
+
+		writeCliente(ds);
+
+	}
+
+	private IDataSet getDataSetConsSECLO() {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TConsSECLO");
+		dataset.fieldDef(new Field("codigo_interno", Field.STRING, 50));
+		dataset.fieldDef(new Field("legajo", Field.STRING, 50));
+		dataset.fieldDef(new Field("ape_y_nom", Field.STRING, 255));
+		dataset.fieldDef(new Field("procedencia", Field.STRING, 1000));
+		dataset.fieldDef(new Field("requerido", Field.MEMO, 0));
+		dataset.fieldDef(new Field("puesto", Field.STRING, 255));
+		dataset.fieldDef(new Field("seco", Field.STRING, 255));
+		dataset.fieldDef(new Field("fec_ant_reco", Field.DATE, 0));
+		dataset.fieldDef(new Field("fec_ing_real", Field.DATE, 0));
+		dataset.fieldDef(new Field("fec_egreso", Field.DATE, 0));
+		dataset.fieldDef(new Field("tipo_reclamo", Field.STRING, 100));
+		dataset.fieldDef(new Field("monto_reclamo", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("estado_seclo", Field.STRING, 255));
+		dataset.fieldDef(new Field("observaciones", Field.MEMO, 0));
+		dataset.fieldDef(new Field("fec_recepcion", Field.DATE, 0));
+		dataset.fieldDef(new Field("monto_acuerdo", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("hono_letrado", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("hono_conciliador", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("hono_otros", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("total", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("pagado", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("saldo", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("audiencias", Field.MEMO, 0));
+		dataset.fieldDef(new Field("docu_enviada", Field.MEMO, 0));
+		dataset.fieldDef(new Field("pagos_realizados", Field.MEMO, 0));
+		dataset.fieldDef(new Field("rubros_reclamos", Field.MEMO, 0));
+		dataset.fieldDef(new Field("seguimiento", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("forma_extincion", Field.STRING, 100));
+		dataset.fieldDef(new Field("fec_novedad", Field.DATE, 0));
+		dataset.fieldDef(new Field("causal_acuerdo", Field.STRING, 1000));
+		dataset.fieldDef(new Field("tipo", Field.STRING, 10));
+		
+		
+		
+		
+		
+		return dataset;
+	}
+
+	private void cargaConsSECLO(IDataSet dsConsSECLO, String codigoInterno, String legajo, String apeynom, String procedencia, String requerido, String puesto, String seco, java.util.Date fecAntRec,
+			java.util.Date fecIngReal, java.util.Date fecEgreso, String tipoReclamo, Money montoReclamo, String estadoSeclo, String observaciones, java.util.Date fecRecepcion, Money montoAcuerdo,
+			Money honorarioLetrado, Money honorarionConci, Money honoOtros, Money total, Money pagado, Money saldo, String audiencias, String docuEnviada, String pagosRealizados , String rubrosReclamos, Boolean seguimiento,
+			String formaExtincion,java.util.Date fecNovedad,String causalAcuerdo , String tipo) throws BaseException {
+		dsConsSECLO.append();
+		dsConsSECLO.fieldValue("codigo_interno", codigoInterno);
+		dsConsSECLO.fieldValue("legajo", legajo);
+		dsConsSECLO.fieldValue("ape_y_nom", apeynom);
+		dsConsSECLO.fieldValue("procedencia", procedencia);
+		dsConsSECLO.fieldValue("requerido", requerido);
+		dsConsSECLO.fieldValue("puesto", puesto);
+		dsConsSECLO.fieldValue("seco", seco);
+		dsConsSECLO.fieldValue("fec_ant_reco", fecAntRec);
+		dsConsSECLO.fieldValue("fec_ing_real", fecIngReal);
+		dsConsSECLO.fieldValue("fec_egreso", fecEgreso);
+		dsConsSECLO.fieldValue("tipo_reclamo", tipoReclamo);
+		if ((montoReclamo != null) && (montoReclamo.doubleValue() != 0))
+			dsConsSECLO.fieldValue("monto_reclamo", montoReclamo);
+		else
+			dsConsSECLO.fieldValue("monto_reclamo", "");
+		dsConsSECLO.fieldValue("estado_seclo", estadoSeclo);
+		dsConsSECLO.fieldValue("observaciones", observaciones);
+		dsConsSECLO.fieldValue("fec_recepcion", fecRecepcion);
+		if ((montoAcuerdo != null) && (montoAcuerdo.doubleValue() != 0))
+			dsConsSECLO.fieldValue("monto_acuerdo", montoAcuerdo);
+		else
+			dsConsSECLO.fieldValue("monto_acuerdo", "");
+		if ((honorarioLetrado != null) && (honorarioLetrado.doubleValue() != 0))
+			dsConsSECLO.fieldValue("hono_letrado", honorarioLetrado);
+		else
+			dsConsSECLO.fieldValue("hono_letrado", "");
+		if ((honorarionConci != null) && (honorarionConci.doubleValue() != 0))
+			dsConsSECLO.fieldValue("hono_conciliador", honorarionConci);
+		else
+			dsConsSECLO.fieldValue("hono_conciliador", "");
+		if ((honoOtros != null) && (honoOtros.doubleValue() != 0))
+			dsConsSECLO.fieldValue("hono_otros", honoOtros);
+		else
+			dsConsSECLO.fieldValue("hono_otros", "");
+		if ((total != null) && (total.doubleValue() != 0))
+			dsConsSECLO.fieldValue("total", total);
+		else
+			dsConsSECLO.fieldValue("total", "");
+		if ((pagado != null) && (pagado.doubleValue() != 0))
+			dsConsSECLO.fieldValue("pagado", pagado);
+		else
+			dsConsSECLO.fieldValue("pagado", "");
+		if ((saldo != null) && (saldo.doubleValue() != 0))
+			dsConsSECLO.fieldValue("saldo", saldo);
+		else
+			dsConsSECLO.fieldValue("saldo", "");
+		dsConsSECLO.fieldValue("audiencias", audiencias);
+		dsConsSECLO.fieldValue("docu_enviada", docuEnviada);
+		dsConsSECLO.fieldValue("pagos_realizados", pagosRealizados);
+		dsConsSECLO.fieldValue("rubros_reclamos", rubrosReclamos);
+		
+		dsConsSECLO.fieldValue("seguimiento", seguimiento);
+		
+		dsConsSECLO.fieldValue("forma_extincion", formaExtincion);
+		dsConsSECLO.fieldValue("fec_novedad", fecNovedad);
+		dsConsSECLO.fieldValue("causal_acuerdo", causalAcuerdo);	
+		
+		if (tipo == null)
+			dsConsSECLO.fieldValue("tipo", "");
+		else if (tipo.equals(Seclo.TIPO_ACU_INT))
+			dsConsSECLO.fieldValue("tipo", "Acuerdo");
+		else if (tipo.equals(Seclo.TIPO_SECLO))
+			dsConsSECLO.fieldValue("tipo", "Seclo");
+		else if (tipo.equals(Seclo.TIPO_MTSS))
+			dsConsSECLO.fieldValue("tipo", "MTSS");
+		else if (tipo.equals(Seclo.TIPO_MC))
+			dsConsSECLO.fieldValue("tipo", "Med. Civil");		
+		else
+			dsConsSECLO.fieldValue("tipo", "");
+			
+			
+		
+
+	}
+
+}

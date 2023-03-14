@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defPoolBD>
+  <defParamPoolBD
+     dataBaseName="jdbc:oracle:thin:@172.24.190.52:1521:uterrhh"
+     username="SIG"
+     password="SIG" idleOut="30" minSize="2" maxSize="2" loginTimeOut="10" tipoBD="oracle">
+  </defParamPoolBD>
+</defPoolBD>

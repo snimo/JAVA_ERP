@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dicPrograma>
+  <defObjsProg>
+
+  <!-- GENERALES -->	
+  <defObjProg classForm="TFMonedas"
+             paquete="General">
+             </defObjProg>
+             
+  <defObjProg classForm="TFEntidades"
+             paquete="General">
+             </defObjProg>             
+
+  <defObjProg classForm="TFConfigBD"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFClasificadorEntidad"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFGrupoClasificadorEntidad"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFEmpHabUsu"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFTalonarios"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFEmpresas"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFSucursales"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFPais"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFImpresoraFiscal"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFImpresoraComun"
+             paquete="General">
+             </defObjProg>
+
+
+  <defObjProg classForm="TFFactoresDeConversion"
+             paquete="General">
+             </defObjProg>
+
+
+
+  <defObjProg classForm="TFProvincia"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFTipoComprobante"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFTipoCambio"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFIndices"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFIndicesValor"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFPeriodos"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFCotizaciones"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFPeriodosInc"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFValoresIndices"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFTipoUnidadOrganizativa"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFUnidadOrganizativa"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFLugarEmision"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFIdioma"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFZona"
+             paquete="General">
+             </defObjProg>
+
+  <defObjProg classForm="TFComponentes"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFAtributosCompo"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFLeyendas"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFEstructuras"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFEjercicios"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFValoresComponentes"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFCuentas"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFReporteContable"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFPreFormConsAsientos"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFIngresoAsientos"
+             paquete="Contabilidad">
+             <!--<paqueteAuxiliar>
+               <nombre>Comunes</nombre>
+             </paqueteAuxiliar>-->
+             </defObjProg>
+
+  <defObjProg classForm="TFListaComproContables"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFPreFormFiltroAsiManuales"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFPreFormConsMayor"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFPreFormConsBalance"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFCuboConsultaBalance"
+             paquete="Contabilidad">
+             </defObjProg>
+
+  <defObjProg classForm="TFTipoProducto"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFConfigTalonarioAjuStk"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFAjusteStock"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFPeriodosStockReales"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFTipoMovStkTalonario"
+             paquete="stock">
+             </defObjProg>
+  <defObjProg classForm="TFUbicacionDeposito"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFPartida"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFSerie"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFEstadoStock"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFTransporte"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFDeposito"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFUnidadMedida"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFProducto"
+             paquete="stock">
+             </defObjProg>
+
+  <defObjProg classForm="TFCertificacionProveedor"
+             paquete="compras">
+             </defObjProg>
+
+  <defObjProg classForm="TFCondicionCompra"
+             paquete="compras">
+             </defObjProg>
+
+  <defObjProg classForm="TFProveedor"
+             paquete="compras">
+             </defObjProg>
+
+  <defObjProg classForm="TFCategoriaIVA"
+             paquete="impuestos">
+             </defObjProg>
+
+  <defObjProg classForm="TFCategoriaIB"
+             paquete="impuestos">
+             </defObjProg>
+
+  <defObjProg classForm="TFCategoriaGan"
+             paquete="impuestos">
+             </defObjProg>
+
+  <defObjProg classForm="TFImpuesto"
+             paquete="impuestos">
+             </defObjProg>
+
+  <defObjProg classForm="TFColLibroIVA"
+             paquete="impuestos">
+             </defObjProg>
+
+  <defObjProg classForm="TFConceptoImpuesto"
+             paquete="impuestos">
+             </defObjProg>
+
+  <defObjProg classForm="TFTipoCtaCteProv"
+             paquete="ctasAPagar">
+             </defObjProg>
+
+  <defObjProg classForm="TFConcFactProv"
+             paquete="ctasAPagar">
+             </defObjProg>
+
+  <defObjProg classForm="TFFactProv"
+             paquete="ctasAPagar">
+             </defObjProg>
+
+  <defObjProg classForm="TFPreFormConsCtaCteProv"
+             paquete="ctasAPagar">
+             </defObjProg>
+
+  <defObjProg classForm="TFPreFormConsFactPendAut"
+             paquete="ctasAPagar">
+             </defObjProg>
+
+  <defObjProg classForm="TFParametros"
+             paquete="Parametros">
+             </defObjProg>
+
+  <defObjProg classForm="TFClasifParametros"
+             paquete="Parametros">
+             </defObjProg>
+
+  <defObjProg classForm="TFValoresParametros"
+             paquete="Parametros">
+             </defObjProg>
+
+  <defObjProg classForm="TFTipoValores"
+             paquete="Tesoreria">
+             </defObjProg>
+
+  <defObjProg classForm="TFBancos"
+             paquete="Tesoreria">
+             </defObjProg>
+
+  <defObjProg classForm="TFCuentasBancarias"
+             paquete="Tesoreria">
+             </defObjProg>
+
+  <defObjProg classForm="TFTarjetasCredito"
+             paquete="Tesoreria">
+             </defObjProg>
+
+  <defObjProg classForm="TFTickets"
+             paquete="Tesoreria">
+             </defObjProg>
+
+  <defObjProg classForm="TFCajas"
+             paquete="Tesoreria">
+             </defObjProg>
+
+  <defObjProg classForm="TFAperturaCierreCaja"
+             paquete="Tesoreria">
+             </defObjProg>
+
+
+  <defObjProg classForm="TFMotivosPagos"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFFormasDePago"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFOrdenDePago"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFCatRetGan"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFCatRetIVA"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFCatRetIB"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFPeriRetIVA"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFPeriRetIB"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFPeriRetGan"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFTablaRetIVA"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFTablaRetGan"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFTablaRetIB"
+             paquete="Pagos">
+             </defObjProg>
+
+  <defObjProg classForm="TFRelacionSujeto"
+             paquete="Ventas">
+             </defObjProg>
+             
+  <defObjProg classForm="TFClientes"
+             paquete="Ventas">
+             </defObjProg>             
+             
+  <defObjProg classForm="TFProspectos"
+             paquete="Ventas">
+             </defObjProg>                          
+
+  <defObjProg classForm="TFContactos"
+             paquete="Ventas">
+             </defObjProg>                          
+
+  <defObjProg classForm="TFCondPagoVenta"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFGruposCondPago"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFFTipoCtaCteClie"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFFechaFacturacion"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFFacturaMostrador"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFConfigTalonarioFactClie"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFConfigTalonarioRto"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFRemito"
+             paquete="Ventas">
+             </defObjProg>
+
+
+
+  <defObjProg classForm="TFPedido"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFZonaVenta"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFTiposUnidades"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFVendedor"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFTipoDocumento"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFSujeto"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFCobrador"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFRubro"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFCanal"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFCategoria"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFClasifSujeto"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFEstadoCivil"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFEstadoSituacion"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFCondicionVenta"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFSectorDireccion"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFListaPrecios"
+             paquete="Ventas">
+             </defObjProg>
+
+  <defObjProg classForm="TFPreciosArticulo"
+             paquete="Ventas">
+             </defObjProg>
+             
+  <defObjProg classForm="TFTipoCampania"
+             paquete="CRM">
+             </defObjProg>             
+
+  <defObjProg classForm="TFEstadoCampania"
+             paquete="CRM">
+             </defObjProg>             
+
+  <defObjProg classForm="TFCampania"
+             paquete="CRM">
+             </defObjProg>             
+             
+  <defObjProg classForm="TFSensaCierreOpor"
+             paquete="CRM">
+             </defObjProg>             
+             
+  <defObjProg classForm="TFEstadoOportunidad"
+             paquete="CRM">
+             </defObjProg>             
+             
+  <defObjProg classForm="TFMotEstOpor"
+             paquete="CRM">
+             </defObjProg>             
+
+  <defObjProg classForm="TFClasifOpor"
+             paquete="CRM">
+             </defObjProg>             
+             
+  <defObjProg classForm="TFOportunidad"
+             paquete="CRM">
+             </defObjProg>     
+             
+  <defObjProg classForm="TFSelect"
+             paquete="Xlook">
+             </defObjProg>                  
+             
+  <defObjProg classForm="TFVista"
+             paquete="Xlook">
+             </defObjProg>                               
+             
+  <defObjProg classForm="TFObjetoXLook"
+             paquete="Xlook">
+             </defObjProg>                                            
+
+  <defObjProg classForm="TFDominioXLook"
+             paquete="Xlook">
+             </defObjProg>                                            
+
+  <defObjProg classForm="TFTipoDominio"
+             paquete="Xlook">
+             </defObjProg>                                            
+
+  <defObjProg classForm="TFTablaXLook"
+             paquete="Xlook">
+             </defObjProg>                                            
+
+             
+  </defObjsProg>
+</dicPrograma>
+
+

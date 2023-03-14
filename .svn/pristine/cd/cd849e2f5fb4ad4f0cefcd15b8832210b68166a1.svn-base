@@ -1,0 +1,95 @@
+package com.srn.erp.cip.bm;
+
+import framework.applicarionServer.bl.Utils.Fecha;
+import framework.request.bl.Utils.BaseException;
+
+public class PINIEventoHELLO extends PINIEventoBase {
+
+	private static String TELEPORT = "TELEPORT";
+	private static String TELEOPENED = "TELEOPENED";
+	private static String NO_MANTENER = "0";
+	private static String MANTENER = "1";
+	
+	private static final String ID = "ID";
+	
+	private int valor_ID = -1;
+	
+	public void inicializar() {
+		valor_ID = -1;
+	}
+	
+	public void addParametro(String clave,String valor) {
+		if (clave.equals(ID)) {
+			valor_ID = new Integer(valor);
+			try {
+				this.getPiniEngine().setIDEquipo(valor_ID);
+			} catch (BaseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void internalRun(PINIAccess response) throws BaseException {
+		
+		
+			  //do what you want to do before sleeping
+				//Thread.currentThread().sleep(60000);
+		
+		response.clear();
+		response.setSeccion(PINIAccess.NTMY);
+		response.addClave(PINIEventoHELLO.TELEPORT, this.getPiniEngine().getPuertoPlacaTeleComandos().toString());
+		response.addClave(PINIEventoHELLO.TELEOPENED, MANTENER);
+		
+		java.util.Date fecha = UtilCIP.getFechaHoraActual(this.getSession());
+		String hora = Fecha.getHoraActualConSeg();
+		
+		Puerta puerta = Puerta.getPuertaByIdentif(valor_ID, this.getSession());
+		if (puerta!=null) {
+			puerta.setFecInicioOL(UtilCIP.getTruncDate(fecha));
+			puerta.setHoraInicioOL(hora);
+			puerta.save();				
+			puerta = null;
+		} else {
+			System.out.println("La placa envio el Identificador "+valor_ID+" que no se encuentra asignado a ninguna placa en B.D.");
+		}
+		
+		
+	}
+	
+	public void afterEnvioMensaje() {
+		
+		try {
+			Puerta puerta = Puerta.getPuertaByIdentif(valor_ID, this.getSession());
+			if (puerta.isIniciarTelecomando()) {
+				TelecomandoCIP.getTelecomandoCIP().getSocket(puerta.getIP(), puerta.getTelePuerto(), true);
+			}
+		} catch(Exception e) {}
+		
+		
+	}
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+package com.srn.erp.legales.op;
+
+import com.srn.erp.legales.bm.Seclo;
+
+import framework.request.bl.Operaciones.Operation;
+import framework.request.bl.Tablas.Field;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.MapDatos;
+import framework.request.bl.XML.IDataSet;
+import framework.request.bl.XML.TDataSet;
+
+public class TraerTiposSeclos extends Operation {
+
+	public TraerTiposSeclos() {
+	}
+
+	public void execute(MapDatos mapaDatos) throws BaseException {
+
+		IDataSet datasetSeclo = this.getDataSetTiposSeclos();
+		cargarRegistroTipoSeclo(datasetSeclo, Seclo.TIPO_SECLO, "Seclo");	
+		cargarRegistroTipoSeclo(datasetSeclo, Seclo.TIPO_ACU_INT, "Acuerdo Interno");
+		cargarRegistroTipoSeclo(datasetSeclo, Seclo.TIPO_MTSS, "MTSS");
+		cargarRegistroTipoSeclo(datasetSeclo, Seclo.TIPO_MC, "Mediación Civil");
+		
+		writeCliente(datasetSeclo);
+	}
+
+	private IDataSet getDataSetTiposSeclos() {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TTiposSeclos");
+		dataset.fieldDef(new Field("codigo", Field.STRING, 20));
+		dataset.fieldDef(new Field("descripcion", Field.STRING, 100));
+		return dataset;
+	}
+
+	private void cargarRegistroTipoSeclo(IDataSet dataset, String codigo, String descripcion) {
+		dataset.append();
+		dataset.fieldValue("codigo", codigo);
+		dataset.fieldValue("descripcion", descripcion);
+	}
+}

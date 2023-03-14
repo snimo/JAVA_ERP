@@ -1,0 +1,1421 @@
+package com.srn.erp.cip.bm;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+
+import com.srn.erp.cip.da.DBPuerta;
+import com.srn.erp.mensajero.bm.GruDetUsuMens;
+import com.srn.erp.mensajero.bm.GrupoMaquinaDet;
+import com.srn.erp.sueldos.bm.Legajo;
+
+import framework.applicarionServer.bl.ObjetosAplicacion.IObjetoLogico;
+import framework.applicarionServer.bl.ObjetosAplicacion.ObjetoLogico;
+import framework.applicarionServer.bl.Sesion.ISesion;
+import framework.applicarionServer.bl.Utils.Fecha;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.HashTableDatos;
+import framework.request.bl.Utils.Validar;
+
+public class Puerta extends ObjetoLogico {
+
+	public Puerta() {
+	}
+
+	private List avisosCacheoMaq = new ArrayList();
+	private boolean readAvisosCacheoMaq = true;
+
+	private List avisosCacheoUsu = new ArrayList();
+	private boolean readAvisosCacheoUsu = true;
+	
+	private List avisosCacheoGMaq = new ArrayList();
+	private boolean readAvisosCacheoGMaq = true;
+
+	private List avisosCacheoGUsu = new ArrayList();
+	private boolean readAvisosCacheoGUsu = true;
+	
+	
+	private List avisosCacheoMaqAD = new ArrayList();
+	private boolean readAvisosCacheoMaqAD = true;
+
+	private List avisosCacheoUsuAD = new ArrayList();
+	private boolean readAvisosCacheoUsuAD = true;
+	
+	private List avisosCacheoGMaqAD = new ArrayList();
+	private boolean readAvisosCacheoGMaqAD = true;
+
+	private List avisosCacheoGUsuAD = new ArrayList();
+	private boolean readAvisosCacheoGUsuAD = true;
+	
+
+	public static String NICKNAME = "cip.Puerta";
+
+	private String codigo;
+	private String descripcion;
+	private Boolean activo;
+	private Boolean ingresoAlPredio;
+	private Boolean egredoDelPredio;
+	private String IP;
+	private String identifPuerta;
+	private String ingresoCacheo;
+	private String egresoCacheo;
+
+	private HashTableDatos listaBlancaAGrabar;
+
+	private String tipoMedioEntrada;
+	private String identifEntrada;
+	private String identifLegEntrada;
+	private String protocoloEntrada;
+	private String modoFuncEnt;
+	private String tipoMedioSalida;
+	private String identifSalida;
+	private String identifLegSalida;
+	private String protocoloSalida;
+	private String modoFuncSal;
+
+	private Integer modoOFFLineEnt;
+	private Integer modoOFFLineSal;
+	private Integer intervaloStatusTime;
+	private Integer intervaloConfigTime;
+	private Integer intervaloSyncroTime;
+	private Integer habPuntoAcceso1;
+	private Integer habPuntoAcceso2;
+	private Integer cTimeOutEnt;
+	private Integer cTimeOutSal;
+	private Integer oTimeOutEnt;
+	private Integer oTimeOutSal;
+	private Integer alarmTimeEnt;
+	private Integer alarmTimeSal;
+	private Integer dirPtoEnt;
+	private Integer dirPtoSal;
+	private Integer tipoPtoEnt;
+	private Integer tipoPtoSal;
+	private Integer benableEnt;
+	private Integer benableSal;
+	private Integer penableEnt;
+	private Integer penableSal;
+	private Integer mode;
+	private Integer puerto;
+	private Integer telePuerto;
+	private Date fecUltActLB;
+	private String horaUltActLB;
+	private Date fecUltCargaLB;
+	private String horUltCargaLB;
+	private Integer cantRegLB;
+	private String tipoAlimLBEnt;
+	private String tipoAlimLBSal;
+	private Boolean pedirConfig;
+
+	private java.util.Date fecInicioOL;
+	private String horaInicioOL;
+	private java.util.Date fecUltStatus;
+	private String horaUltStatus;
+
+	private Boolean liberarEntrada;
+	private Boolean liberarSalida;
+
+	private String InterpretarNroEnt;
+	private String InterpretarNroSal;
+	private Boolean iniciarTelecomando;
+	
+	private ZonaCIP entradaSaleDe;
+	private ZonaCIP entradaEntraA;
+	private ZonaCIP salidaSaleDe;
+	private ZonaCIP salidaEntraA;
+	
+	private boolean controlAntiPassBackEnt;
+	private boolean controlAntiPassBackSal;
+	private boolean controlCacheoEnt;
+	private boolean controlCacheoSal;
+	
+	private boolean regMovUltEnt;
+	private boolean regMovUltSal;
+	private boolean actAviAccDenegado; 
+	private boolean restringirEnt;
+	private boolean restringirSal;
+	private boolean restringirEntVis;
+	
+	private boolean libEntradaVis;
+	private boolean libSalidaVis;
+	
+	private boolean tragaTarjAlSalir; 
+	
+	private Boolean desconectada;
+
+	public ZonaCIP getEntradaSaleDe() throws BaseException {
+		this.supportRefresh();
+		return entradaSaleDe;
+	}
+	
+	public boolean isTragaTarjAlSalir() throws BaseException {
+		this.supportRefresh();
+		return this.tragaTarjAlSalir;
+	}
+	
+	public boolean isLibEntradaVisita() throws BaseException {
+		this.supportRefresh();
+		return this.libEntradaVis;
+	}
+	
+	public boolean isLibSalidaVisita() throws BaseException {
+		this.supportRefresh();
+		return this.libSalidaVis;
+	}
+	
+	public boolean isActAviAccDenegado() throws BaseException {
+		this.supportRefresh();
+		return this.actAviAccDenegado;
+	}
+	
+	public boolean isRestringirEntVisita() throws BaseException {
+		this.supportRefresh();
+		return this.restringirEntVis;
+	}
+	
+	public void setRestringirEntVisita(boolean aRestringirEntVisita) {
+		this.restringirEntVis = aRestringirEntVisita;
+	}
+	
+	public void setTragaTarjAlSalir(boolean aTragaTarjAlSalir) {
+		this.tragaTarjAlSalir = aTragaTarjAlSalir;
+	}
+	
+	
+	public void setLibEntradaVisita(boolean aLibEntradaVisita) {
+		this.libEntradaVis = aLibEntradaVisita;
+	}
+	
+	public void setLibSalidaVisita(boolean aLibSalidaVisita) {
+		this.libSalidaVis = aLibSalidaVisita;
+	}
+	
+	
+	public boolean isRentringirEnt() throws BaseException {
+		this.supportRefresh();
+		return this.restringirEnt;
+	}	
+	
+	public boolean isRentringirSal() throws BaseException {
+		this.supportRefresh();
+		return this.restringirSal;
+	}	
+	
+	public boolean isControlAntiPassBackEnt() throws BaseException {
+		this.supportRefresh();
+		return controlAntiPassBackEnt;
+	}
+	
+	public boolean isRegMovUltEnt() throws BaseException {
+		this.supportRefresh();
+		return this.regMovUltEnt;
+	}
+	
+	public void setRegMovUltEnt(boolean aRegMovUltEnt) {
+		this.regMovUltEnt = aRegMovUltEnt;
+	}
+	
+	public void setRestringirEnt(boolean aRestringirEnt) {
+		this.restringirEnt = aRestringirEnt;
+	}
+	
+	public void setRestringirSal(boolean aRestringirSal) {
+		this.restringirSal = aRestringirSal;
+	}
+	
+	public void setActAviAccDenegado(boolean aActAviAccDenegado) {
+		this.actAviAccDenegado = aActAviAccDenegado;
+	}
+	
+	public void setRegMovUltSal(boolean aRegMovUltSal) {
+		this.regMovUltSal = aRegMovUltSal;
+	}
+	
+	public boolean isRegMovUltSal() throws BaseException {
+		this.supportRefresh();
+		return this.regMovUltSal;
+	}
+	
+	public boolean isControlCacheoEnt() throws BaseException {
+		this.supportRefresh();
+		return this.controlCacheoEnt;
+	}
+	
+	public boolean isControlCacheoSal() throws BaseException {
+		this.supportRefresh();
+		return this.controlCacheoSal;
+	}
+	
+	public boolean isControlAntiPassBackSal() throws BaseException {
+		this.supportRefresh();
+		return controlAntiPassBackSal;
+	}
+	
+	public void setControlCacheoEnt(boolean aControlCacheoEnt) {
+		this.controlCacheoEnt = aControlCacheoEnt;
+	}
+	
+	public void setControlCacheoSal(boolean aControlCacheoSal) {
+		this.controlCacheoSal = aControlCacheoSal;
+	}
+	
+	public void setControlAntiPassBackEnt(boolean aControlAntiPassBackEnt) {
+		this.controlAntiPassBackEnt = aControlAntiPassBackEnt;
+	}
+
+	public void setControlAntiPassBackSal(boolean aControlAntiPassBackSal) {
+		this.controlAntiPassBackSal = aControlAntiPassBackSal;
+	}
+	
+	public void setEntradaSaleDe(ZonaCIP entradaSaleDe) {
+		this.entradaSaleDe = entradaSaleDe;
+	}
+
+	public ZonaCIP getEntradaEntraA() throws BaseException {
+		this.supportRefresh();
+		return entradaEntraA;
+	}
+
+	public void setEntradaEntraA(ZonaCIP entradaEntraA) {
+		this.entradaEntraA = entradaEntraA;
+	}
+
+	public ZonaCIP getSalidaSaleDe() throws BaseException {
+		this.supportRefresh();
+		return salidaSaleDe;
+	}
+
+	public void setSalidaSaleDe(ZonaCIP salidaSaleDe) {
+		this.salidaSaleDe = salidaSaleDe;
+	}
+
+	public ZonaCIP getSalidaEntraA() throws BaseException {
+		this.supportRefresh();
+		return salidaEntraA;
+	}
+
+	public void setSalidaEntraA(ZonaCIP salidaEntraA) {
+		this.salidaEntraA = salidaEntraA;
+	}
+
+	public String getInterpretarNroEnt() throws BaseException {
+		supportRefresh();
+		return this.InterpretarNroEnt;
+	}
+	
+	public String getIngresoCacheo() throws BaseException {
+		supportRefresh();
+		return this.ingresoCacheo;
+	}
+	
+	public void setIngresoCacheo(String aIngresoCacheo) throws BaseException {
+		this.ingresoCacheo = aIngresoCacheo;
+	}
+	
+	public String getEgresoCacheo() throws BaseException {
+		supportRefresh();
+		return this.egresoCacheo;
+	}
+	
+	public void setEgresoCacheo(String aEgresoCacheo) throws BaseException {
+		this.egresoCacheo = aEgresoCacheo;
+	}	
+
+	public void setInterpretarNroEnt(String aInterpretarNroEnt) {
+		this.InterpretarNroEnt = aInterpretarNroEnt;
+	}
+
+	public Boolean isIniciarTelecomando() throws BaseException {
+		supportRefresh();
+		return this.iniciarTelecomando;
+	}
+
+	public void setIniciarTelecomando(Boolean aIniciarTelecomando) {
+		this.iniciarTelecomando = aIniciarTelecomando;
+	}
+
+	public String getInterpretarNroSal() throws BaseException {
+		supportRefresh();
+		return this.InterpretarNroSal;
+	}
+
+	public void setInterpretarNroSal(String aInterpretarNroSal) {
+		this.InterpretarNroSal = aInterpretarNroSal;
+	}
+
+	public java.util.Date getFecInicioOL() throws BaseException {
+		supportRefresh();
+		return this.fecInicioOL;
+	}
+
+	public Boolean isLiberarEntrada() throws BaseException {
+		supportRefresh();
+		return this.liberarEntrada;
+	}
+
+	public void setLiberarEntrada(Boolean aLiberarEntrada) {
+		this.liberarEntrada = aLiberarEntrada;
+	}
+
+	public Boolean isLiberarSalida() throws BaseException {
+		supportRefresh();
+		return this.liberarSalida;
+	}
+
+	public void setLiberarSalida(Boolean aLiberarSalida) {
+		this.liberarSalida = aLiberarSalida;
+	}
+
+	public void setFecInicioOL(java.util.Date aFecInicioOL) {
+		this.fecInicioOL = aFecInicioOL;
+	}
+
+	public java.util.Date getFecUltStatus() throws BaseException {
+		supportRefresh();
+		return this.fecUltStatus;
+	}
+
+	public void setFecUltStatus(java.util.Date aFecUltStatus) {
+		this.fecUltStatus = aFecUltStatus;
+	}
+
+	public String getHoraInicioOL() throws BaseException {
+		supportRefresh();
+		return this.horaInicioOL;
+	}
+
+	public void setHoraInicioOL(String aHoraInicioOL) {
+		this.horaInicioOL = aHoraInicioOL;
+	}
+
+	public String getHoraUltStatus() throws BaseException {
+		supportRefresh();
+		return this.horaUltStatus;
+	}
+
+	public void setHoraUltStatus(String aHoraUltStatus) {
+		this.horaUltStatus = aHoraUltStatus;
+	}
+
+	public boolean isTienePing() throws BaseException {
+		try {
+
+			InetAddress ip = null;
+			try {
+				ip = InetAddress.getByName(this.getIP());
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// InetAddress localhostIP = InetAddress.getByAddress("127.0.0.1",
+			// new byte[]{127, 0, 0, 1});
+			if (ip.isReachable(1000))
+				return true;
+			else
+				return false;
+
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
+
+	public String getTipoAlimLBEnt() throws BaseException {
+		supportRefresh();
+		if (this.tipoAlimLBEnt == null)
+			return "";
+		else
+			return this.tipoAlimLBEnt;
+	}
+
+	public void setTipoAlimLBEnt(String aTipoAlimLBEnt) {
+		this.tipoAlimLBEnt = aTipoAlimLBEnt;
+	}
+
+	public Boolean isPideConfiguracion() throws BaseException {
+		supportRefresh();
+		return this.pedirConfig;
+	}
+
+	public void setPideConfiguracion(Boolean aPideConfiguracion) {
+		this.pedirConfig = aPideConfiguracion;
+	}
+
+	public String getTipoAlimLBSal() throws BaseException {
+		supportRefresh();
+		if (this.tipoAlimLBSal == null)
+			return "";
+		else
+			return this.tipoAlimLBSal;
+	}
+
+	public void setTipoAlimLBSal(String aTipoAlimLBSal) {
+		this.tipoAlimLBSal = aTipoAlimLBSal;
+	}
+
+	public Integer getCantRegLB() throws BaseException {
+		supportRefresh();
+		return this.cantRegLB;
+	}
+
+	public void setCantRegLP(Integer aCantRegLB) {
+		this.cantRegLB = aCantRegLB;
+	}
+
+	public String getHorUltCargaLB() throws BaseException {
+		supportRefresh();
+		return this.horUltCargaLB;
+	}
+
+	public void setHoraUltCargaLP(String aHorUltCargaLB) {
+		this.horUltCargaLB = aHorUltCargaLB;
+	}
+
+	public Date getFecUltCargaLB() throws BaseException {
+		supportRefresh();
+		return this.fecUltCargaLB;
+	}
+
+	public void setFecUltCargaLB(Date aFecUltCargaLB) {
+		this.fecUltCargaLB = aFecUltCargaLB;
+	}
+
+	public String getHoraUltActLB() throws BaseException {
+		supportRefresh();
+		return this.horaUltActLB;
+	}
+
+	public void setHoraUltActLB(String aHoraUltActLB) {
+		this.horaUltActLB = aHoraUltActLB;
+	}
+
+	public Date getFecUltActLB() throws BaseException {
+		supportRefresh();
+		return this.fecUltActLB;
+	}
+
+	public void setFecUltActLB(Date aFecUltActLB) {
+		this.fecUltActLB = aFecUltActLB;
+	}
+
+	public Integer getBenableEnt() throws BaseException {
+		supportRefresh();
+		return this.benableEnt;
+	}
+
+	public void setBenableEnt(Integer aBenableEnt) {
+		this.benableEnt = aBenableEnt;
+	}
+
+	public Integer getPuerto() throws BaseException {
+		supportRefresh();
+		return this.puerto;
+	}
+
+	public void setPuerto(Integer aPuerto) {
+		this.puerto = aPuerto;
+	}
+
+	public Integer getTelePuerto() throws BaseException {
+		supportRefresh();
+		return this.telePuerto;
+	}
+
+	public void setTelePuerto(Integer aTelePuerto) {
+		this.telePuerto = aTelePuerto;
+	}
+
+	public Integer getMode() throws BaseException {
+		supportRefresh();
+		return this.mode;
+	}
+
+	public void setMode(Integer aMode) {
+		this.mode = aMode;
+	}
+
+	public Integer getBenableSal() throws BaseException {
+		supportRefresh();
+		return this.benableSal;
+	}
+
+	public void setBenableSal(Integer aBenableSal) {
+		this.benableSal = aBenableSal;
+	}
+
+	public Integer getPenableEnt() throws BaseException {
+		supportRefresh();
+		return this.penableEnt;
+	}
+
+	public void setPenableEnt(Integer aPenableEnt) {
+		this.penableEnt = aPenableEnt;
+	}
+
+	public Integer getPenableSal() throws BaseException {
+		supportRefresh();
+		return this.penableSal;
+	}
+
+	public void setPenableSal(Integer aPenableSal) {
+		this.penableSal = aPenableSal;
+	}
+
+	public Integer getDirPtoEnt() throws BaseException {
+		supportRefresh();
+		return this.dirPtoEnt;
+	}
+
+	public void setDirPtoEnt(Integer aDirPtoEnt) {
+		this.dirPtoEnt = aDirPtoEnt;
+	}
+
+	public Integer getTipoPtoEnt() throws BaseException {
+		supportRefresh();
+		return this.tipoPtoEnt;
+	}
+
+	public void setTipoPtoEnt(Integer aTipoPtoEnt) {
+		this.tipoPtoEnt = aTipoPtoEnt;
+	}
+
+	public Integer getTipoPtoSal() throws BaseException {
+		supportRefresh();
+		return this.tipoPtoSal;
+	}
+
+	public void setTipoPtoSal(Integer aTipoPtoSal) {
+		this.tipoPtoSal = aTipoPtoSal;
+	}
+
+	public Integer getDirPtoSal() throws BaseException {
+		supportRefresh();
+		return this.dirPtoSal;
+	}
+
+	public void setDirPtoSal(Integer aDirPtoSal) {
+		this.dirPtoSal = aDirPtoSal;
+	}
+
+	public Integer getAlarmTimeEnt() throws BaseException {
+		supportRefresh();
+		return this.alarmTimeEnt;
+	}
+
+	public void setAlarmTimeEnt(Integer aAlarmTimeEnt) {
+		this.alarmTimeEnt = aAlarmTimeEnt;
+	}
+
+	public Integer getAlarmTimeSal() throws BaseException {
+		supportRefresh();
+		return this.alarmTimeSal;
+	}
+
+	public void setAlarmTimeSal(Integer aAlarmTimeSal) {
+		this.alarmTimeSal = aAlarmTimeSal;
+	}
+
+	public Integer getCTimeOutEnt() throws BaseException {
+		supportRefresh();
+		return this.cTimeOutEnt;
+	}
+
+	public void setCTimeOutEnt(Integer aCTimeOutEnt) {
+		this.cTimeOutEnt = aCTimeOutEnt;
+	}
+
+	public Integer getOTimeOutEnt() throws BaseException {
+		supportRefresh();
+		return this.oTimeOutEnt;
+	}
+
+	public void setOTimeOutEnt(Integer aOTimeOutEnt) {
+		this.oTimeOutEnt = aOTimeOutEnt;
+	}
+
+	public Integer getOTimeOutSal() throws BaseException {
+		supportRefresh();
+		return this.oTimeOutSal;
+	}
+
+	public void setOTimeOutSal(Integer aOTimeOutSal) {
+		this.oTimeOutSal = aOTimeOutSal;
+	}
+
+	public Integer getCTimeOutSal() throws BaseException {
+		supportRefresh();
+		return this.cTimeOutSal;
+	}
+
+	public void setCTimeOutSal(Integer aCTimeOutSal) {
+		this.cTimeOutSal = aCTimeOutSal;
+	}
+
+	public Integer getHabilitarPuntoAcceso1() throws BaseException {
+		supportRefresh();
+		return this.habPuntoAcceso1;
+	}
+
+	public void setHabilitarPuntoAcceso1(Integer aHabPuntoAcceso1) {
+		this.habPuntoAcceso1 = aHabPuntoAcceso1;
+	}
+
+	public Integer getHabilitarPuntoAcceso2() throws BaseException {
+		supportRefresh();
+		return this.habPuntoAcceso2;
+	}
+
+	public void setHabilitarPuntoAcceso2(Integer aHabPuntoAcceso2) {
+		this.habPuntoAcceso2 = aHabPuntoAcceso2;
+	}
+
+	public Integer getIntervaloStatusTime() throws BaseException {
+		supportRefresh();
+		return this.intervaloStatusTime;
+	}
+
+	public void setIntervalorStatusTime(Integer aIntervaloStatusTime) {
+		this.intervaloStatusTime = aIntervaloStatusTime;
+	}
+
+	public Integer getIntervaloSyncroTime() throws BaseException {
+		supportRefresh();
+		return this.intervaloSyncroTime;
+	}
+
+	public void setIntervalorSyncroTime(Integer aIntervaloSyncroTime) {
+		this.intervaloSyncroTime = aIntervaloSyncroTime;
+	}
+
+	public Integer getIntervaloConfigTime() throws BaseException {
+		supportRefresh();
+		return this.intervaloConfigTime;
+	}
+
+	public void setIntervalorConfigTime(Integer aIntervaloConfigTime) {
+		this.intervaloConfigTime = aIntervaloConfigTime;
+	}
+
+	public Integer getModoOFFLineEnt() throws BaseException {
+		supportRefresh();
+		return this.modoOFFLineEnt;
+	}
+
+	public void setModoOFFLineEnt(Integer aModoOFFLineEnt) {
+		this.modoOFFLineEnt = aModoOFFLineEnt;
+	}
+
+	public Integer getModoOFFLineSal() throws BaseException {
+		supportRefresh();
+		return this.modoOFFLineSal;
+	}
+
+	public void setModoOFFLineSal(Integer aModoOFFLineSal) {
+		this.modoOFFLineSal = aModoOFFLineSal;
+	}
+
+	public String getModoFuncSal() throws BaseException {
+		supportRefresh();
+		return this.modoFuncSal;
+	}
+
+	public void setModoFuncSal(String aModoFuncSal) {
+		this.modoFuncSal = aModoFuncSal;
+	}
+
+	public String getProtocoloSalida() throws BaseException {
+		supportRefresh();
+		return this.protocoloSalida;
+	}
+
+	public void setProtocoloSalida(String aProtolocoSalida) {
+		this.protocoloSalida = aProtolocoSalida;
+	}
+
+	public String getIdentifLegSal() throws BaseException {
+		supportRefresh();
+		return this.identifLegSalida;
+	}
+
+	public void setIdentifLegSal(String aIdentifLegSal) {
+		this.identifLegSalida = aIdentifLegSal;
+	}
+
+	public String getTipoMedioSal() throws BaseException {
+		supportRefresh();
+		return this.tipoMedioSalida;
+	}
+
+	public void setTipoMedioSal(String aTipoMedioSal) {
+		this.tipoMedioSalida = aTipoMedioSal;
+	}
+
+	public String getIdentifSal() throws BaseException {
+		supportRefresh();
+		return this.identifSalida;
+	}
+
+	public void setIdentifSal(String aIdentifSal) {
+		this.identifSalida = aIdentifSal;
+	}
+
+	public String getModoFuncEnt() throws BaseException {
+		supportRefresh();
+		return this.modoFuncEnt;
+	}
+
+	public void setModoFuncEnt(String aModoFuncEnt) {
+		this.modoFuncEnt = aModoFuncEnt;
+	}
+
+	public String getCodigo() throws BaseException {
+		supportRefresh();
+		return codigo;
+	}
+
+	public void setCodigo(String aCodigo) {
+		this.codigo = aCodigo;
+	}
+
+	public String getProtocoloEntrada() throws BaseException {
+		supportRefresh();
+		return this.protocoloEntrada;
+	}
+
+	public void setProtolocoEntrada(String aProtolocoEntrada) {
+		this.protocoloEntrada = aProtolocoEntrada;
+	}
+
+	public String getIdentifLegEntrada() throws BaseException {
+		supportRefresh();
+		return this.identifLegEntrada;
+	}
+
+	public void setIdentifLegEntrada(String aIdentifLegEntrada) {
+		this.identifLegEntrada = aIdentifLegEntrada;
+	}
+
+	public String getIdentifEntrada() throws BaseException {
+		supportRefresh();
+		return this.identifEntrada;
+	}
+
+	public void setIdentifEntrada(String aIdentifEntrada) {
+		this.identifEntrada = aIdentifEntrada;
+	}
+
+	public String getTipoMedioEntrada() throws BaseException {
+		supportRefresh();
+		return this.tipoMedioEntrada;
+	}
+
+	public void setTipoMedioEntrada(String aTipoMedioEntrada) {
+		this.tipoMedioEntrada = aTipoMedioEntrada;
+	}
+
+	public String getIdentifPuerta() throws BaseException {
+		supportRefresh();
+		return this.identifPuerta;
+	}
+
+	public void setIdentifPuerta(String aIdentifPuerta) {
+		this.identifPuerta = aIdentifPuerta;
+	}
+
+	public String getIP() throws BaseException {
+		supportRefresh();
+		return this.IP;
+	}
+
+	public void setIP(String aIP) {
+		this.IP = aIP;
+	}
+
+	public Boolean isIngresoAlPredio() throws BaseException {
+		supportRefresh();
+		return this.ingresoAlPredio;
+	}
+	
+	public Boolean isIngresoInterno() throws BaseException {
+		if (isIngresoAlPredio())
+			return false;
+		else
+			return true;
+	}
+	
+
+	public void setIngresoAlPredio(Boolean aIngresoAlPredio) {
+		this.ingresoAlPredio = aIngresoAlPredio;
+	}
+
+	public Boolean isEgresoDelPredio() throws BaseException {
+		supportRefresh();
+		return this.egredoDelPredio;
+	}
+
+	public void setEgresoDelPredio(Boolean aEgresoDelPredio) {
+		this.egredoDelPredio = aEgresoDelPredio;
+	}
+
+	public String getDescripcion() throws BaseException {
+		supportRefresh();
+		return descripcion;
+	}
+
+	public void setDescripcion(String aDescripcion) {
+		this.descripcion = aDescripcion;
+	}
+
+	public Boolean isActivo() throws BaseException {
+		supportRefresh();
+		return activo;
+	}
+
+	public void setActivo(Boolean aActivo) {
+		this.activo = aActivo;
+	}
+	
+	public Boolean isDesconectada() throws BaseException {
+		supportRefresh();
+		if(this.desconectada == null)
+			return false;
+		
+		return this.desconectada;
+	}
+
+	public void setDesconectada(Boolean desconectada) {
+		this.desconectada = desconectada;
+	}
+
+	public String getNickName() {
+		return NICKNAME;
+	}
+
+	public static Puerta findByOid(Integer oid, ISesion aSesion) throws BaseException {
+		return (Puerta) getObjectByOid(NICKNAME, oid, aSesion);
+	}
+
+	public static Puerta findByOidProxy(Integer oid, ISesion aSesion) throws BaseException {
+		return (Puerta) getObjectByOidProxy(NICKNAME, oid, aSesion);
+	}
+
+	public static Puerta findByCodigo(String codigo, ISesion aSesion) throws BaseException {
+		return (Puerta) getObjectByCodigo(NICKNAME, codigo, aSesion);
+	}
+
+	public void beforeSave() throws BaseException {
+		Validar.noNulo(codigo, "Debe ingresar el código");
+		Validar.noNulo(descripcion, "Debe ingresar le descripción");
+	}
+
+	public static Puerta getPuertaByIdentif(Integer aIdentif, ISesion aSesion) throws BaseException {
+		return DBPuerta.getPuertaByIdentif(aIdentif, aSesion);
+	}
+
+	public static List getPuertasActivas(ISesion aSesion) throws BaseException {
+		return DBPuerta.getPuertasActivas(aSesion);
+	}
+
+	public void borrarListaBlanca() throws BaseException {
+
+		TarjetaLegajo.borrarListaBlanca(this, this.getSesion());
+
+	}
+
+	@Override
+	public void afterSave() throws BaseException {
+		// TODO Auto-generated method stub
+		super.afterSave();
+
+		Iterator iterAvisosUsu = this.avisosCacheoUsu.iterator();
+		while (iterAvisosUsu.hasNext()) {
+			AvisoCIPUsuario avisoCIPUsuario = (AvisoCIPUsuario) iterAvisosUsu.next();
+			avisoCIPUsuario.save();
+			avisoCIPUsuario = null;
+		}
+		iterAvisosUsu = null;
+		
+		Iterator iterAvisosUsuAD = this.avisosCacheoUsuAD.iterator();
+		while (iterAvisosUsuAD.hasNext()) {
+			AvisoCIPUsuario avisoCIPUsuario = (AvisoCIPUsuario) iterAvisosUsuAD.next();
+			avisoCIPUsuario.save();
+			avisoCIPUsuario = null;
+		}
+		iterAvisosUsuAD = null;
+		
+		
+		Iterator iterAvisosMaq = this.avisosCacheoMaq.iterator();
+		while (iterAvisosMaq.hasNext()) {
+			AvisoCIPMaquina avisoCIPMaquina = (AvisoCIPMaquina) iterAvisosMaq.next();
+			avisoCIPMaquina.save();
+			avisoCIPMaquina = null;
+		}
+		iterAvisosMaq = null;
+		
+		Iterator iterAvisosMaqAD = this.avisosCacheoMaqAD.iterator();
+		while (iterAvisosMaqAD.hasNext()) {
+			AvisoCIPMaquina avisoCIPMaquina = (AvisoCIPMaquina) iterAvisosMaqAD.next();
+			avisoCIPMaquina.save();
+			avisoCIPMaquina = null;
+		}
+		iterAvisosMaqAD = null;		
+		
+		
+		Iterator iterAvisosGMaq = this.avisosCacheoGMaq.iterator();
+		while (iterAvisosGMaq.hasNext()) {
+			AvisoCIPGMaquina avisoCIPGMaquina = (AvisoCIPGMaquina) iterAvisosGMaq.next();
+			avisoCIPGMaquina.save();
+			avisoCIPGMaquina = null;
+		}
+		iterAvisosGMaq = null;
+		
+		Iterator iterAvisosGMaqAD = this.avisosCacheoGMaqAD.iterator();
+		while (iterAvisosGMaqAD.hasNext()) {
+			AvisoCIPGMaquina avisoCIPGMaquina = (AvisoCIPGMaquina) iterAvisosGMaqAD.next();
+			avisoCIPGMaquina.save();
+			avisoCIPGMaquina = null;
+		}
+		iterAvisosGMaqAD = null;
+		
+		
+		Iterator iterAvisosGUsu = this.avisosCacheoGUsu.iterator();
+		while (iterAvisosGUsu.hasNext()) {
+			AvisoCIPGUsuario avisoCIPGUsuario = (AvisoCIPGUsuario) iterAvisosGUsu.next();
+			avisoCIPGUsuario.save();
+			avisoCIPGUsuario = null;
+		}
+		iterAvisosGUsu = null;
+		
+		Iterator iterAvisosGUsuAD = this.avisosCacheoGUsuAD.iterator();
+		while (iterAvisosGUsuAD.hasNext()) {
+			AvisoCIPGUsuario avisoCIPGUsuario = (AvisoCIPGUsuario) iterAvisosGUsuAD.next();
+			avisoCIPGUsuario.save();
+			avisoCIPGUsuario = null;
+		}
+		iterAvisosGUsuAD = null;		
+		
+
+		if (this.getListaBlancaAGrabar() != null) {
+			this.borrarListaBlanca();
+			grabarListaBlanca();
+		}
+
+	}
+	
+	public void grabarLB() throws BaseException {
+		this.borrarListaBlanca();
+		grabarListaBlanca();		
+	}
+
+	private void grabarListaBlanca() throws BaseException {
+		int nroOrden = 1;
+		Iterator iterListaBlanca = getListaBlancaAGrabar().keySet().iterator();
+		while (iterListaBlanca.hasNext()) {
+			Integer nroAVal = (Integer) iterListaBlanca.next();
+			IObjetoLogico objLog = (IObjetoLogico) getListaBlancaAGrabar().get(nroAVal);
+
+			ListaBlanca listaBlanca = (ListaBlanca) ListaBlanca.getNew(ListaBlanca.NICKNAME, this.getSesion());
+			listaBlanca.setPuerta(this);
+			String tipo = "";
+			if (objLog instanceof Legajo) {
+				listaBlanca.setLegajo((Legajo) objLog);
+				tipo = Legajo.NICKNAME;
+			} else if (objLog instanceof TarjetaLegajo) {
+				listaBlanca.setLegajo(((TarjetaLegajo) objLog).getLegajo());
+				tipo = TarjetaLegajo.NICKNAME;
+			}
+			listaBlanca.setNro_a_validar(nroAVal);
+			listaBlanca.setNro_orden(nroOrden);
+			listaBlanca.setTipo(tipo);
+			listaBlanca.setActivo(true);
+			listaBlanca.save();
+			++nroOrden;
+		}
+	}
+
+	public void setListaBlancaAGrabar(HashTableDatos aListaBlancaAGrabar) throws BaseException {
+		this.listaBlancaAGrabar = aListaBlancaAGrabar;
+	}
+
+	public HashTableDatos getListaBlancaAGrabar() throws BaseException {
+		return this.listaBlancaAGrabar;
+	}
+
+	public String getFecHorONLINE() throws BaseException {
+		StringBuffer fecHor = new StringBuffer("");
+		if (this.getFecInicioOL() != null)
+			fecHor.append(Fecha.getddmmyyyy(this.getFecInicioOL()));
+		if (this.getHoraInicioOL() != null)
+			fecHor.append(" " + this.getHoraInicioOL());
+		return fecHor.toString();
+	}
+
+	public String getFecHorUltStatus() throws BaseException {
+		StringBuffer fecHor = new StringBuffer("");
+		if (this.getFecUltStatus() != null)
+			fecHor.append(Fecha.getddmmyyyy(this.getFecUltStatus()));
+		if (this.getHoraUltStatus() != null)
+			fecHor.append(" " + this.getHoraUltStatus());
+		return fecHor.toString();
+	}
+
+	public String getFecHorUltActuLB() throws BaseException {
+		PrepararLB prepararLB = PrepararLB.getPrepararLB(this, this.getSesion());
+		if (prepararLB == null)
+			return "";
+
+		StringBuffer fecHor = new StringBuffer("");
+		if (prepararLB.getFecha_preparacion() != null)
+			fecHor.append(Fecha.getddmmyyyy(prepararLB.getFecha_preparacion()));
+		if (prepararLB.getHora_prep() != null)
+			fecHor.append(" " + prepararLB.getHora_prep());
+		return fecHor.toString();
+	}
+
+	public static String getCACHEO() {
+		return "CACHEO";
+	}
+	
+	public static String getACCESO_DENEGADO() {
+		return "ACCDEN";
+	}
+	
+
+	public String getFecHorUltCargaLB() throws BaseException {
+		StringBuffer fecHor = new StringBuffer("");
+		if (this.getFecUltCargaLB() != null)
+			fecHor.append(Fecha.getddmmyyyy(this.getFecUltCargaLB()));
+		if (this.getHorUltCargaLB() != null)
+			fecHor.append(" " + this.getHorUltCargaLB());
+		return fecHor.toString();
+	}
+
+	public boolean resetPlaca() throws BaseException {
+		boolean devResPlaca = false;
+		try {
+			PrintWriter out = null;
+			Socket socket = new Socket(this.getIP(), this.getTelePuerto());
+			out = new PrintWriter(socket.getOutputStream(), true);
+			PINIAccess pini = new PINIAccess();
+			pini.setSeccion("TELECOMMAND");
+			pini.addClave("ID", this.getIdentifPuerta());
+			pini.addClave("TELTYPE", "3");
+			out.print(pini.getPKT());
+			out.flush();
+			socket.getInputStream();
+			try {
+				java.lang.Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			out.close();
+			socket.close();
+			devResPlaca = true;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			devResPlaca = false;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			devResPlaca = false;
+		}
+		return devResPlaca;
+	}
+
+	public List getAvisosCacheoUsu() throws BaseException {
+		if (this.readAvisosCacheoUsu) {
+			List listaAvisosCacheoUsu = AvisoCIPUsuario.getAvisos(getOIDInteger(), Puerta.getCACHEO(), getSesion());
+			this.avisosCacheoUsu.addAll(listaAvisosCacheoUsu);
+			readAvisosCacheoUsu = false;
+		}
+		return this.avisosCacheoUsu;
+	}
+	
+	public List getAvisosCacheoGUsu() throws BaseException {
+		if (this.readAvisosCacheoGUsu) {
+			List listaAvisosCacheoGUsu = AvisoCIPGUsuario.getAvisos(getOIDInteger(), Puerta.getCACHEO(), getSesion());
+			this.avisosCacheoGUsu.addAll(listaAvisosCacheoGUsu);
+			readAvisosCacheoGUsu = false;
+		}
+		return this.avisosCacheoGUsu;
+	}	
+	
+	public List getAvisosCacheoMaq() throws BaseException {
+		if (this.readAvisosCacheoMaq) {
+			List listaAvisosCacheoMaq = AvisoCIPMaquina.getAvisos(getOIDInteger(), Puerta.getCACHEO(), getSesion());
+			this.avisosCacheoMaq.addAll(listaAvisosCacheoMaq);
+			readAvisosCacheoMaq = false;
+		}
+		return this.avisosCacheoMaq;
+	}
+		
+	public List getAvisosCacheoGMaq() throws BaseException {
+		if (this.readAvisosCacheoGMaq) {
+			List listaAvisosCacheoGMaq = AvisoCIPGMaquina.getAvisos(getOIDInteger(), Puerta.getCACHEO(), getSesion());
+			this.avisosCacheoGMaq.addAll(listaAvisosCacheoGMaq);
+			readAvisosCacheoGMaq = false;
+		}
+		return this.avisosCacheoGMaq;
+	}
+	
+	public List getAvisosCacheoUsuAD() throws BaseException {
+		if (this.readAvisosCacheoUsuAD) {
+			List listaAvisosCacheoUsu = AvisoCIPUsuario.getAvisos(getOIDInteger(), Puerta.getACCESO_DENEGADO(), getSesion());
+			this.avisosCacheoUsuAD.addAll(listaAvisosCacheoUsu);
+			readAvisosCacheoUsuAD = false;
+		}
+		return this.avisosCacheoUsuAD;
+	}
+	
+	public List getAvisosCacheoGUsuAD() throws BaseException {
+		if (this.readAvisosCacheoGUsuAD) {
+			List listaAvisosCacheoGUsu = AvisoCIPGUsuario.getAvisos(getOIDInteger(), Puerta.getACCESO_DENEGADO(), getSesion());
+			this.avisosCacheoGUsuAD.addAll(listaAvisosCacheoGUsu);
+			readAvisosCacheoGUsuAD = false;
+		}
+		return this.avisosCacheoGUsuAD;
+	}	
+	
+	public List getAvisosCacheoMaqAD() throws BaseException {
+		if (this.readAvisosCacheoMaqAD) {
+			List listaAvisosCacheoMaq = AvisoCIPMaquina.getAvisos(getOIDInteger(), Puerta.getACCESO_DENEGADO(), getSesion());
+			this.avisosCacheoMaqAD.addAll(listaAvisosCacheoMaq);
+			readAvisosCacheoMaqAD = false;
+		}
+		return this.avisosCacheoMaqAD;
+	}	
+	
+	public List getAvisosCacheoGMaqAD() throws BaseException {
+		if (this.readAvisosCacheoGMaqAD) {
+			List listaAvisosCacheoGMaq = AvisoCIPGMaquina.getAvisos(getOIDInteger(), Puerta.getACCESO_DENEGADO(), getSesion());
+			this.avisosCacheoGMaqAD.addAll(listaAvisosCacheoGMaq);
+			readAvisosCacheoGMaqAD = false;
+		}
+		return this.avisosCacheoGMaqAD;
+	}	
+	
+
+	public void addAvisoCacheoUsuario(AvisoCIPUsuario aAvisoCIPUsuario) throws BaseException {
+		aAvisoCIPUsuario.setOid_obj_neg(this.getOIDInteger());
+		this.avisosCacheoUsu.add(aAvisoCIPUsuario);
+	}
+	
+	public void addAvisoUsuarioAD(AvisoCIPUsuario aAvisoCIPUsuario) throws BaseException {
+		aAvisoCIPUsuario.setOid_obj_neg(this.getOIDInteger());
+		this.avisosCacheoUsuAD.add(aAvisoCIPUsuario);
+	}
+	
+	public void addAvisoCacheoMaquina(AvisoCIPMaquina aAvisoCIPMaquina) throws BaseException {
+		aAvisoCIPMaquina.setOid_obj_neg(this.getOIDInteger());
+		this.avisosCacheoMaq.add(aAvisoCIPMaquina);
+	}
+	
+	public void addAvisoMaquinaAD(AvisoCIPMaquina aAvisoCIPMaquina) throws BaseException {
+		aAvisoCIPMaquina.setOid_obj_neg(this.getOIDInteger());
+		this.avisosCacheoMaqAD.add(aAvisoCIPMaquina);
+	}	
+	
+	public void addAvisoCacheoGUsuario(AvisoCIPGUsuario aAvisoCIPGUsuario) throws BaseException {
+		aAvisoCIPGUsuario.setOid_obj_neg(this.getOIDInteger());
+		this.avisosCacheoGUsu.add(aAvisoCIPGUsuario);
+	}
+
+	public void addAvisoGUsuarioAD(AvisoCIPGUsuario aAvisoCIPGUsuario) throws BaseException {
+		aAvisoCIPGUsuario.setOid_obj_neg(this.getOIDInteger());
+		this.avisosCacheoGUsuAD.add(aAvisoCIPGUsuario);
+	}	
+	
+	
+	public void addAvisoCacheoGMaquina(AvisoCIPGMaquina aAvisoCIPGMaquina) throws BaseException {
+		aAvisoCIPGMaquina.setOid_obj_neg(this.getOIDInteger());
+		this.avisosCacheoGMaq.add(aAvisoCIPGMaquina);
+	}
+	
+	public void addAvisoGMaquinaAD(AvisoCIPGMaquina aAvisoCIPGMaquina) throws BaseException {
+		aAvisoCIPGMaquina.setOid_obj_neg(this.getOIDInteger());
+		this.avisosCacheoGMaqAD.add(aAvisoCIPGMaquina);
+	}
+	
+	
+	public boolean isNoPermitirIngresoEnCacheo() throws BaseException {
+		if (this.getIngresoCacheo()==null)
+			return false;
+		else if (this.getIngresoCacheo().equals(Cacheo.CACHEO_NO_ING))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isNoPermitirEgresoEnCacheo() throws BaseException {
+		if (this.getEgresoCacheo()==null)
+			return false;
+		else if (this.getEgresoCacheo().equals(Cacheo.CACHEO_NO_EGR))
+			return true;
+		else
+			return false;
+	}
+	
+	public List getUsuariosAvisoCacheo() throws BaseException {
+		
+		List usuarios = new ArrayList();
+		Iterator iterAvisoCIPUsuario
+			= AvisoCIPUsuario.getAvisos(
+					this.getOIDInteger(), 
+					Puerta.getCACHEO(), 
+					this.getSesion()).iterator();
+		while (iterAvisoCIPUsuario.hasNext()) {
+			AvisoCIPUsuario avisoCIPUsuario = (AvisoCIPUsuario) iterAvisoCIPUsuario.next();
+			usuarios.add(avisoCIPUsuario.getUsuario().getLogin());
+		}
+		
+		Iterator iterGUsu =
+			AvisoCIPGUsuario.getAvisos(
+					this.getOIDInteger(),
+					Puerta.getCACHEO(), 
+					this.getSesion()).iterator();
+		while (iterGUsu.hasNext()) {
+			AvisoCIPGUsuario avisoGUsu = (AvisoCIPGUsuario) iterGUsu.next();
+			Iterator iterDetUsuGru = 
+				avisoGUsu.getGrupo_usuario().getDetUsuGrupo().iterator();
+			while (iterDetUsuGru.hasNext()) {
+				GruDetUsuMens gruDetUsuGru = (GruDetUsuMens) iterDetUsuGru.next();
+				usuarios.add(gruDetUsuGru.getUsuario().getLogin());
+			}
+			
+		}
+		
+		return usuarios;
+	}
+	
+	public List getUsuariosAvisoAccDen() throws BaseException {
+		
+		List usuarios = new ArrayList();
+		Iterator iterAvisoCIPUsuario = AvisoCIPUsuario.getAvisos(
+					this.getOIDInteger(), 
+					Puerta.getACCESO_DENEGADO(), 
+					this.getSesion()).iterator();
+		while (iterAvisoCIPUsuario.hasNext()) {
+			AvisoCIPUsuario avisoCIPUsuario = (AvisoCIPUsuario) iterAvisoCIPUsuario.next();
+			usuarios.add(avisoCIPUsuario.getUsuario().getLogin());
+		}
+		
+		Iterator iterGUsu =
+			AvisoCIPGUsuario.getAvisos(
+					this.getOIDInteger(),
+					Puerta.getACCESO_DENEGADO(), 
+					this.getSesion()).iterator();
+		while (iterGUsu.hasNext()) {
+			AvisoCIPGUsuario avisoGUsu = (AvisoCIPGUsuario) iterGUsu.next();
+			Iterator iterDetUsuGru = 
+				avisoGUsu.getGrupo_usuario().getDetUsuGrupo().iterator();
+			while (iterDetUsuGru.hasNext()) {
+				GruDetUsuMens gruDetUsuGru = (GruDetUsuMens) iterDetUsuGru.next();
+				usuarios.add(gruDetUsuGru.getUsuario().getLogin());
+			}
+			
+		}
+		
+		return usuarios;
+	}
+	
+	
+	public List getMaquinasAvisoCacheo() throws BaseException {
+		
+		List maquinas = new ArrayList();
+		Iterator iterAvisoCIPMaquina
+			= AvisoCIPMaquina.getAvisos(
+					this.getOIDInteger(), 
+					Puerta.getCACHEO(), 
+					this.getSesion()).iterator();
+		while (iterAvisoCIPMaquina.hasNext()) {
+			AvisoCIPMaquina avisoCIPMaquina = (AvisoCIPMaquina) iterAvisoCIPMaquina.next();
+			maquinas.add(avisoCIPMaquina.getMaquina().getNombre().toUpperCase());
+		}
+		
+		Iterator iterGMaq =
+			AvisoCIPGMaquina.getAvisos(
+					this.getOIDInteger(),
+					Puerta.getCACHEO(), 
+					this.getSesion()).iterator();
+		while (iterGMaq.hasNext()) {
+			AvisoCIPGMaquina avisoGMaq = (AvisoCIPGMaquina) iterGMaq.next();
+			Iterator iterDetMaqGru = 
+				avisoGMaq.getGrupo_maquina().getMaquinasDet().iterator();
+			while (iterDetMaqGru.hasNext()) {
+				GrupoMaquinaDet gruMaqDet = (GrupoMaquinaDet) iterDetMaqGru.next();
+				maquinas.add(gruMaqDet.getMaquina().getNombre().toUpperCase());
+			}
+			
+		}
+		
+		return maquinas;
+	}
+	
+	public List getMaquinasAvisoAccDen() throws BaseException {
+		
+		List maquinas = new ArrayList();
+		Iterator iterAvisoCIPMaquina
+			= AvisoCIPMaquina.getAvisos(
+					this.getOIDInteger(), 
+					Puerta.getACCESO_DENEGADO(), 
+					this.getSesion()).iterator();
+		while (iterAvisoCIPMaquina.hasNext()) {
+			AvisoCIPMaquina avisoCIPMaquina = (AvisoCIPMaquina) iterAvisoCIPMaquina.next();
+			maquinas.add(avisoCIPMaquina.getMaquina().getNombre().toUpperCase());
+		}
+		
+		Iterator iterGMaq =
+			AvisoCIPGMaquina.getAvisos(
+					this.getOIDInteger(),
+					Puerta.getACCESO_DENEGADO(), 
+					this.getSesion()).iterator();
+		while (iterGMaq.hasNext()) {
+			AvisoCIPGMaquina avisoGMaq = (AvisoCIPGMaquina) iterGMaq.next();
+			Iterator iterDetMaqGru = 
+				avisoGMaq.getGrupo_maquina().getMaquinasDet().iterator();
+			while (iterDetMaqGru.hasNext()) {
+				GrupoMaquinaDet gruMaqDet = (GrupoMaquinaDet) iterDetMaqGru.next();
+				maquinas.add(gruMaqDet.getMaquina().getNombre().toUpperCase());
+			}
+			
+		}
+		
+		return maquinas;
+	}
+	
+	
+	public List getCategAccesoInternosEntradaLegajo(Legajo legajo) throws BaseException {
+		return CategAccesoPuertaCIP.getCategAccesoEntradaByPuertaLegajo(legajo,this,this.getSesion());
+	}
+
+	public boolean isPerdioConexion(Integer minSinConexion) throws BaseException {
+		Date fechaActual = new Date();
+		Date fechaUltiStatus = this.getFechaDDMMAAHHMMSS(this.getFecHorUltStatus());
+		if (Fecha.fechasDiferenciaEnMinutos(fechaUltiStatus, fechaActual) > minSinConexion) {
+			return true;
+		}
+
+		return false;
+	}
+	
+	private Date getFechaDDMMAAHHMMSS(String fecha) throws BaseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		try {
+			return sdf.parse(fecha);
+		} catch (ParseException ex) {
+			throw new BaseException(ex.getMessage());
+		}
+	}
+	
+
+}

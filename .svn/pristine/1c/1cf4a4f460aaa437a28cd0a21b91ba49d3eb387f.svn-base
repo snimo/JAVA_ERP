@@ -1,0 +1,817 @@
+package com.srn.erp.ventas.op;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import com.srn.erp.general.bm.ComprobanteImpreso;
+import com.srn.erp.general.bm.Empresa;
+import com.srn.erp.general.bm.EtiquetaIdioma;
+import com.srn.erp.general.bm.Idioma;
+import com.srn.erp.general.bm.LabelTranslator;
+import com.srn.erp.general.bm.Sucursal;
+import com.srn.erp.general.bm.ValorClasifEntProdGen;
+import com.srn.erp.ventas.bm.FacturaCab;
+import com.srn.erp.ventas.bm.FacturaDet;
+import com.srn.erp.ventas.bm.ItemFactDetProdGral;
+
+import framework.applicarionServer.bl.Sesion.ISesion;
+import framework.applicarionServer.bm.Parametros.ValorParametro;
+import framework.applicarionServer.bm.Varios.CalculadorMoney;
+import framework.applicarionServer.bm.Varios.Money;
+import framework.applicarionServer.bm.Varios.Porcentaje;
+import framework.request.bl.Operaciones.Operation;
+import framework.request.bl.Tablas.Field;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.HashTableDatos;
+import framework.request.bl.Utils.MapDatos;
+import framework.request.bl.XML.IDataSet;
+import framework.request.bl.XML.TDataSet;
+
+public class ImpresionFactura extends Operation {
+
+	private LabelTranslator lt = null;
+	private int nroRenglon = 1;
+
+	private CalculadorMoney calcAcumcBruto = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumDto = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumRec = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumNeto = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumIVA = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumIVA2 = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumPercIVA = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumImpInt = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumPercIB = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumPercIBBA = new CalculadorMoney(new Money(0));
+	private CalculadorMoney calcAcumTotal = new CalculadorMoney(new Money(0));
+
+	public ImpresionFactura() {
+	}
+
+	public void execute(MapDatos mapaDatos) throws BaseException {
+
+		lt = new LabelTranslator(this.getSesion());
+		lt.setNickName(FacturaCab.NICKNAME);
+		lt.setIdioma(Idioma.getIdiomaLocal(this.getSesion()));
+
+		IDataSet dsFacturaCab = getDataSetFacturaCab();
+		IDataSet dsFacturaDet = getDataSetFacturaDet();
+		IDataSet dsLabels = getDataSetLabels();
+
+		FacturaCab facturaCab = FacturaCab.findByOid(mapaDatos.getInteger("oid_cco"), getSesion());
+
+		if (facturaCab.getSujeto().getIdioma() != null)
+			lt.setIdioma(facturaCab.getSujeto().getIdioma());
+
+		cargarRegistroFacturaCab(dsFacturaCab, facturaCab);
+
+		if ((mapaDatos.containsKey("tipo_impresion")) && (mapaDatos.getString("tipo_impresion") != null) && (mapaDatos.getString("tipo_impresion").equals("PROD_GENERAL"))) {
+
+			HashTableDatos listaItems = new HashTableDatos();
+			Iterator iterDetallesFactura = facturaCab.getItemsFactura().iterator();
+			while (iterDetallesFactura.hasNext()) {
+				FacturaDet facturaDet = (FacturaDet) iterDetallesFactura.next();
+				cargarRegistroFacturaDetProdGral(dsFacturaDet, facturaCab, facturaDet, !iterDetallesFactura.hasNext(), listaItems);
+			}
+
+			List listItemsOrdenada = new ArrayList();
+
+			Iterator iterItemsProdgral = listaItems.values().iterator();
+			while (iterItemsProdgral.hasNext()) {
+				ItemFactDetProdGral itemFactDetProdGral = (ItemFactDetProdGral) iterItemsProdgral.next();
+				listItemsOrdenada.add(itemFactDetProdGral);
+			}
+			Collections.sort(listItemsOrdenada);
+
+			// Recorrer
+			for (int i = 0; i < listItemsOrdenada.size(); ++i) {
+				ItemFactDetProdGral itemFactDetProdGral = (ItemFactDetProdGral) listItemsOrdenada.get(i);
+
+				calcAcumTotal.sumar(itemFactDetProdGral.importe);
+
+				if (i == (listItemsOrdenada.size() - 1)) {
+
+					itemFactDetProdGral.acum_bruto = facturaCab.getImpre_bruto();
+					itemFactDetProdGral.acum_descuento = facturaCab.getImpre_bonif();
+					itemFactDetProdGral.acum_recargo = facturaCab.getImpre_recar();
+					itemFactDetProdGral.acum_neto = facturaCab.getImpre_neto();
+					itemFactDetProdGral.acum_iva = facturaCab.getImpre_iva();
+					itemFactDetProdGral.acum_iva_2 = facturaCab.getImpre_iva2();
+					itemFactDetProdGral.acum_perc_iva = facturaCab.getImpre_perc_iva();
+					itemFactDetProdGral.acum_imp_int = facturaCab.getImpre_imp_int();
+					itemFactDetProdGral.acum_perc_ib = facturaCab.getImpre_perc_ib();
+					itemFactDetProdGral.acum_perc_ib_ba = facturaCab.getImprePercIBBsAs();
+					itemFactDetProdGral.acum_total = facturaCab.getImpre_total();
+					itemFactDetProdGral.subtotal = "";
+
+				} else {
+
+					itemFactDetProdGral.acum_bruto = calcAcumNeto.getResultMoney();
+					itemFactDetProdGral.acum_descuento = calcAcumDto.getResultMoney();
+					itemFactDetProdGral.acum_recargo = calcAcumRec.getResultMoney();
+					itemFactDetProdGral.acum_neto = calcAcumNeto.getResultMoney();
+					itemFactDetProdGral.acum_iva = calcAcumIVA.getResultMoney();
+					itemFactDetProdGral.acum_iva_2 = calcAcumIVA2.getResultMoney();
+					itemFactDetProdGral.acum_perc_iva = calcAcumIVA.getResultMoney();
+					itemFactDetProdGral.acum_imp_int = calcAcumImpInt.getResultMoney();
+					itemFactDetProdGral.acum_perc_ib = calcAcumPercIB.getResultMoney();
+					itemFactDetProdGral.acum_perc_ib_ba = calcAcumPercIBBA.getResultMoney();
+					itemFactDetProdGral.acum_total = calcAcumTotal.getResultMoney();
+					itemFactDetProdGral.subtotal = "Subtotal";
+
+				}
+
+			}
+
+			// Enviar dataset al cliente
+			for (int i = 0; i < listItemsOrdenada.size(); ++i) {
+				ItemFactDetProdGral itemFactDetProdGral = (ItemFactDetProdGral) listItemsOrdenada.get(i);
+				cargarRegistroFacturaDetProdGral(dsFacturaDet, itemFactDetProdGral);
+			}
+
+		} else {
+
+			Iterator iterDetallesFactura = facturaCab.getItemsFactura().iterator();
+			while (iterDetallesFactura.hasNext()) {
+				FacturaDet facturaDet = (FacturaDet) iterDetallesFactura.next();
+				cargarRegistroFacturaDet(dsFacturaDet, facturaCab, facturaDet, !iterDetallesFactura.hasNext());
+			}
+		}
+
+		cargarEtiquetas(dsLabels);
+
+		writeCliente(dsFacturaCab);
+		writeCliente(dsFacturaDet);
+		writeCliente(dsLabels);
+
+	}
+
+	private IDataSet getDataSetFacturaCab() {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TFacturaCab");
+
+		// Datos de la empresa
+		dataset.fieldDef(new Field("empresa_oid", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("empresa_codigo", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_razon_social", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_direccion", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_localidad", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_cp", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_oid_provincia", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("empresa_cod_provincia", Field.STRING, 50));
+		dataset.fieldDef(new Field("empresa_desc_provincia", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_oid_pais", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("empresa_cod_pais", Field.STRING, 50));
+		dataset.fieldDef(new Field("empresa_desc_pais", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_cuit", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_cat_iva", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_nro_ib", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_cat_ib", Field.STRING, 100));
+		dataset.fieldDef(new Field("empresa_incio_act", Field.DATE, 0));
+
+		// Datos de la Sucursal
+		dataset.fieldDef(new Field("sucursal_oid", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("sucursal_codigo", Field.STRING, 100));
+		dataset.fieldDef(new Field("sucursal_razon_social", Field.STRING, 100));
+		dataset.fieldDef(new Field("sucursal_direccion", Field.STRING, 100));
+		dataset.fieldDef(new Field("sucursal_localidad", Field.STRING, 100));
+		dataset.fieldDef(new Field("sucursal_cp", Field.STRING, 100));
+		dataset.fieldDef(new Field("sucursal_oid_provincia", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("sucursal_cod_provincia", Field.STRING, 50));
+		dataset.fieldDef(new Field("sucursal_desc_provincia", Field.STRING, 100));
+		dataset.fieldDef(new Field("sucursal_oid_pais", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("sucursal_cod_pais", Field.STRING, 50));
+		dataset.fieldDef(new Field("sucursal_desc_pais", Field.STRING, 100));
+
+		// Datos de la Sucursal
+
+		dataset.fieldDef(new Field("oid_cco_fact", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_talonario", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cod_tc", Field.STRING, 50));
+		dataset.fieldDef(new Field("oid_tc", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cod_cliente", Field.STRING, 30));
+		dataset.fieldDef(new Field("rz_cliente", Field.STRING, 100));
+		dataset.fieldDef(new Field("letra", Field.STRING, 0));
+		dataset.fieldDef(new Field("lug_emi", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("nro_ext", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("lug_emi_y_nro_ext", Field.STRING, 100));
+		dataset.fieldDef(new Field("oid_cliente", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_moneda", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("desc_moneda", Field.STRING, 50));
+		dataset.fieldDef(new Field("cotizacion", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("mercado", Field.STRING, 1));
+		dataset.fieldDef(new Field("porc_bonif_cli", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("porc_reca_cli", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("bonif_cli_cascada", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("reca_cli_cascada", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("oid_precio_cab", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cod_lp", Field.STRING, 30));
+		dataset.fieldDef(new Field("desc_lp", Field.STRING, 100));
+		dataset.fieldDef(new Field("path_logo_sucursal", Field.STRING, 255));
+		dataset.fieldDef(new Field("oid_cond_pago", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cod_cond_pago", Field.STRING, 30));
+		dataset.fieldDef(new Field("desc_cond_pago", Field.STRING, 100));
+		dataset.fieldDef(new Field("oid_vendedor", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cod_vendedor", Field.STRING, 30));
+		dataset.fieldDef(new Field("desc_vendedor", Field.STRING, 100));
+		dataset.fieldDef(new Field("vendedor_mail", Field.STRING, 100));
+		dataset.fieldDef(new Field("vendedor_telefono", Field.STRING, 100));
+		dataset.fieldDef(new Field("vend_mail_tel", Field.STRING, 255));
+		dataset.fieldDef(new Field("domicilio_fiscal", Field.STRING, 255));
+		dataset.fieldDef(new Field("cat_iva_cliente", Field.STRING, 100));
+		dataset.fieldDef(new Field("nro_cuit_cliente", Field.STRING, 100));
+		dataset.fieldDef(new Field("porc_bonif_cp", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("porc_reca_cp", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("bonif_cp_cascada", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("reca_cp_cascada", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("observado", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("comentario", Field.STRING, 255));
+		dataset.fieldDef(new Field("fec_emision", Field.STRING, 10));
+		dataset.fieldDef(new Field("activo", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("oid_moneda_fact", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_forma_entrega", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("cod_forma_entrega", Field.STRING, 50));
+		dataset.fieldDef(new Field("desc_forma_entrega", Field.STRING, 100));
+		dataset.fieldDef(new Field("orden_compra", Field.STRING, 50));
+		dataset.fieldDef(new Field("remitos_facturados", Field.STRING, 100));
+
+		dataset.fieldDef(new Field("impre_bruto", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_porc_dto", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_descuento", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_porc_recar", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_recargo", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_neto", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_iva", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_perc_iva", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_imp_internos", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_perc_ib", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_perc_ib_ba", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("impre_total", Field.CURRENCY, 0));
+
+		dataset.fieldDef(new Field("label_porc_iva", Field.STRING, 20));
+		dataset.fieldDef(new Field("label_porc_iva_2", Field.STRING, 20));
+		dataset.fieldDef(new Field("label_porc_perc_iva", Field.STRING, 20));
+
+		dataset.fieldDef(new Field("observacion", Field.MEMO, 0));
+		dataset.fieldDef(new Field("leyenda_anulado", Field.STRING, 50));
+		dataset.fieldDef(new Field("codigo_barra", Field.STRING, 200));
+		dataset.fieldDef(new Field("imprimir_leyenda_copia_fiel", Field.BOOLEAN, 0));
+
+		return dataset;
+	}
+
+	private IDataSet getDataSetFacturaDet() {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TFacturaDet");
+		dataset.fieldDef(new Field("nro_renglon", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_fact_det", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_cco_fact", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("oid_art", Field.INTEGER, 0));
+		;
+		dataset.fieldDef(new Field("cod_producto", Field.STRING, 50));
+		;
+		dataset.fieldDef(new Field("desc_producto", Field.STRING, 100));
+		dataset.fieldDef(new Field("oid_um_ori", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("desc_um_ori", Field.STRING, 20));
+		dataset.fieldDef(new Field("cantidad", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("precio", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("precio_lista", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("precio_sugerido", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("precio_bonif", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("importe", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("oid_moneda", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("activo", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("bonif1", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("bonif2", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("bonif3", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("comentario", Field.STRING, 255));
+		dataset.fieldDef(new Field("activo", Field.BOOLEAN, 0));
+		dataset.fieldDef(new Field("oid_conc_imp_iva", Field.INTEGER, 0));
+		;
+		dataset.fieldDef(new Field("oid_conc_imp_perc_iva", Field.INTEGER, 0));
+		;
+		dataset.fieldDef(new Field("oid_conc_imp_int", Field.INTEGER, 0));
+		;
+		dataset.fieldDef(new Field("oid_conc_imp_perc_ib", Field.INTEGER, 0));
+		dataset.fieldDef(new Field("subtotal", Field.STRING, 50));
+
+		dataset.fieldDef(new Field("acum_bruto", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_descuento", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_recargo", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_neto", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_iva", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_iva_2", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_perc_iva", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_imp_int", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_perc_ib", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_perc_ib_ba", Field.CURRENCY, 0));
+		dataset.fieldDef(new Field("acum_total", Field.CURRENCY, 0));
+
+		return dataset;
+	}
+
+	private void enviarDatosEmpresa(IDataSet dataset) throws BaseException {
+
+		Empresa empresa = Empresa.findByOidProxy(this.getSesion().getLogin().getOidEmpresa(), this.getSesion());
+
+		dataset.fieldValue("empresa_oid", empresa.getOIDInteger());
+		dataset.fieldValue("empresa_codigo", empresa.getCodigo());
+		dataset.fieldValue("empresa_razon_social", empresa.getRazon_social());
+		dataset.fieldValue("empresa_direccion", empresa.getCalle_y_nro());
+		dataset.fieldValue("empresa_localidad", empresa.getLocalidad());
+		dataset.fieldValue("empresa_cp", empresa.getCodigo_postal());
+
+		if (empresa.getProvincia() != null) {
+			dataset.fieldValue("empresa_oid_provincia", empresa.getProvincia().getOIDInteger());
+			dataset.fieldValue("empresa_cod_provincia", empresa.getProvincia().getCodigo());
+			dataset.fieldValue("empresa_desc_provincia", empresa.getProvincia().getDescripcion());
+		} else {
+			dataset.fieldValue("empresa_oid_provincia", 0);
+			dataset.fieldValue("empresa_cod_provincia", "");
+			dataset.fieldValue("empresa_desc_provincia", "");
+		}
+
+		if (empresa.getPais() != null) {
+			dataset.fieldValue("empresa_oid_pais", empresa.getPais().getOIDInteger());
+			dataset.fieldValue("empresa_cod_pais", empresa.getPais().getCodigo());
+			dataset.fieldValue("empresa_desc_pais", empresa.getPais().getDescripcion());
+		} else {
+			dataset.fieldValue("empresa_oid_pais", 0);
+			dataset.fieldValue("empresa_cod_pais", "");
+			dataset.fieldValue("empresa_desc_pais", "");
+		}
+
+		dataset.fieldValue("empresa_cuit", empresa.getCuit());
+		if (empresa.getCategoria_iva() != null)
+			dataset.fieldValue("empresa_cat_iva", empresa.getCategoria_iva().getDescripcion());
+		else
+			dataset.fieldValue("empresa_cat_iva", "");
+
+		dataset.fieldValue("empresa_nro_ib", empresa.getNro_ing_brutos());
+		if (empresa.getCategoria_ib() != null)
+			dataset.fieldValue("empresa_cat_ib", empresa.getCategoria_ib().getDescripcion());
+		else
+			dataset.fieldValue("empresa_cat_ib", "");
+
+		dataset.fieldValue("empresa_incio_act", empresa.getInicioActividad());
+
+	}
+
+	private void enviarDatosSucursal(IDataSet dataset) throws BaseException {
+
+		Sucursal sucursal = Sucursal.findByOidProxy(this.getSesion().getLogin().getOidSucursal(), this.getSesion());
+
+		dataset.fieldValue("sucursal_oid", sucursal.getOIDInteger());
+		dataset.fieldValue("sucursal_codigo", sucursal.getCodigo());
+		dataset.fieldValue("sucursal_razon_social", sucursal.getDescripcion());
+		dataset.fieldValue("sucursal_direccion", sucursal.getCalle_y_nro());
+		dataset.fieldValue("sucursal_localidad", sucursal.getLocalidad());
+		dataset.fieldValue("sucursal_cp", sucursal.getCodigo_postal());
+
+		if (sucursal.getProvincia() != null) {
+			dataset.fieldValue("sucursal_oid_provincia", sucursal.getProvincia().getOIDInteger());
+			dataset.fieldValue("sucursal_cod_provincia", sucursal.getProvincia().getCodigo());
+			dataset.fieldValue("sucursal_desc_provincia", sucursal.getProvincia().getDescripcion());
+		} else {
+			dataset.fieldValue("sucursal_oid_provincia", 0);
+			dataset.fieldValue("sucursal_cod_provincia", "");
+			dataset.fieldValue("sucursal_desc_provincia", "");
+		}
+
+		if (sucursal.getPais() != null) {
+			dataset.fieldValue("sucursal_oid_pais", sucursal.getPais().getOIDInteger());
+			dataset.fieldValue("sucursal_cod_pais", sucursal.getPais().getCodigo());
+			dataset.fieldValue("sucursal_desc_pais", sucursal.getPais().getDescripcion());
+		} else {
+			dataset.fieldValue("sucursal_oid_pais", 0);
+			dataset.fieldValue("sucursal_cod_pais", "");
+			dataset.fieldValue("sucursal_desc_pais", "");
+		}
+
+	}
+
+	private void cargarRegistroFacturaCab(IDataSet dataset, FacturaCab facturaCab) throws BaseException {
+		dataset.append();
+
+		enviarDatosEmpresa(dataset);
+		enviarDatosSucursal(dataset);
+
+		dataset.fieldValue("oid_cco_fact", facturaCab.getOIDInteger());
+		dataset.fieldValue("oid_talonario", facturaCab.getTalonario().getOIDInteger());
+		dataset.fieldValue("cod_tc", facturaCab.getTcExt());
+		dataset.fieldValue("oid_tc", facturaCab.getTipoCompro().getOIDInteger());
+		dataset.fieldValue("cod_cliente", facturaCab.getSujeto().getCodigo());
+		dataset.fieldValue("rz_cliente", facturaCab.getSujeto().getRazon_social());
+		dataset.fieldValue("letra", facturaCab.getLetra());
+		dataset.fieldValue("lug_emi", facturaCab.getLugarEmision().getLugemi());
+		dataset.fieldValue("nro_ext", facturaCab.getNroExt());
+		dataset.fieldValue("lug_emi_y_nro_ext", facturaCab.getLugEmiNroExt(facturaCab.getLugarEmision().getLugemi(), facturaCab.getNroExt()));
+		dataset.fieldValue("oid_cliente", facturaCab.getSujeto().getOIDInteger());
+		dataset.fieldValue("oid_moneda", facturaCab.getMoneda().getOIDInteger());
+		dataset.fieldValue("desc_moneda", facturaCab.getMoneda().getDescripcion());
+
+		if (!facturaCab.getMoneda().isMonedaCursoLegal())
+			dataset.fieldValue("cotizacion", facturaCab.getCotizacion().doubleValue());
+		else
+			dataset.fieldValue("cotizacion", "");
+		dataset.fieldValue("mercado", "");
+		dataset.fieldValue("porc_bonif_cli", facturaCab.getPorc_bonif_cli());
+		dataset.fieldValue("porc_reca_cli", facturaCab.getPorc_recar_cli());
+		dataset.fieldValue("bonif_cli_cascada", new Boolean(false));
+		dataset.fieldValue("reca_cli_cascada", new Boolean(false));
+		dataset.fieldValue("oid_precio_cab", facturaCab.getLista_precios().getOIDInteger());
+		dataset.fieldValue("cod_lp", facturaCab.getLista_precios().getCodigo());
+		dataset.fieldValue("desc_lp", facturaCab.getLista_precios().getDescripcion());
+		dataset.fieldValue("path_logo_sucursal", facturaCab.getSucursal().getPathLogo());
+
+		if (facturaCab.getCond_pago() != null) {
+			dataset.fieldValue("oid_cond_pago", facturaCab.getCond_pago().getOIDInteger());
+			dataset.fieldValue("cod_cond_pago", facturaCab.getCond_pago().getCodigo());
+			dataset.fieldValue("desc_cond_pago", facturaCab.getCond_pago().getDescripcion());
+		} else {
+			dataset.fieldValue("oid_cond_pago", 0);
+			dataset.fieldValue("cod_cond_pago", "");
+			dataset.fieldValue("desc_cond_pago", "");
+		}
+
+		// Datos del Vendedor
+
+		dataset.fieldValue("oid_vendedor", facturaCab.getVendedor().getOIDInteger());
+		dataset.fieldValue("cod_vendedor", facturaCab.getVendedor().getCodigo());
+		dataset.fieldValue("desc_vendedor", facturaCab.getVendedor().getNombre() + " " + facturaCab.getVendedor().getApellido());
+		dataset.fieldValue("vendedor_mail", facturaCab.getVendedor().getMail());
+		dataset.fieldValue("vendedor_telefono", facturaCab.getVendedor().getTelefono());
+
+		StringBuffer vendMailTel = new StringBuffer("");
+		if (facturaCab.getVendedor() != null)
+			vendMailTel.append(facturaCab.getVendedor().getNombreyApellido());
+
+		if ((facturaCab.getVendedor() != null) && (facturaCab.getVendedor().getMail() != null) && (facturaCab.getVendedor().getMail().length() > 0)) {
+			if (vendMailTel.toString().length() > 0)
+				vendMailTel.append(" ");
+			vendMailTel.append(facturaCab.getVendedor().getMail());
+		}
+
+		if ((facturaCab.getVendedor() != null) && (facturaCab.getVendedor().getTelefono() != null) && (facturaCab.getVendedor().getTelefono().length() > 0)) {
+			if (vendMailTel.toString().length() > 0)
+				vendMailTel.append(" ");
+			vendMailTel.append(facturaCab.getVendedor().getTelefono());
+		}
+
+		dataset.fieldValue("vend_mail_tel", vendMailTel.toString());
+
+		dataset.fieldValue("domicilio_fiscal", facturaCab.getSujeto().getDireccionCompleta());
+		if ((facturaCab.getSujeto().getSujeto_impositivo() != null) && (facturaCab.getSujeto().getSujeto_impositivo().getCategiva() != null))
+			dataset.fieldValue("cat_iva_cliente", facturaCab.getSujeto().getSujeto_impositivo().getCategiva().getDescripcion());
+		else
+			dataset.fieldValue("cat_iva_cliente", "");
+
+		if (facturaCab.getSujeto().getSujeto_impositivo() != null)
+			dataset.fieldValue("nro_cuit_cliente", facturaCab.getSujeto().getSujeto_impositivo().getCUITFormateado());
+		else
+			dataset.fieldValue("nro_cuit_cliente", "");
+
+		dataset.fieldValue("porc_bonif_cp", facturaCab.getPorc_bonif_cp());
+		dataset.fieldValue("porc_reca_cp", facturaCab.getPorc_recar_cp());
+		dataset.fieldValue("bonif_cp_cascada", new Boolean(false));
+		dataset.fieldValue("reca_cp_cascada", new Boolean(false));
+		dataset.fieldValue("observado", new Boolean(false));
+		dataset.fieldValue("comentario", facturaCab.getComentario());
+		dataset.fieldValue("fec_emision", facturaCab.getEmision());
+		dataset.fieldValue("activo", facturaCab.isActivo());
+		dataset.fieldValue("oid_moneda_fact", facturaCab.getMoneda().getOIDInteger());
+
+		dataset.fieldValue("oid_forma_entrega", new Integer(0));
+		dataset.fieldValue("cod_forma_entrega", "");
+		dataset.fieldValue("desc_forma_entrega", "");
+
+		dataset.fieldValue("orden_compra", facturaCab.getOC());
+		dataset.fieldValue("remitos_facturados", facturaCab.getRemitosFacturados());
+
+		dataset.fieldValue("impre_bruto", facturaCab.getImpre_bruto());
+		dataset.fieldValue("impre_porc_dto", facturaCab.getImprePorcBonif());
+		dataset.fieldValue("impre_descuento", facturaCab.getImpre_bonif());
+		dataset.fieldValue("impre_porc_recar", facturaCab.getImprePorcRecar());
+		dataset.fieldValue("impre_recargo", facturaCab.getImpre_recar());
+		dataset.fieldValue("impre_neto", facturaCab.getImpre_neto());
+		dataset.fieldValue("impre_iva", facturaCab.getImpre_iva());
+		dataset.fieldValue("impre_perc_iva", facturaCab.getImpre_perc_iva());
+		dataset.fieldValue("impre_imp_internos", facturaCab.getImpre_imp_int());
+		dataset.fieldValue("impre_perc_ib", facturaCab.getImpre_perc_ib());
+		dataset.fieldValue("impre_perc_ib_ba", facturaCab.getImprePercIBBsAs());
+		dataset.fieldValue("impre_total", facturaCab.getImpre_total());
+
+		if ((facturaCab.getConcImpuIVA() != null) && (facturaCab.getConcImpuIVA().getColumnalibroiva() != null))
+			dataset.fieldValue("label_porc_iva", facturaCab.getConcImpuIVA().getColumnalibroiva().getDescripcion());
+		else
+			dataset.fieldValue("label_porc_iva", "");
+
+		if ((facturaCab.getConcImpuIVA2() != null) && (facturaCab.getConcImpuIVA2().getColumnalibroiva() != null))
+			dataset.fieldValue("label_porc_iva_2", facturaCab.getConcImpuIVA2().getColumnalibroiva().getDescripcion());
+		else
+			dataset.fieldValue("label_porc_iva_2", "");
+
+		if ((facturaCab.getConcImpuPercIVA() != null) && (facturaCab.getConcImpuPercIVA().getColumnalibroiva() != null))
+			dataset.fieldValue("label_porc_perc_iva", facturaCab.getConcImpuPercIVA().getColumnalibroiva().getDescripcion());
+		else
+			dataset.fieldValue("label_porc_perc_iva", "");
+
+		dataset.fieldValue("observacion", facturaCab.getComentario());
+		if (facturaCab.isActivo().booleanValue() == false)
+			dataset.fieldValue("leyenda_anulado", "ANULADO");
+		else
+			dataset.fieldValue("leyenda_anulado", "");
+		Empresa empresa = Empresa.findByOidProxy(this.getSesion().getLogin().getOidEmpresa(), this.getSesion());
+		dataset.fieldValue("codigo_barra", facturaCab.getTalonario().getCodigoBarraImpresionFactura(empresa.getCuit()));
+		ComprobanteImpreso comproImpreso = facturaCab.getComprobanteImpreso();
+		if ((comproImpreso != null) && (comproImpreso.isImpre_generada() != null) && (comproImpreso.isImpre_generada().booleanValue()))
+			dataset.fieldValue("imprimir_leyenda_copia_fiel", true);
+		else
+			dataset.fieldValue("imprimir_leyenda_copia_fiel", false);
+
+	}
+
+	private void cargarRegistroFacturaDetProdGral(IDataSet dataset, FacturaCab facturaCab, FacturaDet facturaDet, boolean esUltimoItem, HashTableDatos listaItems) throws BaseException {
+
+		if (facturaDet.isAnulado().booleanValue())
+			return;
+
+		// Determinar el Oid del Producto
+		String oidProducto = "";
+		String codProducto = "";
+		String descProducto = "";
+		String observacion = "";
+		Integer oidUmOri = new Integer(0);
+		Money precio = new Money(0);
+		Money precioLista = new Money(0);
+		Money precioSugerido = new Money(0);
+		Money precioBonif = new Money(0);
+		Money importe = new Money(0);
+		Porcentaje bonif1 = new Porcentaje(0);
+		Porcentaje bonif2 = new Porcentaje(0);
+		Porcentaje bonif3 = new Porcentaje(0);
+		Integer oidConcImpIVA = new Integer(0);
+		Integer oidConcPercIVA = new Integer(0);
+		Integer oidConcImpInt = new Integer(0);
+		Integer oidConcPercIB = new Integer(0);
+
+		ValorClasifEntProdGen ValorClasifEntProdGen = facturaDet.getProducto().getValorClasifProdGen();
+
+		if (ValorClasifEntProdGen != null) {
+			oidProducto = "PG_" + ValorClasifEntProdGen.getOIDInteger();
+			descProducto = ValorClasifEntProdGen.getDescripcion();
+			codProducto = ValorClasifEntProdGen.getCodigo();
+		} else {
+			oidProducto = "PS_" + facturaDet.getProducto().getOID();
+			descProducto = facturaDet.getProducto().getDescripcion();
+			codProducto = facturaDet.getProducto().getCodigo();
+		}
+
+		if (facturaDet.getComentario() != null)
+			observacion = facturaDet.getComentario();
+
+		oidUmOri = facturaDet.getUnidad_medida().getOIDInteger();
+
+		if (facturaDet.getPrecio_ingresado() != null)
+			precio = facturaDet.getPrecio_ingresado();
+
+		if (facturaDet.getPrecio_lista() != null)
+			precioLista = facturaDet.getPrecio_lista();
+
+		if (facturaDet.getPrecio_sugerido() != null)
+			precioSugerido = facturaDet.getPrecio_sugerido();
+
+		if (facturaDet.getPrecio_bonificado() != null)
+			precioBonif = facturaDet.getPrecio_bonificado();
+
+		if (facturaDet.getImporte() != null)
+			importe = facturaDet.getImporte();
+
+		if (facturaDet.getPorc_bonif_1() != null)
+			bonif1 = facturaDet.getPorc_bonif_1();
+		if (facturaDet.getPorc_bonif_2() != null)
+			bonif2 = facturaDet.getPorc_bonif_2();
+		if (facturaDet.getPorc_bonif_3() != null)
+			bonif3 = facturaDet.getPorc_bonif_3();
+
+		if (facturaDet.getConcImpuIVA() != null)
+			oidConcImpIVA = facturaDet.getConcImpuIVA().getOIDInteger();
+
+		if (facturaDet.getConcImpuPercIVA() != null)
+			oidConcPercIVA = facturaDet.getConcImpuPercIVA().getOIDInteger();
+
+		if (facturaDet.getConcImpuInt() != null)
+			oidConcImpInt = facturaDet.getConcImpuInt().getOIDInteger();
+
+		if (facturaDet.getConcImpuPercIB() != null)
+			oidConcPercIB = facturaDet.getConcImpuPercIB().getOIDInteger();
+
+		String clave = ItemFactDetProdGral.getClave(oidProducto, observacion, oidUmOri, precio, precioLista, precioSugerido, precioBonif, bonif1, bonif2, bonif3, oidConcImpIVA, oidConcPercIB,
+				oidConcImpInt, oidConcPercIB);
+
+		ItemFactDetProdGral itemFactDetProdGral = (ItemFactDetProdGral) listaItems.get(clave);
+		if (itemFactDetProdGral == null) {
+
+			itemFactDetProdGral = new ItemFactDetProdGral();
+			itemFactDetProdGral.nro_renglon = nroRenglon;
+			itemFactDetProdGral.oid_fact_det = nroRenglon;
+			itemFactDetProdGral.oid_cco_fact = facturaCab.getOIDInteger();
+			itemFactDetProdGral.oid_art = facturaDet.getProducto().getOID();
+			itemFactDetProdGral.cod_producto = codProducto;
+			itemFactDetProdGral.desc_producto = descProducto;
+			itemFactDetProdGral.oid_um_ori = oidUmOri;
+			itemFactDetProdGral.desc_um_ori = facturaDet.getUnidad_medida().getLabelImpresion();
+
+			itemFactDetProdGral.precio = precio;
+			itemFactDetProdGral.precio_lista = precioLista;
+			itemFactDetProdGral.precio_sugerido = precioSugerido;
+			itemFactDetProdGral.precio_bonif = precioBonif;
+
+			itemFactDetProdGral.oid_moneda = facturaDet.getComprocab().getMoneda().getOIDInteger();
+			itemFactDetProdGral.activo = true;
+			itemFactDetProdGral.bonif1 = bonif1;
+			itemFactDetProdGral.bonif2 = bonif2;
+			itemFactDetProdGral.bonif3 = bonif3;
+			itemFactDetProdGral.comentario = observacion;
+			itemFactDetProdGral.oid_conc_imp_iva = oidConcImpIVA;
+			itemFactDetProdGral.oid_conc_imp_perc_iva = oidConcPercIVA;
+			itemFactDetProdGral.oid_conc_imp_int = oidConcImpInt;
+			itemFactDetProdGral.oid_conc_imp_perc_ib = oidConcPercIB;
+
+			itemFactDetProdGral.cantidad = new Money(facturaDet.getCantidad());
+			itemFactDetProdGral.importe = facturaDet.getImporte();
+
+			++nroRenglon;
+
+			listaItems.put(clave, itemFactDetProdGral);
+
+		} else {
+
+			CalculadorMoney acumCant = new CalculadorMoney(itemFactDetProdGral.cantidad);
+			acumCant.sumar(new Money(facturaDet.getCantidad()));
+			itemFactDetProdGral.cantidad = acumCant.getResultMoney();
+
+			CalculadorMoney acumImporte = new CalculadorMoney(itemFactDetProdGral.importe);
+			acumImporte.sumar(facturaDet.getImporte());
+			itemFactDetProdGral.importe = acumImporte.getResultMoney();
+
+		}
+
+	}
+
+	private void cargarRegistroFacturaDetProdGral(IDataSet dataset, ItemFactDetProdGral aItemFactDetProdGral) throws BaseException {
+
+		dataset.append();
+		dataset.fieldValue("nro_renglon", aItemFactDetProdGral.nro_renglon);
+		dataset.fieldValue("oid_fact_det", aItemFactDetProdGral.oid_fact_det);
+		dataset.fieldValue("oid_cco_fact", aItemFactDetProdGral.oid_cco_fact);
+		dataset.fieldValue("oid_art", aItemFactDetProdGral.oid_art);
+		dataset.fieldValue("cod_producto", aItemFactDetProdGral.cod_producto);
+		dataset.fieldValue("desc_producto", aItemFactDetProdGral.desc_producto);
+		dataset.fieldValue("oid_um_ori", aItemFactDetProdGral.oid_um_ori);
+		dataset.fieldValue("desc_um_ori", aItemFactDetProdGral.desc_um_ori);
+		dataset.fieldValue("cantidad", aItemFactDetProdGral.cantidad);
+		dataset.fieldValue("precio", aItemFactDetProdGral.precio);
+		dataset.fieldValue("precio_lista", aItemFactDetProdGral.precio_lista);
+		dataset.fieldValue("precio_sugerido", aItemFactDetProdGral.precio_sugerido);
+		dataset.fieldValue("precio_bonif", aItemFactDetProdGral.precio_bonif);
+		dataset.fieldValue("importe", aItemFactDetProdGral.importe);
+		dataset.fieldValue("oid_moneda", aItemFactDetProdGral.oid_moneda);
+		dataset.fieldValue("activo", true);
+		dataset.fieldValue("bonif1", aItemFactDetProdGral.bonif1);
+		dataset.fieldValue("bonif2", aItemFactDetProdGral.bonif2);
+		dataset.fieldValue("bonif3", aItemFactDetProdGral.bonif3);
+		dataset.fieldValue("comentario", aItemFactDetProdGral.comentario);
+		dataset.fieldValue("activo", true);
+		dataset.fieldValue("oid_conc_imp_iva", aItemFactDetProdGral.oid_conc_imp_iva);
+		dataset.fieldValue("oid_conc_imp_perc_iva", aItemFactDetProdGral.oid_conc_imp_perc_iva);
+		dataset.fieldValue("oid_conc_imp_int", aItemFactDetProdGral.oid_conc_imp_int);
+		dataset.fieldValue("oid_conc_imp_perc_ib", aItemFactDetProdGral.oid_conc_imp_perc_ib);
+		dataset.fieldValue("subtotal", aItemFactDetProdGral.subtotal);
+
+		dataset.fieldValue("acum_bruto", aItemFactDetProdGral.acum_bruto);
+		dataset.fieldValue("acum_descuento", aItemFactDetProdGral.acum_descuento);
+		dataset.fieldValue("acum_recargo", aItemFactDetProdGral.acum_recargo);
+		dataset.fieldValue("acum_neto", aItemFactDetProdGral.acum_neto);
+		dataset.fieldValue("acum_iva", aItemFactDetProdGral.acum_iva);
+		dataset.fieldValue("acum_iva_2", aItemFactDetProdGral.acum_iva_2);
+		dataset.fieldValue("acum_perc_iva", aItemFactDetProdGral.acum_perc_iva);
+		dataset.fieldValue("acum_imp_int", aItemFactDetProdGral.acum_imp_int);
+		dataset.fieldValue("acum_perc_ib", aItemFactDetProdGral.acum_perc_ib);
+		dataset.fieldValue("acum_perc_ib_ba", aItemFactDetProdGral.acum_perc_ib_ba);
+		dataset.fieldValue("acum_total", aItemFactDetProdGral.acum_total);
+
+	}
+
+	private void cargarRegistroFacturaDet(IDataSet dataset, FacturaCab facturaCab, FacturaDet facturaDet, boolean esUltimoItem) throws BaseException {
+
+		if (facturaDet.isAnulado().booleanValue())
+			return;
+
+		++nroRenglon;
+		dataset.append();
+		dataset.fieldValue("nro_renglon", nroRenglon);
+		dataset.fieldValue("oid_fact_det", facturaDet.getOIDInteger());
+		dataset.fieldValue("oid_cco_fact", facturaCab.getOIDInteger());
+		dataset.fieldValue("oid_art", facturaDet.getProducto().getOIDInteger());
+		dataset.fieldValue("cod_producto", facturaDet.getProducto().getCodigo());
+		dataset.fieldValue("desc_producto", facturaDet.getProducto().getDescripcion());
+		dataset.fieldValue("oid_um_ori", facturaDet.getUnidad_medida().getOIDInteger());
+		dataset.fieldValue("desc_um_ori", facturaDet.getUnidad_medida().getLabelImpresion());
+		dataset.fieldValue("cantidad", facturaDet.getCantidad());
+		dataset.fieldValue("precio", facturaDet.getPrecio_ingresado());
+		dataset.fieldValue("precio_lista", facturaDet.getPrecio_lista());
+		dataset.fieldValue("precio_sugerido", facturaDet.getPrecio_sugerido());
+		dataset.fieldValue("precio_bonif", facturaDet.getPrecio_bonificado());
+		dataset.fieldValue("importe", facturaDet.getImporte());
+		dataset.fieldValue("oid_moneda", facturaDet.getComprocab().getMoneda().getOIDInteger());
+		dataset.fieldValue("activo", facturaDet.isActivo());
+		dataset.fieldValue("bonif1", facturaDet.getPorc_bonif_1());
+		dataset.fieldValue("bonif2", facturaDet.getPorc_bonif_2());
+		dataset.fieldValue("bonif3", facturaDet.getPorc_bonif_3());
+		dataset.fieldValue("comentario", facturaDet.getComentario());
+		dataset.fieldValue("activo", new Boolean(true));
+
+		if (facturaDet.getConcImpuIVA() != null)
+			dataset.fieldValue("oid_conc_imp_iva", facturaDet.getConcImpuIVA().getOIDInteger());
+		else
+			dataset.fieldValue("oid_conc_imp_iva", new Integer(0));
+		if (facturaDet.getConcImpuPercIVA() != null)
+			dataset.fieldValue("oid_conc_imp_perc_iva", facturaDet.getConcImpuPercIVA().getOIDInteger());
+		else
+			dataset.fieldValue("oid_conc_imp_perc_iva", new Integer(0));
+		if (facturaDet.getConcImpuInt() != null)
+			dataset.fieldValue("oid_conc_imp_int", facturaDet.getConcImpuInt().getOIDInteger());
+		else
+			dataset.fieldValue("oid_conc_imp_int", new Integer(0));
+		if (facturaDet.getConcImpuPercIB() != null)
+			dataset.fieldValue("oid_conc_imp_perc_ib", facturaDet.getConcImpuPercIB().getOIDInteger());
+		else
+			dataset.fieldValue("oid_conc_imp_perc_ib", new Integer(0));
+		
+		calcAcumTotal.sumar(facturaDet.getImporte());
+
+		if (esUltimoItem) {
+			dataset.fieldValue("subtotal", "");
+			dataset.fieldValue("acum_bruto", facturaCab.getImpre_bruto());
+			dataset.fieldValue("acum_descuento", facturaCab.getImpre_bonif());
+			dataset.fieldValue("acum_recargo", facturaCab.getImpre_recar());
+			dataset.fieldValue("acum_neto", facturaCab.getImpre_neto());
+			dataset.fieldValue("acum_iva", facturaCab.getImpre_iva());
+			dataset.fieldValue("acum_iva_2", facturaCab.getImpre_iva2());
+			dataset.fieldValue("acum_perc_iva", facturaCab.getImpre_perc_iva());
+			dataset.fieldValue("acum_imp_int", facturaCab.getImpre_imp_int());
+			dataset.fieldValue("acum_perc_ib", facturaCab.getImpre_perc_ib());
+			dataset.fieldValue("acum_perc_ib_ba", facturaCab.getImprePercIBBsAs());
+			dataset.fieldValue("acum_total", facturaCab.getImpre_total());
+
+		} else {
+			dataset.fieldValue("subtotal", "Subtotal");
+			dataset.fieldValue("acum_bruto", calcAcumNeto.getResultMoney());
+			dataset.fieldValue("acum_descuento", calcAcumDto.getResultMoney());
+			dataset.fieldValue("acum_recargo", calcAcumRec.getResultMoney());
+			dataset.fieldValue("acum_neto", calcAcumNeto.getResultMoney());
+			dataset.fieldValue("acum_iva", calcAcumIVA.getResultMoney());
+			dataset.fieldValue("acum_iva_2", calcAcumIVA2.getResultMoney());
+			dataset.fieldValue("acum_perc_iva", calcAcumIVA.getResultMoney());
+			dataset.fieldValue("acum_imp_int", calcAcumImpInt.getResultMoney());
+			dataset.fieldValue("acum_perc_ib", calcAcumPercIB.getResultMoney());
+			dataset.fieldValue("acum_perc_ib_ba", calcAcumPercIBBA.getResultMoney());
+			dataset.fieldValue("acum_total", calcAcumTotal.getResultMoney());
+		}
+
+	}
+
+	private void cargarEtiquetas(IDataSet ds) throws BaseException {
+		Iterator iterEtiquetas = EtiquetaIdioma.getEtiquetasComprobante(FacturaCab.NICKNAME, this.getSesion()).iterator();
+		while (iterEtiquetas.hasNext()) {
+			EtiquetaIdioma etiquetaIdioma = (EtiquetaIdioma) iterEtiquetas.next();
+			String descripcion = lt.getEtiqueta(etiquetaIdioma.getEtiqueta());
+			cargarEtiqueta(ds, etiquetaIdioma.getEtiqueta(), descripcion);
+		}
+	}
+
+	private void cargarEtiqueta(IDataSet ds, String etiqueta, String descripcion) throws BaseException {
+		ds.append();
+		ds.fieldValue("etiqueta", etiqueta);
+		ds.fieldValue("descripcion", descripcion);
+	}
+
+	private IDataSet getDataSetLabels() throws BaseException {
+		IDataSet dataset = new TDataSet();
+		dataset.create("TLabels");
+		dataset.fieldDef(new Field("etiqueta", Field.STRING, 100));
+		dataset.fieldDef(new Field("descripcion", Field.MEMO, 0));
+		return dataset;
+	}
+
+	public static boolean isCheckErrorImpFiscal(ISesion aSesion) throws BaseException {
+		return ValorParametro.findByCodigoParametro("ACT_CHECK_ERROR_FISCAL_PTO_VTA", aSesion).getBoolean();
+	}
+
+	public static boolean isActivarLogImpFiscal(ISesion aSesion) throws BaseException {
+		return ValorParametro.findByCodigoParametro("ACT_LOGIMP_FISCAL_PTO_VTA", aSesion).getBoolean();
+	}
+
+}

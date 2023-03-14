@@ -1,0 +1,931 @@
+package com.srn.erp.ventas.bm;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Iterator;
+import java.util.List;
+
+import com.srn.erp.compras.bm.OrdenDeCompraDet;
+import com.srn.erp.general.bm.Moneda;
+import com.srn.erp.impuestos.bm.ConceptoImpuesto;
+import com.srn.erp.stock.bm.Deposito;
+import com.srn.erp.stock.bm.Producto;
+import com.srn.erp.stock.bm.UnidadMedida;
+import com.srn.erp.ventas.da.DBPedidoDet;
+
+import framework.applicarionServer.bl.ObjetosAplicacion.ObjetoLogico;
+import framework.applicarionServer.bl.Sesion.ISesion;
+import framework.applicarionServer.bl.Utils.Util;
+import framework.applicarionServer.bm.Varios.CalculadorMoney;
+import framework.applicarionServer.bm.Varios.Decimal;
+import framework.applicarionServer.bm.Varios.Money;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.ExceptionValidation;
+import framework.request.bl.Utils.Validar;
+
+public class PedidoDet extends ObjetoLogico {
+
+	public PedidoDet() {
+	}
+
+	public static String NICKNAME = "ve.PedidoDet";
+
+	private PedidoCab pedido;
+
+	private Producto producto;
+
+	private UnidadMedida uni_med_ori;
+
+	private Decimal cant_um_ori;
+
+	private Decimal cant_um_ori_res;
+
+	private Decimal cant_um_ori_sep;
+
+	private Decimal cant_um_ori_desp;
+
+	private Decimal cant_um_ori_ent;
+
+	private Decimal cant_um_ori_fact;
+
+	private Decimal cant_um_ori_nc;
+
+	private Money precio;
+
+	private Money precio_bonif;
+
+	private Money precio_lista;
+
+	private Moneda moneda;
+
+	private Boolean anulado;
+
+	private Decimal bonif1;
+
+	private Decimal bonif2;
+
+	private Decimal bonif3;
+
+	private Decimal bonif4;
+
+	private Decimal bonif5;
+
+	private Decimal bonif6;
+
+	private Decimal bonif7;
+
+	private Decimal bonif8;
+
+	private Decimal bonif9;
+
+	private java.util.Date fecEntrega;
+
+	private String comentario;
+
+	private Boolean pendEnt;
+
+	private Boolean pendDesp;
+
+	private Boolean pendFact;
+
+	private Integer nroRenglon;
+
+	private Money importe;
+
+	private Money dto_recar;
+
+	private Money impre_precio;
+
+	private Money impre_bonif;
+
+	private Money impre_recar;
+
+	private Money impre_precio_bonif;
+
+	private Money impre_importe;
+
+	private ConceptoImpuesto concImpuIVA;
+
+	private ConceptoImpuesto concImpuPercIVA;
+
+	private ConceptoImpuesto concImpuInt;
+
+	private ConceptoImpuesto concImpuPercIB;
+
+	private Money netoGravado;
+
+	private Money netoNoGravado;
+
+	private Money precioSugerido;
+	
+	private Boolean noFacturar;
+	
+	private boolean marcarEntregadoSiDespMenorAFact = false;
+
+	public void setPendEnt(Boolean aPendEnt) {
+		this.pendEnt = aPendEnt;
+	}
+
+	public Boolean isPendEnt() throws BaseException {
+		supportRefresh();
+		return pendEnt;
+	}
+	
+	public void setNoFacturar(Boolean aNoFacturar) {
+		this.noFacturar = aNoFacturar;
+	}
+
+	public Boolean isNoFacturar() throws BaseException {
+		supportRefresh();
+		if (noFacturar == null)
+			return false;
+		else
+			return this.noFacturar;
+	}
+	
+
+	public void setPrecioSugerido(Money aPrecioSugerido) {
+		this.precioSugerido = aPrecioSugerido;
+	}
+
+	public Money getPrecioSugerido() throws BaseException {
+		supportRefresh();
+		return this.precioSugerido;
+	}
+
+	public void setPendDesp(Boolean aPendDesp) {
+		this.pendDesp = aPendDesp;
+	}
+
+	public Boolean isPendDesp() throws BaseException {
+		supportRefresh();
+		return pendDesp;
+	}
+
+	public void setPendFact(Boolean aPendFact) {
+		this.pendFact = aPendFact;
+	}
+
+	public Boolean isPendFact() throws BaseException {
+		supportRefresh();
+		return pendFact;
+	}
+
+	public void setFecEntrega(java.util.Date aFecha) throws BaseException {
+		this.fecEntrega = aFecha;
+	}
+
+	public java.util.Date getFechaEntrega() throws BaseException {
+		supportRefresh();
+		return fecEntrega;
+	}
+
+	public void setNroRenglon(Integer aNroRenglon) throws BaseException {
+		this.nroRenglon = aNroRenglon;
+	}
+
+	public Integer getNroRenglon() throws BaseException {
+		supportRefresh();
+		return nroRenglon;
+	}
+
+	public void setComentario(String aComentario) throws BaseException {
+		this.comentario = aComentario;
+	}
+
+	public String getComentario() throws BaseException {
+		supportRefresh();
+		return comentario;
+	}
+
+	public PedidoCab getPedido() throws BaseException {
+		supportRefresh();
+		return pedido;
+	}
+
+	public void setPedido(PedidoCab aPedido) {
+		this.pedido = aPedido;
+	}
+
+	public Producto getProducto() throws BaseException {
+		supportRefresh();
+		return producto;
+	}
+
+	public void setProducto(Producto aProducto) {
+		this.producto = aProducto;
+	}
+
+	public UnidadMedida getUni_med_ori() throws BaseException {
+		supportRefresh();
+		return uni_med_ori;
+	}
+
+	public void setUni_med_ori(UnidadMedida aUni_med_ori) {
+		this.uni_med_ori = aUni_med_ori;
+	}
+
+	public Decimal getCant_um_ori() throws BaseException {
+		supportRefresh();
+		return cant_um_ori;
+	}
+
+	public void setCant_um_ori(Decimal aCant_um_ori) {
+		this.cant_um_ori = aCant_um_ori;
+	}
+
+	public Decimal getCant_um_ori_res() throws BaseException {
+		supportRefresh();
+		return cant_um_ori_res;
+	}
+
+	public void setCant_um_ori_res(Decimal aCant_um_ori_res) {
+		this.cant_um_ori_res = aCant_um_ori_res;
+	}
+
+	public Decimal getCant_um_ori_sep() throws BaseException {
+		supportRefresh();
+		return cant_um_ori_sep;
+	}
+
+	public void setCant_um_ori_sep(Decimal aCant_um_ori_sep) {
+		this.cant_um_ori_sep = aCant_um_ori_sep;
+	}
+
+	public Decimal getCant_um_ori_desp() throws BaseException {
+		supportRefresh();
+		return cant_um_ori_desp;
+	}
+
+	public void setCant_um_ori_desp(Decimal aCant_um_ori_desp) {
+		this.cant_um_ori_desp = aCant_um_ori_desp;
+	}
+
+	public Decimal getCant_um_ori_ent() throws BaseException {
+		supportRefresh();
+		return cant_um_ori_ent;
+	}
+
+	public void setCant_um_ori_ent(Decimal aCant_um_ori_ent) {
+		this.cant_um_ori_ent = aCant_um_ori_ent;
+	}
+
+	public Decimal getCant_um_ori_fact() throws BaseException {
+		supportRefresh();
+		return cant_um_ori_fact;
+	}
+
+	public void setCant_um_ori_fact(Decimal aCant_um_ori_fact) {
+		this.cant_um_ori_fact = aCant_um_ori_fact;
+	}
+
+	public Decimal getCant_um_ori_nc() throws BaseException {
+		supportRefresh();
+		return this.cant_um_ori_nc;
+	}
+
+	public void setCant_um_ori_nc(Decimal aCant_um_ori_nc) {
+		this.cant_um_ori_nc = aCant_um_ori_nc;
+	}
+
+	public Money getPrecio() throws BaseException {
+		supportRefresh();
+		return precio;
+	}
+
+	public void setPrecio(Money aPrecio) {
+		this.precio = aPrecio;
+	}
+
+	public Money getPrecio_bonif() throws BaseException {
+		supportRefresh();
+		return precio_bonif;
+	}
+
+	public void setPrecio_bonif(Money aPrecio_bonif) {
+		this.precio_bonif = aPrecio_bonif;
+	}
+
+	public Money getPrecio_lista() throws BaseException {
+		supportRefresh();
+		return precio_lista;
+	}
+
+	public void setPrecio_lista(Money aPrecio_lista) {
+		this.precio_lista = aPrecio_lista;
+	}
+
+	public Moneda getMoneda() throws BaseException {
+		supportRefresh();
+		return moneda;
+	}
+
+	public void setMoneda(Moneda aMoneda) {
+		this.moneda = aMoneda;
+	}
+
+	public Boolean isAnulado() throws BaseException {
+		supportRefresh();
+		return anulado;
+	}
+
+	public void setAnulado(Boolean aAnulado) {
+		this.anulado = aAnulado;
+	}
+
+	public Decimal getBonif1() throws BaseException {
+		supportRefresh();
+		return bonif1;
+	}
+
+	public void setBonif1(Decimal aBonif1) {
+		this.bonif1 = aBonif1;
+	}
+
+	public Decimal getBonif2() throws BaseException {
+		supportRefresh();
+		return bonif2;
+	}
+
+	public void setBonif2(Decimal aBonif2) {
+		this.bonif2 = aBonif2;
+	}
+
+	public Decimal getBonif3() throws BaseException {
+		supportRefresh();
+		return bonif3;
+	}
+
+	public void setBonif3(Decimal aBonif3) {
+		this.bonif3 = aBonif3;
+	}
+
+	public Decimal getBonif4() throws BaseException {
+		supportRefresh();
+		return bonif4;
+	}
+
+	public void setBonif4(Decimal aBonif4) {
+		this.bonif4 = aBonif4;
+	}
+
+	public Decimal getBonif5() throws BaseException {
+		supportRefresh();
+		return bonif5;
+	}
+
+	public void setBonif5(Decimal aBonif5) {
+		this.bonif5 = aBonif5;
+	}
+
+	public Decimal getBonif6() throws BaseException {
+		supportRefresh();
+		return bonif6;
+	}
+
+	public void setBonif6(Decimal aBonif6) {
+		this.bonif6 = aBonif6;
+	}
+
+	public Decimal getBonif7() throws BaseException {
+		supportRefresh();
+		return bonif7;
+	}
+
+	public void setBonif7(Decimal aBonif7) {
+		this.bonif7 = aBonif7;
+	}
+
+	public Decimal getBonif8() throws BaseException {
+		supportRefresh();
+		return bonif8;
+	}
+
+	public void setBonif8(Decimal aBonif8) {
+		this.bonif8 = aBonif8;
+	}
+
+	public Decimal getBonif9() throws BaseException {
+		supportRefresh();
+		return bonif9;
+	}
+
+	public void setBonif9(Decimal aBonif9) {
+		this.bonif9 = aBonif9;
+	}
+
+	public String getNickName() {
+		return NICKNAME;
+	}
+
+	public static PedidoDet findByOid(Integer oid, ISesion aSesion) throws BaseException {
+		return (PedidoDet) getObjectByOid(NICKNAME, oid, aSesion);
+	}
+
+	public static PedidoDet findByOidProxy(Integer oid, ISesion aSesion) throws BaseException {
+		return (PedidoDet) getObjectByOidProxy(NICKNAME, oid, aSesion);
+	}
+
+	public static PedidoDet findByCodigo(String codigo, ISesion aSesion) throws BaseException {
+		return (PedidoDet) getObjectByCodigo(NICKNAME, codigo, aSesion);
+	}
+
+	public void beforeSave() throws BaseException {
+
+		Validar.noNulo(pedido, "Debe ingresar el Pedido");
+		Validar.noNulo(producto, "Debe ingresar el Producto");
+		Validar.noNulo(uni_med_ori, "Debe Ingresar la Unidad de Medida Origen");
+		Validar.noNulo(cant_um_ori, "Debe ingresar la cantidad en U.M. Orígen");
+		Validar.noNulo(cant_um_ori_res, "Debe ingresar la cantidad en U.M.O.R.");
+		Validar.noNulo(cant_um_ori_sep, "Debe ingresar la cantidad en U.M.O.S.");
+		Validar.noNulo(cant_um_ori_desp, "Debe ingresar la cantidad en U.M.O.D.");
+		Validar.noNulo(cant_um_ori_ent, "Debe ingresar la cantidad en U.M.O.E.");
+		Validar.noNulo(cant_um_ori_fact, "Debe ingresar la cantidad en U.M.O.F.");
+		Validar.noNulo(precio, "Debe ingresar el Precio");
+		Validar.noNulo(precio_bonif, "Debe ingresar el Precio Bonificado");
+		Validar.noNulo(precio_lista, "Debe ingresar el Precio de Lista");
+		Validar.noNulo(moneda, "Debe ingresar la Moneda");
+		Validar.noNulo(anulado, "Debe ingresar si esta o no anulado");
+		Validar.noNulo(fecEntrega, "Debe ingresar la fecha de Entrega");
+
+		// Actualizar si esta pendiente de despacho
+		if (this.isAnulado().booleanValue() == false) {
+			if (getCant_um_ori_desp().doubleValue() >= getCant_um_ori().doubleValue())
+				this.setPendDesp(new Boolean(false));
+			else
+				this.setPendDesp(new Boolean(true));
+
+		}
+
+		// Actualizar si esta pendiente de facturar
+		if (this.isAnulado().booleanValue() == false) {
+			
+			if (this.isNoFacturar()==true) {
+				if (this.isPendFact().booleanValue()==true)
+					setPendFact(new Boolean(false));
+			}
+			else {
+				if (getCant_um_ori_fact().doubleValue() >= getCant_um_ori().doubleValue())
+					this.setPendFact(new Boolean(false));
+				else
+					this.setPendFact(new Boolean(true));
+			}
+		}
+		
+		// Verificar que la cantida pedida , no sea inferior a la cantidad entrega.
+		if (this.getCant_um_ori().doubleValue()<this.getCant_um_ori_desp().doubleValue())
+			throw new ExceptionValidation(null,"La cantidad del pedido no puede ser inferior a la cantidad entregada al cliente."+Util.ENTER()+
+					this.getProducto().getCodigo()+" - "+this.getProducto().getDescripcion()+
+					Util.ENTER()+
+					"Cantidad entregada:"+this.getCant_um_ori_desp().doubleValue()+" Cantidad pedida:"+this.getCant_um_ori().doubleValue());
+		
+		// Verificar que la cantida pedida , no sea inferior a la cantidad facturada.
+		if ((this.getCant_um_ori().doubleValue()<this.getCant_um_ori_fact().doubleValue()) &&  (marcarEntregadoSiDespMenorAFact==false))
+			throw new ExceptionValidation(null,"La cantidad del pedido no puede ser inferior a la cantidad facturada al cliente."+Util.ENTER()+
+					this.getProducto().getCodigo()+" - "+this.getProducto().getDescripcion()+
+					Util.ENTER()+
+					"Cantidad facturada:"+this.getCant_um_ori_fact().doubleValue()+" Cantidad pedida:"+this.getCant_um_ori().doubleValue());
+
+	}
+
+	/**
+	 * isActivo
+	 * 
+	 * @return Boolean
+	 */
+	public Boolean isActivo() {
+		return null;
+	}
+
+	/**
+	 * getCodigo
+	 * 
+	 * @return String
+	 */
+	public String getCodigo() {
+		return "";
+	}
+
+	/**
+	 * getDescripcion
+	 * 
+	 * @return String
+	 */
+	public String getDescripcion() throws BaseException {
+		return getReferencia();
+	}
+
+	public String getReferencia() throws BaseException {
+		StringBuffer desc = new StringBuffer();
+		desc.append(this.getPedido().getCodigo());
+		if (this.getNroRenglon() != null)
+			desc.append("/" + this.getNroRenglon());
+		return desc.toString();
+	}
+
+	public static List getDetallesByPedido(PedidoCab pedido, ISesion aSesion) throws BaseException {
+		return DBPedidoDet.getDetallesByPedido(pedido, aSesion);
+	}
+	
+	public static List getDetallesByPedidoActivos(PedidoCab pedido, ISesion aSesion) throws BaseException {
+		return DBPedidoDet.getDetallesByPedidoActivos(pedido, aSesion);
+	}
+	
+
+	public void onNew() throws BaseException {
+		setPendEnt(new Boolean(true));
+		setPendDesp(new Boolean(true));
+		setPendFact(new Boolean(true));
+		setCant_um_ori(new Decimal(0));
+		setCant_um_ori_res(new Decimal(0));
+		setCant_um_ori_sep(new Decimal(0));
+		setCant_um_ori_desp(new Decimal(0));
+		setCant_um_ori_ent(new Decimal(0));
+		setCant_um_ori_fact(new Decimal(0));
+	}
+
+	public Decimal getCantPendEntUniOri() throws BaseException {
+		if (this.isPendEnt().booleanValue() == false)
+			return new Decimal("0");
+		else {
+			CalculadorMoney cantPend = new CalculadorMoney(getCant_um_ori());
+			cantPend.restar(getCant_um_ori_ent());
+			if (cantPend.getResult() <= 0)
+				return new Decimal("0");
+			else
+				return cantPend.getResultDecimal();
+		}
+	}
+
+	public Decimal getCantPendDespUniOri() throws BaseException {
+		if (this.isPendDesp().booleanValue() == false)
+			return new Decimal("0");
+		else {
+			CalculadorMoney cantPend = new CalculadorMoney(getCant_um_ori());
+			cantPend.restar(getCant_um_ori_desp());
+			if (cantPend.getResult() <= 0)
+				return new Decimal("0");
+			else
+				return cantPend.getResultDecimal();
+		}
+	}
+
+	public Decimal getCantSinReserNiSepa() throws BaseException {
+		Decimal cantPendDesp = getCantPendDespUniOri();
+		if (cantPendDesp.doubleValue() == 0)
+			return new Decimal("0");
+
+		CalculadorMoney calcCantSinSepNiReser = new CalculadorMoney(cantPendDesp);
+		calcCantSinSepNiReser.restar(this.getCant_um_ori_res());
+		calcCantSinSepNiReser.restar(this.getCant_um_ori_sep());
+
+		return calcCantSinSepNiReser.getResultDecimal();
+	}
+
+	public Money getCantPedidaMenosCantDesp() throws BaseException {
+		CalculadorMoney cantPend = new CalculadorMoney(getCant_um_ori());
+		cantPend.restar(getCant_um_ori_desp());
+		return cantPend.getResultMoney();
+
+	}
+
+	public Decimal getCanPendFactUniOri() throws BaseException {
+		if (this.isPendFact().booleanValue() == false)
+			return new Decimal("0");
+		else {
+			CalculadorMoney cantPendFact = new CalculadorMoney(getCant_um_ori());
+			cantPendFact.restar(this.getCant_um_ori_fact());
+			if (cantPendFact.getResult() <= 0)
+				return new Decimal("0");
+			else
+				return cantPendFact.getResultDecimal();
+		}
+	}
+
+	public void reservarProducto(Deposito deposito, Producto producto, Double cantidad) throws BaseException {
+
+	}
+
+	public static List getDetallesPendDesp(PedidoCab pedido, PedidoDet pedidoDet, Sujeto sujeto, Integer nroDesde, Integer nroHasta,
+			java.util.Date fecDesde, java.util.Date fecHasta, java.util.Date fecEntDesde, java.util.Date fecEntHasta, Producto producto,
+			ISesion aSesion) throws BaseException {
+		return DBPedidoDet.getDetallesPendDesp(pedido, pedidoDet, sujeto, nroDesde, nroHasta, fecDesde, fecHasta, fecEntDesde, fecEntHasta,
+				producto, aSesion);
+	}
+
+	public static List getDetallesPendDesp(PedidoCab pedido, ISesion aSesion) throws BaseException {
+		return DBPedidoDet.getDetallesPendDesp(pedido, null, null, null, null, null, null, null, null, null, aSesion);
+	}
+
+	public static List getDetallesPendFact(PedidoCab pedido, Sujeto sujeto, Integer nroDesde, Integer nroHasta, java.util.Date fecDesde,
+			java.util.Date fecHasta, java.util.Date fecEntDesde, java.util.Date fecEntHasta, Producto producto, ISesion aSesion)
+			throws BaseException {
+		return DBPedidoDet.getDetallesPendFact(pedido, sujeto, nroDesde, nroHasta, fecDesde, fecHasta, fecEntDesde, fecEntHasta, producto,
+				aSesion);
+	}
+
+	public static List getDetallesPendFact(PedidoCab pedido, ISesion aSesion) throws BaseException {
+		return DBPedidoDet.getDetallesPendFact(pedido, null, null, null, null, null, null, null, null, aSesion);
+	}
+
+	public void afterSaveDelete() throws BaseException {
+		// TODO Auto-generated method stub
+		super.afterSaveDelete();
+		marcarPedidoSiSeDespacho();
+		marcarPedidoSiSeFacturo();
+	}
+
+	public void beforeSaveDelete() throws BaseException {
+		// TODO Auto-generated method stub
+		super.beforeSaveDelete();
+		validarBajaItem();
+	}
+
+	public void afterSaveModified() throws BaseException {
+		// TODO Auto-generated method stub
+		super.afterSaveModified();
+		marcarPedidoSiSeDespacho();
+
+		// Verificar si se cambia la version de impresion
+		this.getPedido().getComprobanteImpreso().siEstaCongeladoGenerarNuevaVersion();
+
+	}
+
+	public void afterSaveRehabilitar() throws BaseException {
+		// TODO Auto-generated method stub
+		super.afterSaveRehabilitar();
+		marcarPedidoSiSeDespacho();
+	}
+
+	private void marcarPedidoSiSeDespacho() throws BaseException {
+
+		// Si no existen items pendiente de despacho marcar el pedido como
+		// despachado
+		if (!this.getPedido().existeAlgunItemPendDesp()) {
+			this.getPedido().marcarPedidoComoNoPendDespacho();
+		}
+
+	}
+
+	private void marcarPedidoSiSeFacturo() throws BaseException {
+
+		// Si no existen items pendiente de facturar marcar el pedido como
+		// facturado
+		if (!this.getPedido().existeAlgunItemPendFact()) {
+			this.getPedido().marcarPedidoComoNoPendFacturacion();
+		}
+
+	}
+
+	public Money getImporte() throws BaseException {
+		supportRefresh();
+		return importe;
+	}
+
+	public void setImporte(Money aImporte) {
+		this.importe = aImporte;
+	}
+
+	public Money getDto_recar() throws BaseException {
+		supportRefresh();
+		return dto_recar;
+	}
+
+	public void setDto_recar(Money aDto_recar) {
+		this.dto_recar = aDto_recar;
+	}
+
+	public Money getImpre_precio() throws BaseException {
+		supportRefresh();
+		return impre_precio;
+	}
+
+	public void setImpre_precio(Money aImpre_precio) {
+		this.impre_precio = aImpre_precio;
+	}
+
+	public Money getImpre_bonif() throws BaseException {
+		supportRefresh();
+		return impre_bonif;
+	}
+
+	public void setImpre_bonif(Money aImpre_bonif) {
+		this.impre_bonif = aImpre_bonif;
+	}
+
+	public Money getImpre_recar() throws BaseException {
+		supportRefresh();
+		return impre_recar;
+	}
+
+	public void setNetoGravado(Money aNetoGravado) {
+		this.netoGravado = aNetoGravado;
+	}
+
+	public Money getNetoGravado() throws BaseException {
+		supportRefresh();
+		return this.netoGravado;
+	}
+
+	public void setNetoNoGravado(Money aNetoNoGravado) {
+		this.netoNoGravado = aNetoNoGravado;
+	}
+
+	public Money getNetoNoGravado() throws BaseException {
+		supportRefresh();
+		return this.netoNoGravado;
+	}
+
+	public String getRefItem() throws BaseException {
+		this.supportRefresh();
+		return this.getCodigo() + " - " + this.getDescripcion();
+	}
+
+	public void setImpre_recar(Money aImpre_recar) {
+		this.impre_recar = aImpre_recar;
+	}
+
+	public Money getImpre_precio_bonif() throws BaseException {
+		supportRefresh();
+		return impre_precio_bonif;
+	}
+
+	public void setImpre_precio_bonif(Money aImpre_precio_bonif) {
+		this.impre_precio_bonif = aImpre_precio_bonif;
+	}
+
+	public Money getImpre_importe() throws BaseException {
+		supportRefresh();
+		return impre_importe;
+	}
+
+	public void setImpre_importe(Money aImpre_importe) {
+		this.impre_importe = aImpre_importe;
+	}
+
+	public ConceptoImpuesto getConcImpuIVA() throws BaseException {
+		supportRefresh();
+		return this.concImpuIVA;
+	}
+
+	public void setConcImpuIVA(ConceptoImpuesto aConceptoImpuesto) {
+		this.concImpuIVA = aConceptoImpuesto;
+	}
+
+	public ConceptoImpuesto getConcImpuPercIVA() throws BaseException {
+		supportRefresh();
+		return this.concImpuPercIVA;
+	}
+
+	public void setConcImpuPercIVA(ConceptoImpuesto aConceptoImpuesto) {
+		this.concImpuPercIVA = aConceptoImpuesto;
+	}
+
+	public ConceptoImpuesto getConcImpuInt() throws BaseException {
+		supportRefresh();
+		return this.concImpuInt;
+	}
+
+	public void setConcImpuInt(ConceptoImpuesto aConceptoImpuesto) {
+		this.concImpuInt = aConceptoImpuesto;
+	}
+
+	public ConceptoImpuesto getConcImpuPercIB() throws BaseException {
+		supportRefresh();
+		return this.concImpuPercIB;
+	}
+
+	public void setConcImpuPercIB(ConceptoImpuesto aConceptoImpuesto) {
+		this.concImpuPercIB = aConceptoImpuesto;
+	}
+
+	public static List getAllDetalles(Sujeto sujeto, Integer nroDesde, Integer nroHasta, java.util.Date fecDesde, java.util.Date fecHasta,
+			java.util.Date fecEntDesde, java.util.Date fecEntHasta, Producto producto, ISesion aSesion) throws BaseException {
+		return DBPedidoDet.getAllDetalles(sujeto, nroDesde, nroHasta, fecDesde, fecHasta, fecEntDesde, fecEntHasta, producto, aSesion);
+	}
+
+	public static PedidoDet getPedidoDet(PedidoCab pedido, Integer nroRenglon, ISesion aSesion) throws BaseException {
+		return DBPedidoDet.getPedidoDet(pedido, nroRenglon, aSesion);
+
+	}
+
+	public Money getCantOCPendRecepEnUS() throws BaseException {
+		CalculadorMoney calcTotOCPendRec = new CalculadorMoney(new Money(0));
+		Iterator iterDetOC = OrdenDeCompraDet.getDetallesOCPendRecep(this, this.getSesion()).iterator();
+		while (iterDetOC.hasNext()) {
+			OrdenDeCompraDet ocDet = (OrdenDeCompraDet) iterDetOC.next();
+			if (ocDet.getProducto().getOID() != this.getProducto().getOID())
+				continue;
+			if (ocDet.isPendienteRecepcion().booleanValue())
+				calcTotOCPendRec.sumar(new Money(ocDet.getCantPendRecepUS()));
+		}
+		return calcTotOCPendRec.getResultMoney();
+	}
+
+	public Money getCantOCPendRecepEnUC() throws BaseException {
+		CalculadorMoney calcTotOCPendRec = new CalculadorMoney(new Money(0));
+		Iterator iterDetOC = OrdenDeCompraDet.getDetallesOCPendRecep(this, this.getSesion()).iterator();
+		while (iterDetOC.hasNext()) {
+			OrdenDeCompraDet ocDet = (OrdenDeCompraDet) iterDetOC.next();
+			if (ocDet.getProducto().getOID() != this.getProducto().getOID())
+				continue;
+			if (ocDet.isPendienteRecepcion().booleanValue())
+				calcTotOCPendRec.sumar(new Money(ocDet.getCantPendRecepUC()));
+		}
+		return calcTotOCPendRec.getResultMoney();
+	}
+
+	public Money getCantOCPendRecepEnUniVta() throws BaseException {
+		// En unidades de Venta
+		if ((this.getProducto().getUm_vta() != null) && (this.getProducto().getUm_stk() != null)
+				&& (this.getProducto().getUm_vta().getOID() == this.getProducto().getUm_stk().getOID()))
+			return getCantOCPendRecepEnUS();
+
+		if ((this.getProducto().getUm_vta() != null) && (this.getProducto().getUm_cpra() != null)
+				&& (this.getProducto().getUm_vta().getOID() == this.getProducto().getUm_cpra().getOID()))
+			return getCantOCPendRecepEnUC();
+
+		return getCantOCPendRecepEnUS();
+	}
+
+	public void validarBajaItem() throws BaseException {
+
+		if (this.isAnulado())
+			throw new ExceptionValidation(null, "El item " + this.getDescripcion()
+					+ " no puede eliminarse debido a que se encuentra inactivo");
+
+		if (!this.getPedido().isActivo())
+			throw new ExceptionValidation(null, "El item " + this.getDescripcion()
+					+ " no puede eliminarse debido a que el Pedido se encuentra anulado");
+
+		
+		if ((this.getPedido().isPuedeAnularSinControl()!=null) && (this.getPedido().isPuedeAnularSinControl().booleanValue()))
+			return;
+		
+		// Verificar si el pedido tiene reservas no puede darse de baja
+		if ((this.getCant_um_ori_res() != null) && (this.getCant_um_ori_res().doubleValue() > 0))
+			throw new ExceptionValidation(null, "El item " + this.getDescripcion() + " no puede eliminarse debido a que tiene reservas");
+
+		// Verificar si tiene separaciones
+		if ((this.getCant_um_ori_sep() != null) && (this.getCant_um_ori_sep().doubleValue() > 0))
+			throw new ExceptionValidation(null, "El item " + this.getDescripcion() + " no puede eliminarse debido a que tiene separaciones");
+
+		// Verificar si tiene despachos
+		if ((this.getCant_um_ori_desp() != null) && (this.getCant_um_ori_desp().doubleValue() > 0))
+			throw new ExceptionValidation(null, "El item " + this.getDescripcion() + " no puede eliminarse debido a que tiene despachos");
+
+		// Verificar si tiene entregas
+		if ((this.getCant_um_ori_ent() != null) && (this.getCant_um_ori_ent().doubleValue() > 0))			
+			throw new ExceptionValidation(null, "El item " + this.getDescripcion() + " no puede eliminarse debido a que tiene entregas");
+
+			// Si las cantidad
+		if ((this.getCant_um_ori_fact() != null) && (this.getCant_um_ori_fact().doubleValue() > 0))
+				throw new ExceptionValidation(null, "El item " + this.getDescripcion()
+						+ " no puede eliminarse debido a que tiene cantidades Facturadas ");
+
+			// 	Verificar si tiene NC emitidas
+			if ((this.getCant_um_ori_nc() != null) && (this.getCant_um_ori_nc().doubleValue() > 0))
+				throw new ExceptionValidation(null, "El item " + this.getDescripcion()
+						+ " no puede eliminarse debido a que tiene asociados Notas de Crédito");
+
+	}
+	
+	public Money getCantFactMenosNC() throws BaseException {
+		CalculadorMoney calc = new CalculadorMoney(new Money(0));
+		if (this.getCant_um_ori_fact()!=null)
+			calc.sumar(this.getCant_um_ori_fact());
+		if (this.getCant_um_ori_nc()!=null)
+			calc.restar(this.getCant_um_ori_nc());
+		return calc.getResultMoney();
+	}
+
+	public static void actualizarCantidadesDespachadas(PedidoDet pedidoDet, Double cantidad, boolean pendEnt, ISesion aSesion)
+			throws BaseException {
+
+		DBPedidoDet.actualizarCantidadesDespachadas(pedidoDet, cantidad, pendEnt, aSesion);
+	}
+
+	public void actualizarCantidadesDespachadas(Double cantidad, boolean pendEnt) throws BaseException {
+
+		DBPedidoDet.actualizarCantidadesDespachadas(this, cantidad, pendEnt, this.getSesion());
+	}
+	
+	public void descartarCantNoDespachadas() throws BaseException {
+		// La cantidad del pedido es superior a la entregada
+		if (this.getCant_um_ori().doubleValue()>this.getCant_um_ori_desp().doubleValue()) {
+			this.setCant_um_ori(this.getCant_um_ori_desp());
+			if (this.getCant_um_ori().doubleValue() == 0)
+				this.setAnulado(true);
+		}
+	}
+	
+	public void setMarcarEntregadoSiDespMenorAFact(boolean aMarcarEntregadoSiDespMenorAFact) throws BaseException {
+		this.marcarEntregadoSiDespMenorAFact = aMarcarEntregadoSiDespMenorAFact;
+	}
+	
+	public static double getCantProdPedidosPendEnt(Producto producto, ISesion aSesion) throws BaseException {
+		return DBPedidoDet.getCantProdPedidosPendEnt(producto, aSesion);
+	}	
+
+
+}

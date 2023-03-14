@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Documento sin título</title>
+
+
+ <!--<link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">-->
+ 
+  <link rel="stylesheet" type="text/css" href="../../extjs1/ext-all.css" />  
+  
+    <!-- Importar el ext-all-dev.js -->  
+    <script type="text/javascript" src="../../extjs1/ext-all.js"></script>  
+ 
+<link href="../../css/tem01.css" rel="stylesheet" type="text/css">
+
+ <script type="text/javascript">
+        Ext.BLANK_IMAGE_URL = '../../extjs1	/resources/images/default/s.gif';
+
+        Ext.onReady(function(){
+
+           // alert("Congratulations!  You have Ext configured correctly!");
+			
+Ext.create('Ext.grid.Panel', {
+   store: Ext.create('Ext.data.ArrayStore', {
+      fields: [
+          {name: 'book'},
+          {name: 'author'}
+      ],
+      data: [['Ext JS 4: First Look','Loiane Groner'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b'],['a','b']]
+   }),
+   columns: [ {
+      text     : 'Book',
+      flex     : 1,
+      sortable : false,
+      dataIndex: 'book'
+   },{
+      text     : 'Author',
+      width    : 100,
+      sortable : true,
+      dataIndex: 'author'
+   }],
+   width: 300,
+   title: 'Simple Grid',
+	viewConfig: {
+                forceFit: true
+            },   
+   renderTo: 'grid-example'
+});			
+
+        }); //end onReady
+        </script>
+
+</head>
+
+<body>
+<div class="grillaTablero">
+<table width="100%" height="100%" border="1">
+  <tr height="30%">
+    <td width="6%" height="10%" rowspan="3" >&nbsp;</td>
+    <td width="88%" align="center"><h2>&nbsp;</h2></td>
+    <td width="6%" rowspan="3">&nbsp;</td>
+  </tr>
+  <tr height="30%">
+    <td align="center"><h1><span style="font-family: Verdana, Geneva, sans-serif; font-size: 16px;">Titulo Principal de la información del Tablero</span></h1></td>
+  </tr>
+  <tr height="30%">
+    <td align="center">&nbsp;</td>
+  </tr>
+  
+  <tr height="70%">
+    <td width="6%" height="90%">&nbsp;</td>
+    <td width="88%" align="left"><div id="grid-example" style="display: table-cell; padding: 20px;"></div></td>
+    <td width="6%">&nbsp;</td>
+  </tr>  
+  
+  </table>
+</div>
+
+</body>
+</html>

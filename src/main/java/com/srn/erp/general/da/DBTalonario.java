@@ -1,0 +1,896 @@
+package com.srn.erp.general.da;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.List;
+
+import com.srn.erp.general.bm.Sucursal;
+import com.srn.erp.general.bm.Talonario;
+import com.srn.erp.general.bm.UnidadOrganizativa;
+
+import framework.applicarionServer.bl.ObjetosAplicacion.ObjetoLogico;
+import framework.applicarionServer.bl.Persistencia.DBObjetoPersistente;
+import framework.applicarionServer.bl.Persistencia.IDBObjetoPersistente;
+import framework.applicarionServer.bl.Persistencia.IObjetoPersistente;
+import framework.applicarionServer.bl.Sesion.ISesion;
+import framework.applicarionServer.bl.Utils.ListObserver;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.ExceptionValidation;
+import framework.request.bl.Utils.HashTableDatos;
+
+public class DBTalonario extends DBObjetoPersistente {
+
+	public static final String	OID_TALONARIO															= "oid_talonario";
+
+	public static final String	CODIGO																		= "codigo";
+
+	public static final String	DESCRIPCION																= "descripcion";
+
+	public static final String	TIPO_IMP_ASOC															= "tipo_imp_asoc";
+
+	public static final String	OID_IMP_FISCAL														= "oid_imp_fiscal";
+
+	public static final String	OID_IMP_COMUN															= "oid_imp_comun";
+
+	public static final String	OID_TC																		= "oid_tc";
+
+	public static final String	LETRA																			= "letra";
+
+	public static final String	OID_LUG_EMI																= "oid_lug_emi";
+
+	public static final String	NOM_ARCH_IMP															= "nom_arch_imp";
+
+	public static final String	PRIMER_NRO																= "primer_nro";
+
+	public static final String	NRO_ACTUAL																= "nro_actual";
+
+	public static final String	ULTIMO_NRO																= "ultimo_nro";
+
+	public static final String	NRO_AUTOMATICA														= "nro_automatica";
+
+	public static final String	FEC_VTO																		= "fec_vto";
+
+	public static final String	CAI																				= "cai";
+
+	public static final String	OID_UNI_ORG																= "oid_uni_org";
+
+	public static final String	ACTIVO																		= "activo";
+
+	public static final String	OID_TAL_ANU																= "oid_tal_anu";
+
+	public static final String	CANT_COPIAS																= "cant_copias";
+
+	public static final String	INTERCALAR																= "intercalar";
+
+	public static final String	ORIENTACION																= "orientacion";
+
+	public static final String	GENERAR_ARCHIVO														= "generar_archivo";
+
+	public static final String	TIPO_ARCHIVO															= "tipo_archivo";
+
+	public static final String	ARCHIVO_RTM																= "archivo_rtm";
+
+	public static final String	IDENTIF_ARCH_VP														= "identif_arch_vp";
+
+	public static final String	IDENTIF_ARCH_GA														= "identif_arch_ga";
+
+	public static final String	IDENTIF_ARCH_IM														= "identif_arch_im";
+
+	public static final String	COMPO_IMPRESION														= "compo_impresion";
+
+	public static final String	CODIGO_LETRA															= "codigo_letra";
+	
+	public static final String TIPO_IMPRESION															= "tipo_impresion";
+	
+	public static final String ES_FE = "es_fe";
+	
+	public static final String CODIGO_TC_FE = "codigo_tc_fe";
+	
+	
+	public static final String  PATH_GEN_ARCH_IMPRESION                   = "path_gen_arch_imp";
+
+	public static final int			SELECT_TALONARIO_REMITO										= 100;
+
+	public static final int			SELECT_HELP_BY_TALONARIO_RTO							= 101;
+
+	public static final int			SELECT_HELP_BY_TALONARIO_AJU_STK					= 102;
+
+	public static final int			SELECT_BY_TALONARIO_AJU_STK								= 103;
+
+	public static final int			SELECT_BY_TALONARIO_FACT_CLIE							= 104;
+
+	public static final int			SELECT_BY_TALONARIO_FACT_CLIE_UNI_ORG			= 105;
+
+	public static final int			SELECT_HELP_BY_TALONARIO_FACT_ND_NC_CLIE	= 106;
+
+	public static final int			SELECT_BY_IDENTIF_TC_SUCURSAL							= 107;
+
+	public static final int			SELECT_BY_IDENTIF_TC											= 108;
+
+	public static final int			SELECT_BY_TALONARIO_ND_CLIE_UNI_ORG				= 109;
+
+	public static final int			SELECT_BY_TALONARIO_NC_CLIE_UNI_ORG				= 110;
+
+	public static final int			SELECT_BY_TIPO_AJU_STK_OPER_AJU_STK				= 111;
+	
+	public static final int			SELECT_BY_TALONARIO_NDI_CLIE_UNI_ORG			= 112;
+	
+	public static final int			SELECT_BY_TALONARIO_NCI_CLIE_UNI_ORG			= 113;
+	
+	public static final int			SELECT_HELP_BY_TALONARIO_DEV_VTA			= 114;
+	
+	public static final int			SELECT_HELP_BY_TALONARIO_AJU_STK_TRANSF					= 115;
+	
+	public static final int 		SELECT_BY_TALONARIOS_LIBRO_IVA_VTAS = 116;
+	
+	public static final int 		SELECT_BY_TALONARIO_LIQUI_TAR	= 117;
+
+	
+	public DBTalonario() {
+	}
+
+	protected void insert(IObjetoPersistente objetoPersistente) throws BaseException, SQLException {
+
+		final int OID_TALONARIO = 1;
+		final int CODIGO = 2;
+		final int DESCRIPCION = 3;
+		final int TIPO_IMP_ASOC = 4;
+		final int OID_IMP_FISCAL = 5;
+		final int OID_IMP_COMUN = 6;
+		final int OID_TC = 7;
+		final int LETRA = 8;
+		final int OID_LUG_EMI = 9;
+		final int NOM_ARCH_IMP = 10;
+		final int PRIMER_NRO = 11;
+		final int NRO_ACTUAL = 12;
+		final int ULTIMO_NRO = 13;
+		final int NRO_AUTOMATICA = 14;
+		final int FEC_VTO = 15;
+		final int CAI = 16;
+		final int OID_UNI_ORG = 17;
+		final int ACTIVO = 18;
+		final int OID_TAL_ANU = 19;
+		final int CANT_COPIAS = 20;
+		final int INTERCALAR = 21;
+		final int ORIENTACION = 22;
+		final int GENERAR_ARCHIVO = 23;
+		final int TIPO_ARCHIVO = 24;
+		final int ARCHIVO_RTM = 25;
+		final int IDENTIF_ARCH_VP = 26;
+		final int IDENTIF_ARCH_IM = 27;
+		final int IDENTIF_ARCH_GA = 28;
+		final int CODIGO_LETRA = 29;
+		final int COMPO_IMPRESION = 30;
+		final int PATH_GEN_ARCH_IMP = 31;
+		final int TIPO_IMPRESION = 32;
+		final int ES_FE = 33;
+		final int CODIGO_TC_FE = 34;
+		
+
+		Talonario pers = (Talonario) objetoPersistente;
+
+		StringBuffer sqlInsert = new StringBuffer();
+		sqlInsert.append(" insert into geTalonario " + " ( " + "OID_TALONARIO," + "CODIGO," + "DESCRIPCION,"
+				+ "TIPO_IMP_ASOC," + "OID_IMP_FISCAL," + "OID_IMP_COMUN," + "OID_TC," + "LETRA," + "OID_LUG_EMI,"
+				+ "NOM_ARCH_IMP," + "PRIMER_NRO," + "NRO_ACTUAL," + "ULTIMO_NRO," + "NRO_AUTOMATICA," + "FEC_VTO," + "CAI,"
+				+ "OID_UNI_ORG,"
+				+ "ACTIVO , OID_TAL_ANU,CANT_COPIAS,INTERCALAR,ORIENTACION,GENERAR_ARCHIVO,TIPO_ARCHIVO,ARCHIVO_RTM ,"
+				+ " IDENTIF_ARCH_VP, IDENTIF_ARCH_IM , IDENTIF_ARCH_GA , CODIGO_LETRA , COMPO_IMPRESION , PATH_GEN_ARCH_IMP , TIPO_IMPRESION , ES_FE , CODIGO_TC_FE) " + " values " + "("
+				+ "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?,"
+				+ "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," + "?," +"?," + "?," + "?,"+ "?," + "? , ? , ?) ");
+
+		PreparedStatement qInsert = getSesion().getConexionBD().prepareStatement(sqlInsert.toString());
+		qInsert.setInt(OID_TALONARIO, pers.getOID());
+		qInsert.setString(CODIGO, pers.getCodigo());
+		qInsert.setString(DESCRIPCION, pers.getDescripcion());
+		qInsert.setString(TIPO_IMP_ASOC, pers.getImpo_imp_asoc());
+		if (pers.getImpresora_fiscal() != null)
+			qInsert.setInt(OID_IMP_FISCAL, pers.getImpresora_fiscal().getOID());
+		else
+			qInsert.setNull(OID_IMP_FISCAL, java.sql.Types.INTEGER);
+		if (pers.getImpresora_comun() != null)
+			qInsert.setInt(OID_IMP_COMUN, pers.getImpresora_comun().getOID());
+		else
+			qInsert.setNull(OID_IMP_COMUN, java.sql.Types.INTEGER);
+		qInsert.setInt(OID_TC, pers.getTipo_comprobante().getOID());
+		qInsert.setString(LETRA, pers.getLetra());
+		qInsert.setInt(OID_LUG_EMI, pers.getLugar_emision().getOID());
+		qInsert.setString(NOM_ARCH_IMP, pers.getNombre_archivo_impresion());
+		qInsert.setInt(PRIMER_NRO, pers.getPrimer_nro().intValue());
+		qInsert.setInt(NRO_ACTUAL, pers.getNro_actual().intValue());
+		qInsert.setInt(ULTIMO_NRO, pers.getUltimo_nro().intValue());
+		qInsert.setBoolean(NRO_AUTOMATICA, pers.isNro_automatica().booleanValue());
+		qInsert.setDate(FEC_VTO, new java.sql.Date(pers.getFec_vto().getTime()));
+		qInsert.setString(CAI, pers.getCai());
+		qInsert.setInt(OID_UNI_ORG, pers.getUnidad_organizativa().getOID());
+		qInsert.setBoolean(ACTIVO, pers.isActivo().booleanValue());
+		if (pers.getTalonarioAnulacion() != null)
+			qInsert.setInt(OID_TAL_ANU, pers.getTalonarioAnulacion().getOID());
+		else
+			qInsert.setNull(OID_TAL_ANU, Types.INTEGER);
+
+		if (pers.getCantCopias() != null)
+			qInsert.setInt(CANT_COPIAS, pers.getCantCopias().intValue());
+		else
+			qInsert.setNull(CANT_COPIAS, Types.INTEGER);
+		if (pers.isIntercalar() != null)
+			qInsert.setBoolean(INTERCALAR, pers.isIntercalar().booleanValue());
+		else
+			qInsert.setBoolean(INTERCALAR, false);
+		if (pers.getOrientacion() != null)
+			qInsert.setString(ORIENTACION, pers.getOrientacion());
+		else
+			qInsert.setNull(ORIENTACION, Types.VARCHAR);
+		if (pers.isGenerararchivo() != null)
+			qInsert.setBoolean(GENERAR_ARCHIVO, pers.isGenerararchivo().booleanValue());
+		else
+			qInsert.setBoolean(GENERAR_ARCHIVO, false);
+		if (pers.getTipoArchivo() != null)
+			qInsert.setString(TIPO_ARCHIVO, pers.getTipoArchivo());
+		else
+			qInsert.setNull(TIPO_ARCHIVO, Types.VARCHAR);
+
+		if (pers.getArchivoRTM() != null)
+			qInsert.setString(ARCHIVO_RTM, pers.getArchivoRTM());
+		else
+			qInsert.setNull(ARCHIVO_RTM, Types.VARCHAR);
+
+		if (pers.getIdentifArchVistaPreliminar() != null)
+			qInsert.setString(IDENTIF_ARCH_VP, pers.getIdentifArchVistaPreliminar());
+		else
+			qInsert.setNull(IDENTIF_ARCH_VP, Types.VARCHAR);
+
+		if (pers.getIdentifArchImpresion() != null)
+			qInsert.setString(IDENTIF_ARCH_IM, pers.getIdentifArchImpresion());
+		else
+			qInsert.setNull(IDENTIF_ARCH_IM, Types.VARCHAR);
+		if (pers.getIdentifArchGeneracionArchivo() != null)
+			qInsert.setString(IDENTIF_ARCH_GA, pers.getIdentifArchGeneracionArchivo());
+		else
+			qInsert.setNull(IDENTIF_ARCH_GA, Types.VARCHAR);
+		if (pers.getCodigoLetra() != null)
+			qInsert.setString(CODIGO_LETRA, pers.getCodigoLetra());
+		else
+			qInsert.setNull(CODIGO_LETRA, Types.VARCHAR);
+		
+		if (pers.getComportamientoImpresion() != null)
+			qInsert.setString(COMPO_IMPRESION, pers.getComportamientoImpresion());
+		else
+			qInsert.setNull(COMPO_IMPRESION, Types.VARCHAR);
+		
+		if (pers.getPathGeneracionArchImpresion() != null)
+			qInsert.setString(PATH_GEN_ARCH_IMP, pers.getPathGeneracionArchImpresion());
+		else
+			qInsert.setNull(PATH_GEN_ARCH_IMP, Types.VARCHAR);
+		if (pers.getTipoImpresion()!=null)
+			qInsert.setString(TIPO_IMPRESION , pers.getTipoImpresion());
+		else
+			qInsert.setNull(TIPO_IMPRESION , Types.VARCHAR);
+		
+		if (pers.isFactElec()!=null)
+			qInsert.setBoolean(ES_FE, pers.isFactElec().booleanValue());
+		else
+			qInsert.setBoolean(ES_FE, false);
+
+		if (pers.getCodigoTCFactEle() != null)
+			qInsert.setInt(CODIGO_TC_FE, pers.getCodigoTCFactEle().intValue());
+		else
+			qInsert.setNull(CODIGO_TC_FE, Types.INTEGER);
+
+		
+		qInsert.executeUpdate();
+		qInsert.close();
+	}
+
+	protected void update(IObjetoPersistente objetoPersistente) throws BaseException, SQLException {
+
+		final int CODIGO = 1;
+		final int DESCRIPCION = 2;
+		final int TIPO_IMP_ASOC = 3;
+		final int OID_IMP_FISCAL = 4;
+		final int OID_IMP_COMUN = 5;
+		final int OID_TC = 6;
+		final int LETRA = 7;
+		final int OID_LUG_EMI = 8;
+		final int NOM_ARCH_IMP = 9;
+		final int PRIMER_NRO = 10;
+		final int NRO_ACTUAL = 11;
+		final int ULTIMO_NRO = 12;
+		final int NRO_AUTOMATICA = 13;
+		final int FEC_VTO = 14;
+		final int CAI = 15;
+		final int OID_UNI_ORG = 16;
+		final int ACTIVO = 17;
+		final int OID_TAL_ANU = 18;
+		final int CANT_COPIAS = 19;
+		final int INTERCALAR = 20;
+		final int ORIENTACION = 21;
+		final int GENERAR_ARCHIVO = 22;
+		final int TIPO_ARCHIVO = 23;
+		final int ARCHIVO_RTM = 24;
+		final int IDENTIF_ARCH_VP = 25;
+		final int IDENTIF_ARCH_IM = 26;
+		final int IDENTIF_ARCH_GA = 27;
+		final int CODIGO_LETRA = 28;
+		final int COMPO_IMPRESION = 29;
+		final int PATH_GEN_ARCH_IMP = 30;
+		final int TIPO_IMPRESION = 31;
+		final int ES_FE = 32;
+		final int CODIGO_TC_FE = 33;
+		final int OID_TALONARIO = 34;
+
+		Talonario pers = (Talonario) objetoPersistente;
+
+		StringBuffer sqlUpdate = new StringBuffer();
+		sqlUpdate.append(" update geTalonario set " + "codigo=?" + ",descripcion=?" + ",tipo_imp_asoc=?"
+				+ ",oid_imp_fiscal=?" + ",oid_imp_comun=?" + ",oid_tc=?" + ",letra=?" + ",oid_lug_emi=?" + ",nom_arch_imp=?"
+				+ ",primer_nro=?" + ",nro_actual=?" + ",ultimo_nro=?" + ",nro_automatica=?" + ",fec_vto=?" + ",cai=?"
+				+ ",oid_uni_org=?" + ",activo=?" + ",oid_tal_anu=?" + ",cant_copias=?" + ",intercalar=?" + ",orientacion=?"
+				+ ",generar_archivo=?" + ",tipo_archivo=?" + ",archivo_rtm=?" + ",identif_arch_vp=?" + ",identif_arch_im=?"
+				+ ",identif_arch_ga=?" + ",codigo_letra=?" + ",compo_impresion=? , path_gen_arch_imp = ? , tipo_impresion = ? , ES_FE = ? , CODIGO_TC_FE = ? " + " where " + " oid_talonario=? ");
+
+		PreparedStatement qUpdate = getSesion().getConexionBD().prepareStatement(sqlUpdate.toString());
+		qUpdate.setInt(OID_TALONARIO, pers.getOID());
+		qUpdate.setString(CODIGO, pers.getCodigo());
+		qUpdate.setString(DESCRIPCION, pers.getDescripcion());
+		qUpdate.setString(TIPO_IMP_ASOC, pers.getImpo_imp_asoc());
+		if (pers.getImpresora_fiscal() != null)
+			qUpdate.setInt(OID_IMP_FISCAL, pers.getImpresora_fiscal().getOID());
+		else
+			qUpdate.setNull(OID_IMP_FISCAL, java.sql.Types.INTEGER);
+		if (pers.getImpresora_comun() != null)
+			qUpdate.setInt(OID_IMP_COMUN, pers.getImpresora_comun().getOID());
+		else
+			qUpdate.setNull(OID_IMP_COMUN, java.sql.Types.INTEGER);
+		qUpdate.setInt(OID_TC, pers.getTipo_comprobante().getOID());
+		qUpdate.setString(LETRA, pers.getLetra());
+		qUpdate.setInt(OID_LUG_EMI, pers.getLugar_emision().getOID());
+		qUpdate.setString(NOM_ARCH_IMP, pers.getNombre_archivo_impresion());
+		qUpdate.setInt(PRIMER_NRO, pers.getPrimer_nro().intValue());
+		qUpdate.setInt(NRO_ACTUAL, pers.getNro_actual().intValue());
+		qUpdate.setInt(ULTIMO_NRO, pers.getUltimo_nro().intValue());
+		qUpdate.setBoolean(NRO_AUTOMATICA, pers.isNro_automatica().booleanValue());
+		qUpdate.setDate(FEC_VTO, new java.sql.Date(pers.getFec_vto().getTime()));
+		qUpdate.setString(CAI, pers.getCai());
+		qUpdate.setInt(OID_UNI_ORG, pers.getUnidad_organizativa().getOID());
+		qUpdate.setBoolean(ACTIVO, pers.isActivo().booleanValue());
+		if (pers.getTalonarioAnulacion() != null)
+			qUpdate.setInt(OID_TAL_ANU, pers.getTalonarioAnulacion().getOID());
+		else
+			qUpdate.setNull(OID_TAL_ANU, Types.INTEGER);
+		if (pers.getCantCopias() != null)
+			qUpdate.setInt(CANT_COPIAS, pers.getCantCopias().intValue());
+		else
+			qUpdate.setNull(CANT_COPIAS, Types.INTEGER);
+		if (pers.isIntercalar() != null)
+			qUpdate.setBoolean(INTERCALAR, pers.isIntercalar().booleanValue());
+		else
+			qUpdate.setBoolean(INTERCALAR, false);
+		if (pers.getOrientacion() != null)
+			qUpdate.setString(ORIENTACION, pers.getOrientacion());
+		else
+			qUpdate.setNull(ORIENTACION, Types.VARCHAR);
+		if (pers.isGenerararchivo() != null)
+			qUpdate.setBoolean(GENERAR_ARCHIVO, pers.isGenerararchivo().booleanValue());
+		else
+			qUpdate.setBoolean(GENERAR_ARCHIVO, false);
+		if (pers.getTipoArchivo() != null)
+			qUpdate.setString(TIPO_ARCHIVO, pers.getTipoArchivo());
+		else
+			qUpdate.setNull(TIPO_ARCHIVO, Types.VARCHAR);
+		if (pers.getArchivoRTM() != null)
+			qUpdate.setString(ARCHIVO_RTM, pers.getArchivoRTM());
+		else
+			qUpdate.setNull(ARCHIVO_RTM, Types.VARCHAR);
+
+		if (pers.getIdentifArchVistaPreliminar() != null)
+			qUpdate.setString(IDENTIF_ARCH_VP, pers.getIdentifArchVistaPreliminar());
+		else
+			qUpdate.setNull(IDENTIF_ARCH_VP, Types.VARCHAR);
+
+		if (pers.getIdentifArchImpresion() != null)
+			qUpdate.setString(IDENTIF_ARCH_IM, pers.getIdentifArchImpresion());
+		else
+			qUpdate.setNull(IDENTIF_ARCH_IM, Types.VARCHAR);
+		if (pers.getIdentifArchGeneracionArchivo() != null)
+			qUpdate.setString(IDENTIF_ARCH_GA, pers.getIdentifArchGeneracionArchivo());
+		else
+			qUpdate.setNull(IDENTIF_ARCH_GA, Types.VARCHAR);
+		if (pers.getCodigoLetra() != null)
+			qUpdate.setString(CODIGO_LETRA, pers.getCodigoLetra());
+		else
+			qUpdate.setNull(CODIGO_LETRA, Types.VARCHAR);
+		if (pers.getComportamientoImpresion() != null)
+			qUpdate.setString(COMPO_IMPRESION, pers.getComportamientoImpresion());
+		else
+			qUpdate.setNull(COMPO_IMPRESION, Types.VARCHAR);
+
+		if (pers.getPathGeneracionArchImpresion() != null)
+			qUpdate.setString(PATH_GEN_ARCH_IMP, pers.getPathGeneracionArchImpresion());
+		else
+			qUpdate.setNull(PATH_GEN_ARCH_IMP, Types.VARCHAR);
+				
+		if (pers.getTipoImpresion()!=null)
+			qUpdate.setString(TIPO_IMPRESION , pers.getTipoImpresion());
+		else
+			qUpdate.setNull(TIPO_IMPRESION , Types.VARCHAR);
+		
+		if (pers.isFactElec()!=null)
+			qUpdate.setBoolean(ES_FE, pers.isFactElec().booleanValue());
+		else
+			qUpdate.setBoolean(ES_FE, false);
+
+		if (pers.getCodigoTCFactEle() != null)
+			qUpdate.setInt(CODIGO_TC_FE, pers.getCodigoTCFactEle().intValue());
+		else
+			qUpdate.setNull(CODIGO_TC_FE, Types.INTEGER);
+
+		
+		qUpdate.executeUpdate();
+		qUpdate.close();
+	}
+
+	protected void delete(IObjetoPersistente objetoPersistente) throws BaseException, SQLException {
+		final int OID_TALONARIO = 1;
+		Talonario pers = (Talonario) objetoPersistente;
+		StringBuffer sqlUpdate = new StringBuffer();
+		sqlUpdate.append("update geTalonario " + " set activo=0 " + " where " + " oid_talonario=? ");
+		PreparedStatement qUpdate = getSesion().getConexionBD().prepareStatement(sqlUpdate.toString());
+		qUpdate.setInt(OID_TALONARIO, pers.getOID());
+		qUpdate.executeUpdate();
+		qUpdate.close();
+	}
+
+	protected void rehabilitar(IObjetoPersistente objetoPersistente) throws BaseException, SQLException {
+		final int OID_TALONARIO = 1;
+		Talonario pers = (Talonario) objetoPersistente;
+		StringBuffer sqlUpdate = new StringBuffer();
+		sqlUpdate.append("update geTalonario " + " set activo=1 " + " where " + " oid_talonario=? ");
+		PreparedStatement qUpdate = getSesion().getConexionBD().prepareStatement(sqlUpdate.toString());
+		qUpdate.setInt(OID_TALONARIO, pers.getOID());
+		qUpdate.executeUpdate();
+		qUpdate.close();
+	}
+
+	public PreparedStatement prepararSelect(int aSelect, Object aCondiciones) throws BaseException, SQLException {
+		PreparedStatement ps = null;
+		switch (aSelect) {
+		case IDBObjetoPersistente.SELECT_BY_OID: {
+			ps = this.selectByOID(aCondiciones);
+			break;
+		}
+		case IDBObjetoPersistente.SELECT_BY_CODIGO: {
+			ps = this.selectByCodigo(aCondiciones);
+			break;
+		}
+		case IDBObjetoPersistente.SELECT_ALL_HELP: {
+			ps = this.selectAllHelp(aCondiciones);
+			break;
+		}
+		case SELECT_TALONARIO_REMITO: {
+			ps = this.selectByTalonarioRemito(aCondiciones);
+			break;
+		}
+		case SELECT_HELP_BY_TALONARIO_RTO: {
+			ps = this.selectByHelpTalonarioRemito(aCondiciones);
+			break;
+		}
+		case SELECT_HELP_BY_TALONARIO_DEV_VTA: {
+			ps = this.selectByHelpTalonarioDevClie(aCondiciones);
+			break;
+		}
+		case SELECT_HELP_BY_TALONARIO_FACT_ND_NC_CLIE: {
+			ps = this.selectByHelpTalFactNDNCClie(aCondiciones);
+			break;
+		}
+		case SELECT_HELP_BY_TALONARIO_AJU_STK: {
+			ps = this.selectByHelpTalonarioAjuStk(aCondiciones);
+			break;
+		}
+		case SELECT_HELP_BY_TALONARIO_AJU_STK_TRANSF: {
+			ps = this.selectByHelpTalonarioAjuStkTransf(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIO_AJU_STK: {
+			ps = this.selectByTalonarioAjuStk(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIO_FACT_CLIE: {
+			ps = this.selectByTalonarioFactClie(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIO_FACT_CLIE_UNI_ORG: {
+			ps = this.selectByTalonarioFactClieUniOrg(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIO_ND_CLIE_UNI_ORG: {
+			ps = this.selectByTalonarioNDClieUniOrg(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIO_NC_CLIE_UNI_ORG: {
+			ps = this.selectByTalonarioNCClieUniOrg(aCondiciones);
+			break;
+		}
+		case SELECT_BY_IDENTIF_TC_SUCURSAL: {
+			ps = this.selectByIdentifTCSucursal(aCondiciones);
+			break;
+		}
+		case SELECT_BY_IDENTIF_TC: {
+			ps = this.selectByIdentifTC(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TIPO_AJU_STK_OPER_AJU_STK: {
+			ps = this.selectByTipoAjuStkOperAjuStk(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIO_NDI_CLIE_UNI_ORG: {
+			ps = this.selectByTalonarioNDIClieUniOrg(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIO_NCI_CLIE_UNI_ORG: {
+			ps = this.selectByTalonarioNCIClieUniOrg(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIOS_LIBRO_IVA_VTAS: {
+			ps = this.selectByTalonarioLibroIVAVentas(aCondiciones);
+			break;
+		}
+		case SELECT_BY_TALONARIO_LIQUI_TAR: {
+			ps = this.selectByLiquidacionTarjetas(aCondiciones);
+			break;
+		}
+		}
+		return ps;
+	}
+
+	private PreparedStatement selectByOID(Object aCondiciones) throws BaseException, SQLException {
+
+		final int OID_TALONARIO = 1;
+
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * FROM  geTalonario ");
+		textSQL.append(" WHERE oid_talonario = ? ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		int oid = ((Integer) aCondiciones).intValue();
+		querySelect.setInt(OID_TALONARIO, oid);
+		return querySelect;
+	}
+
+	private PreparedStatement selectByCodigo(Object aCondiciones) throws BaseException, SQLException {
+
+		final int CODIGO = 1;
+
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * FROM  geTalonario ");
+		textSQL.append(" WHERE codigo = ? ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		String codigo = (String) aCondiciones;
+		querySelect.setString(CODIGO, codigo);
+		return querySelect;
+	}
+
+	private PreparedStatement selectByTalonarioRemito(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL
+				.append("select * from geTalonario where oid_tc in (select oid_tc from getipocompro where identificacion='RTOCL') and activo=1 ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+	
+	
+	private PreparedStatement selectByHelpTalonarioAjuStkTransf(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL
+				.append("select oid_talonario oid,codigo codigo, descripcion descripcion ,activo  from geTalonario where oid_tc in (select oid_tc from getipocompro where identificacion in ('AJUSK','TRISK')) and activo=1 ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+	
+
+	private PreparedStatement selectByHelpTalonarioAjuStk(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL
+				.append("select oid_talonario oid,codigo codigo, descripcion descripcion ,activo  from geTalonario where oid_tc in (select oid_tc from getipocompro where identificacion='AJUSK') and activo=1 ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByHelpTalFactNDNCClie(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL
+				.append("select oid_talonario oid,codigo codigo, descripcion descripcion ,activo  from geTalonario where oid_tc in (select oid_tc from getipocompro where identificacion in ('FACLI','NDCLI','NCCLI','NDICL','NCICL')) and activo=1 ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByTalonarioAjuStk(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL
+				.append("select *  from geTalonario where oid_tc in (select oid_tc from getipocompro where identificacion='AJUSK') and activo=1 ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByHelpTalonarioRemito(Object aCondiciones) throws BaseException, SQLException {
+
+		StringBuffer textSQL = new StringBuffer();
+
+		textSQL.append("SELECT oid_talonario oid,codigo codigo, descripcion descripcion ,activo ");
+		textSQL
+				.append(" from geTalonario where oid_tc in (select oid_tc from getipocompro where identificacion='RTOCL') and activo=1 ");
+
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+	
+	private PreparedStatement selectByHelpTalonarioDevClie(Object aCondiciones) throws BaseException, SQLException {
+
+		StringBuffer textSQL = new StringBuffer();
+
+		textSQL.append("SELECT oid_talonario oid,codigo codigo, descripcion descripcion ,activo ");
+		textSQL
+				.append(" from geTalonario where oid_tc in (select oid_tc from getipocompro where identificacion='DEVVT') and activo=1 ");
+
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+	
+
+	private PreparedStatement selectByTalonarioFactClie(Object aCondiciones) throws BaseException, SQLException {
+
+		StringBuffer textSQL = new StringBuffer();
+
+		textSQL.append("SELECT oid_talonario oid,codigo codigo, descripcion descripcion ,activo ");
+		textSQL
+				.append(" from geTalonario where oid_tc in (select oid_tc from getipocompro where identificacion='FACLI') and activo=1 ");
+
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByTalonarioFactClieUniOrg(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * ");
+		textSQL
+				.append(" from geTalonario where oid_uni_org = ? and oid_tc in (select oid_tc from getipocompro where identificacion='FACLI') and activo=1 ");
+		UnidadOrganizativa uniOrg = (UnidadOrganizativa) aCondiciones;
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setInt(1, uniOrg.getOID());
+		return querySelect;
+	}
+	
+	
+	private PreparedStatement selectByLiquidacionTarjetas(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL
+				.append(" select * from geTalonario where oid_tc in (select oid_tc from geTipoCompro where identificacion in ('LIQTC','LIQTD')) and oid_uni_org ");
+		textSQL.append(" in (select oid_uni_org from geUnidadOrg where oid_sucursal=?) ");
+		HashTableDatos condiciones = (HashTableDatos) aCondiciones;
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setInt(1, this.getSesion().getLogin().getOidSucursal());
+		return querySelect;
+	}
+	
+	private PreparedStatement selectByTalonarioNDIClieUniOrg(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * ");
+		textSQL
+				.append(" from geTalonario where oid_uni_org = ? and oid_tc in (select oid_tc from getipocompro where identificacion='NDICL') and activo=1 ");
+		UnidadOrganizativa uniOrg = (UnidadOrganizativa) aCondiciones;
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setInt(1, uniOrg.getOID());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByTalonarioLibroIVAVentas(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * ");
+		textSQL.append(" from geTalonario where oid_talonario in (" +
+				"select b.oid_talonario from imListadoIVACab a , geComproCab b where a.oid_cco = b.oid_cco and a.tipo_listado= 'IVA_VENTAS'"+
+				") ");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+	
+	private PreparedStatement selectByTalonarioNCIClieUniOrg(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * ");
+		textSQL
+				.append(" from geTalonario where oid_uni_org = ? and oid_tc in (select oid_tc from getipocompro where identificacion='NCICL') and activo=1 ");
+		UnidadOrganizativa uniOrg = (UnidadOrganizativa) aCondiciones;
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setInt(1, uniOrg.getOID());
+		return querySelect;
+	}
+	
+	private PreparedStatement selectByTalonarioNDClieUniOrg(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * ");
+		textSQL
+				.append(" from geTalonario where oid_uni_org = ? and oid_tc in (select oid_tc from getipocompro where identificacion='NDCLI') and activo=1 ");
+		UnidadOrganizativa uniOrg = (UnidadOrganizativa) aCondiciones;
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setInt(1, uniOrg.getOID());
+		return querySelect;
+	}
+
+	public static int getProxNroTalonario(Object aCondiciones , ISesion sesion) throws BaseException {
+		
+		try {
+		// Actualizar el NroExterno
+		Talonario talonario = (Talonario) aCondiciones;
+		
+		StringBuffer textUpdate = new StringBuffer();
+		textUpdate.append(" update geTalonario set nro_actual = nro_actual + 1 where oid_talonario = "+talonario.getOIDInteger().toString());
+		PreparedStatement updateNroExt = sesion.getConexionBD().prepareStatement(textUpdate.toString());
+		updateNroExt.executeUpdate();
+		updateNroExt.close();
+		
+		StringBuffer textSelect = new StringBuffer();
+		textSelect.append(" select nro_actual from geTalonario where oid_talonario = "+talonario.getOIDInteger().toString());
+		PreparedStatement selectNroActual = sesion.getConexionBD().prepareStatement(textSelect.toString());
+		ResultSet rs = selectNroActual.executeQuery();
+		while (rs.next()) 
+			return rs.getInt(1);
+		rs.close();
+		selectNroActual.close();
+		} catch (Exception e) {
+			throw new ExceptionValidation(null,e.getMessage());
+		}
+		return 0;
+	}
+
+	private PreparedStatement selectByTipoAjuStkOperAjuStk(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append(" select * ");
+		textSQL.append("  from " + " geTalonario where oid_talonario in "
+				+ " (select oid_talonario from skConfTalAjuStk where "
+				+ " oid_conf_tal_stk in (select oid_conf_tal_stk from skOperHabTalAjuStk where "
+				+ " tipo_aju_stk=? and oid_oper_aju_stk in (select oid_oper_aju_stk from skCompoTalAjuStk where "
+				+ " oid_tipo_conf_mov=?))) ");
+		HashTableDatos condiciones = (HashTableDatos) aCondiciones;
+		String tipoAjuste = (String) condiciones.get("TIPO_AJUSTE");
+		Integer oidOperAjuStk = (Integer) condiciones.get("OID_TIPO_CONF_MOV");
+
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setString(1, tipoAjuste);
+		querySelect.setInt(2, oidOperAjuStk.intValue());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByTalonarioNCClieUniOrg(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL.append("SELECT * ");
+		textSQL
+				.append(" from geTalonario where oid_uni_org = ? and oid_tc in (select oid_tc from getipocompro where identificacion='NCCLI') and activo=1 ");
+		UnidadOrganizativa uniOrg = (UnidadOrganizativa) aCondiciones;
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setInt(1, uniOrg.getOID());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByIdentifTCSucursal(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL
+				.append(" select * from geTalonario where oid_tc in (select oid_tc from geTipoCompro where identificacion=?) and oid_uni_org ");
+		textSQL.append(" in (select oid_uni_org from geUnidadOrg where oid_sucursal=?) ");
+		HashTableDatos condiciones = (HashTableDatos) aCondiciones;
+		String identificacion = (String) condiciones.get("IDENTIFICACION");
+		Sucursal sucursal = (Sucursal) condiciones.get(Sucursal.NICKNAME);
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setString(1, identificacion);
+		querySelect.setInt(2, sucursal.getOID());
+		return querySelect;
+	}
+
+	private PreparedStatement selectByIdentifTC(Object aCondiciones) throws BaseException, SQLException {
+		StringBuffer textSQL = new StringBuffer();
+		textSQL
+				.append(" select * from geTalonario where oid_tc in (select oid_tc from geTipoCompro where identificacion=?) ");
+		HashTableDatos condiciones = (HashTableDatos) aCondiciones;
+		String identificacion = (String) condiciones.get("IDENTIFICACION");
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		querySelect.setString(1, identificacion);
+		return querySelect;
+	}
+
+	private PreparedStatement selectAllHelp(Object aCondiciones) throws BaseException, SQLException {
+
+		StringBuffer textSQL = new StringBuffer();
+
+		textSQL.append("SELECT oid_talonario oid,codigo codigo, descripcion descripcion ,activo ");
+		textSQL.append(" from geTalonario");
+
+		PreparedStatement querySelect = getSesion().getConexionBD().prepareStatement(textSQL.toString());
+		return querySelect;
+	}
+
+	public static List getTalonariosRemito(ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_TALONARIO_REMITO, null,
+				new ListObserver(), aSesion);
+	}
+	
+	public static List getTalonariosDevVtas(ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_HELP_BY_TALONARIO_DEV_VTA, null,
+				new ListObserver(), aSesion);
+	}
+	
+
+	public static List getTalonariosAjuStk(ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TALONARIO_AJU_STK, null,
+				new ListObserver(), aSesion);
+	}
+
+	public static List getTalonariosFactuClie(UnidadOrganizativa uniOrg, ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TALONARIO_FACT_CLIE_UNI_ORG,
+				uniOrg, new ListObserver(), aSesion);
+
+	}
+
+	public static List getTalonariosNDClie(UnidadOrganizativa uniOrg, ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TALONARIO_ND_CLIE_UNI_ORG, uniOrg,
+				new ListObserver(), aSesion);
+	}
+	
+	public static List getTalonariosNDIClie(UnidadOrganizativa uniOrg, ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TALONARIO_NDI_CLIE_UNI_ORG, uniOrg,
+				new ListObserver(), aSesion);
+	}
+	
+	public static List getTalonariosNCIClie(UnidadOrganizativa uniOrg, ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TALONARIO_NCI_CLIE_UNI_ORG, uniOrg,
+				new ListObserver(), aSesion);
+	}	
+	
+
+	public static List getTalonariosNCClie(UnidadOrganizativa uniOrg, ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TALONARIO_NC_CLIE_UNI_ORG, uniOrg,
+				new ListObserver(), aSesion);
+	}
+
+	public static List getTalonariosByIdentifTCySucursal(String identificacion, Sucursal sucursal, ISesion aSesion)
+			throws BaseException {
+		HashTableDatos condiciones = new HashTableDatos();
+		condiciones.put("IDENTIFICACION", identificacion);
+		condiciones.put(Sucursal.NICKNAME, sucursal);
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_IDENTIF_TC_SUCURSAL, condiciones,
+				new ListObserver(), aSesion);
+
+	}
+
+	public static List getTalonariosByTipoAjuStkyOidTipoConfMov(String tipoAjuStk, Integer oidTipoConfMov, ISesion aSesion)
+			throws BaseException {
+		HashTableDatos condiciones = new HashTableDatos();
+		condiciones.put("TIPO_AJUSTE", tipoAjuStk);
+		condiciones.put("OID_TIPO_CONF_MOV", oidTipoConfMov);
+
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TIPO_AJU_STK_OPER_AJU_STK,
+				condiciones, new ListObserver(), aSesion);
+
+	}
+
+	public static List getTalonariosByIdentifTC(String identificacion, ISesion aSesion) throws BaseException {
+		HashTableDatos condiciones = new HashTableDatos();
+		condiciones.put("IDENTIFICACION", identificacion);
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_IDENTIF_TC, condiciones,
+				new ListObserver(), aSesion);
+
+	}
+	
+	public static List getTalonariosByLibroIVAVentas(ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TALONARIOS_LIBRO_IVA_VTAS, null,
+				new ListObserver(), aSesion);
+
+	}
+	
+	public static List getTalonariosLiquidacionesTarjetas(ISesion aSesion) throws BaseException {
+		return (List) ObjetoLogico.getObjects(Talonario.NICKNAME, DBTalonario.SELECT_BY_TALONARIO_LIQUI_TAR, null,
+				new ListObserver(), aSesion);
+
+	}
+	
+	
+
+}

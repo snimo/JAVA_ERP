@@ -1,0 +1,504 @@
+package com.srn.erp.legales.bm;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.srn.erp.legales.da.DBSeclo;
+import com.srn.erp.sueldos.bm.Legajo;
+
+import framework.applicarionServer.bl.ObjetosAplicacion.ObjetoLogico;
+import framework.applicarionServer.bl.Sesion.ISesion;
+import framework.applicarionServer.bl.Utils.Util;
+import framework.applicarionServer.bm.Varios.CalculadorMoney;
+import framework.applicarionServer.bm.Varios.Money;
+import framework.request.bl.Utils.BaseException;
+import framework.request.bl.Utils.HashTableDatos;
+import framework.request.bl.Utils.Validar;
+
+public class Seclo extends ObjetoLogico {
+
+	public String getCodigo() throws BaseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getDescripcion() throws BaseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static final String TIPO_SECLO = "SECLO";
+	public static final String TIPO_ACU_INT = "ACU_INT";
+	public static final String TIPO_MTSS = "MTSS";
+	
+
+	public Seclo() {
+	}
+
+	public static String NICKNAME = "leg.Seclo";
+
+	private List audiencias = new ArrayList();
+	private boolean readAudiencias = true;
+
+	private List docEnviadas = new ArrayList();
+	private boolean readDocEnviadas = true;
+
+	private List pagos = new ArrayList();
+	private boolean readPagos = true;
+
+	private List requeridos = new ArrayList();
+	private boolean readRequeridos = true;
+	
+	private List rubroReclamos = new ArrayList();
+	private boolean readRubroReclamos = true;	
+
+	private Legajo legajo;
+	private java.util.Date fec_recepcion;
+	private TipoReclamoLeg tipo_reclamo;
+	private Money monto_reclamo;
+	private String observaciones;
+	private Boolean activo;
+	private EstadoSeclo estado_seclo;
+	private Money monto_acuerdo;
+	private Money hono_letrado;
+	private Money hono_conciliado;
+	private Money otros_hono;
+	private Money pagado;
+	private Boolean saldado;
+	private String codigoInterno;
+	private String tipo;
+	private FormaExtincion formaExtincion;
+	private String causalAcuerdo;
+	private java.util.Date fecNovedad;
+	
+
+	public FormaExtincion getFormaExtincion() throws BaseException {
+		supportRefresh();
+		return this.formaExtincion;
+	}	
+	
+	public java.util.Date getFechaNovedad() throws BaseException {
+		supportRefresh();
+		return this.fecNovedad;
+	}	
+	
+	public String getCausaAcuerdo() throws BaseException {
+		supportRefresh();
+		return this.causalAcuerdo;
+	}	
+	
+	public Legajo getLegajo() throws BaseException {
+		supportRefresh();
+		return legajo;
+	}
+	
+	public String getTipo() throws BaseException {
+		supportRefresh();
+		return tipo;
+	}
+	
+	public void setLegajo(Legajo aLegajo) {
+		this.legajo = aLegajo;
+	}	
+	
+	public void setFecNovedad(java.util.Date aFecNovedad) {
+		this.fecNovedad = aFecNovedad;
+	}	
+	
+	public void setCausaAcuerdo(String aCausaAcuerdo) {
+		this.causalAcuerdo = aCausaAcuerdo;
+	}	
+	
+	public void setFormaExtincion(FormaExtincion aFormaExtincion) {
+		this.formaExtincion = aFormaExtincion;
+	}	
+
+	public void setTipo(String aTipo) {
+		this.tipo = aTipo;
+	}
+
+	public String getCodigoInterno() throws BaseException {
+		supportRefresh();
+		return this.codigoInterno;
+	}
+
+	public void setcodigoInterno(String aCodigoInterno) {
+		this.codigoInterno = aCodigoInterno;
+	}
+
+	public java.util.Date getFec_recepcion() throws BaseException {
+		supportRefresh();
+		return fec_recepcion;
+	}
+
+	public void setFec_recepcion(java.util.Date aFec_recepcion) {
+		this.fec_recepcion = aFec_recepcion;
+	}
+
+	public TipoReclamoLeg getTipo_reclamo() throws BaseException {
+		supportRefresh();
+		return tipo_reclamo;
+	}
+
+	public void setTipo_reclamo(TipoReclamoLeg aTipo_reclamo) {
+		this.tipo_reclamo = aTipo_reclamo;
+	}
+
+	public Money getMonto_reclamo() throws BaseException {
+		supportRefresh();
+		return monto_reclamo;
+	}
+
+	public void setMonto_reclamo(Money aMonto_reclamo) {
+		this.monto_reclamo = aMonto_reclamo;
+	}
+
+	public String getObservaciones() throws BaseException {
+		supportRefresh();
+		return observaciones;
+	}
+
+	public void setObservaciones(String aObservaciones) {
+		this.observaciones = aObservaciones;
+	}
+
+	public Boolean isActivo() throws BaseException {
+		supportRefresh();
+		return activo;
+	}
+
+	public void setActivo(Boolean aActivo) {
+		this.activo = aActivo;
+	}
+
+	public EstadoSeclo getEstado_seclo() throws BaseException {
+		supportRefresh();
+		return estado_seclo;
+	}
+
+	public void setEstado_seclo(EstadoSeclo aEstado_seclo) {
+		this.estado_seclo = aEstado_seclo;
+	}
+
+	public Money getMonto_acuerdo() throws BaseException {
+		supportRefresh();
+		return monto_acuerdo;
+	}
+
+	public void setMonto_acuerdo(Money aMonto_acuerdo) {
+		this.monto_acuerdo = aMonto_acuerdo;
+	}
+
+	public Money getHono_letrado() throws BaseException {
+		supportRefresh();
+		return hono_letrado;
+	}
+
+	public void setHono_letrado(Money aHono_letrado) {
+		this.hono_letrado = aHono_letrado;
+	}
+
+	public Money getHono_conciliado() throws BaseException {
+		supportRefresh();
+		return hono_conciliado;
+	}
+
+	public void setHono_conciliado(Money aHono_conciliado) {
+		this.hono_conciliado = aHono_conciliado;
+	}
+
+	public Money getOtros_hono() throws BaseException {
+		supportRefresh();
+		return otros_hono;
+	}
+
+	public void setOtros_hono(Money aOtros_hono) {
+		this.otros_hono = aOtros_hono;
+	}
+
+	public Money getPagado() throws BaseException {
+		supportRefresh();
+		return pagado;
+	}
+
+	public void setPagado(Money aPagado) {
+		this.pagado = aPagado;
+	}
+
+	public Boolean isSaldado() throws BaseException {
+		supportRefresh();
+		return saldado;
+	}
+
+	public void setSaldado(Boolean aSaldado) {
+		this.saldado = aSaldado;
+	}
+
+	public String getNickName() {
+		return NICKNAME;
+	}
+
+	public static Seclo findByOid(Integer oid, ISesion aSesion) throws BaseException {
+		return (Seclo) getObjectByOid(NICKNAME, oid, aSesion);
+	}
+
+	public static Seclo findByOidProxy(Integer oid, ISesion aSesion) throws BaseException {
+		return (Seclo) getObjectByOidProxy(NICKNAME, oid, aSesion);
+	}
+
+	public static Seclo findByCodigo(String codigo, ISesion aSesion) throws BaseException {
+		return (Seclo) getObjectByCodigo(NICKNAME, codigo, aSesion);
+	}
+
+	public void beforeSave() throws BaseException {
+		Validar.noNulo(legajo, "Debe ingresar el Legajo");
+		Validar.noNulo(estado_seclo, "Debe ingresar el Estado del Seclo");
+	}
+
+	public static List getSeclosByLegajo(Legajo aLegajo, ISesion aSesion) throws BaseException {
+		return DBSeclo.getSeclosByLegajo(aLegajo, aSesion);
+	}
+
+	public List getAudiencias() throws BaseException {
+		if (this.readAudiencias) {
+			List listaAudiencias = AudienciaSeclo.getAudiencias(this, getSesion());
+			this.audiencias.addAll(listaAudiencias);
+			this.readAudiencias = false;
+		}
+		return this.audiencias;
+	}
+
+	public List getDocEnviados() throws BaseException {
+		if (this.readDocEnviadas) {
+			List listaDocEnv = DocEnvSeclo.getDocEnvBySeclos(this, getSesion());
+			this.docEnviadas.addAll(listaDocEnv);
+			this.readDocEnviadas = false;
+		}
+		return this.docEnviadas;
+	}
+
+	public List getPagosSeclo() throws BaseException {
+		if (this.readPagos) {
+			List listaPagos = PagoSeclo.getPagosSeclo(this, getSesion());
+			this.pagos.addAll(listaPagos);
+			this.readPagos = false;
+		}
+		return this.pagos;
+	}
+
+	public List getRequeridos() throws BaseException {
+		if (this.readRequeridos) {
+			List listaRequeridos = RequeridoSeclo.getRequeridos(this, getSesion());
+			this.requeridos.addAll(listaRequeridos);
+			this.readRequeridos = false;
+		}
+		return this.requeridos;
+	}
+	
+	public List getRubrosReclamos() throws BaseException {
+		if (this.readRubroReclamos) {
+			List listaRubrosReclamos = RubroReclamoSeclo.getRubrosReclaSeclos(this, getSesion());
+			this.rubroReclamos.addAll(listaRubrosReclamos);
+			this.readRubroReclamos = false;
+		}
+		return this.rubroReclamos;
+	}	
+
+	public void addAudiencias(AudienciaSeclo aAudienciaSeclo) throws BaseException {
+		aAudienciaSeclo.setSeclo(this);
+		this.audiencias.add(aAudienciaSeclo);
+	}
+	
+	public void addRubroReclamo(RubroReclamoSeclo aRubroReclamoSeclo) throws BaseException {
+		aRubroReclamoSeclo.setSeclo(this);
+		this.rubroReclamos.add(aRubroReclamoSeclo);
+	}	
+
+	public void addRequerido(RequeridoSeclo aRequeridoSeclo) throws BaseException {
+		aRequeridoSeclo.setSeclo(this);
+		this.requeridos.add(aRequeridoSeclo);
+	}
+
+	public void addPago(PagoSeclo aPagoSeclo) throws BaseException {
+		aPagoSeclo.setSeclo(this);
+		this.pagos.add(aPagoSeclo);
+	}
+
+	public void addDocEnviadas(DocEnvSeclo aDocEnvSeclo) throws BaseException {
+		aDocEnvSeclo.setSeclo(this);
+		this.docEnviadas.add(aDocEnvSeclo);
+	}
+
+	public void afterSave() throws BaseException {
+
+		Iterator iterAudiencias = this.audiencias.iterator();
+		while (iterAudiencias.hasNext()) {
+			AudienciaSeclo audiencia = (AudienciaSeclo) iterAudiencias.next();
+			audiencia.save();
+			audiencia = null;
+		}
+		iterAudiencias = null;
+
+		Iterator iterDocEnviadas = this.docEnviadas.iterator();
+		while (iterDocEnviadas.hasNext()) {
+			DocEnvSeclo docEnvSeclo = (DocEnvSeclo) iterDocEnviadas.next();
+			docEnvSeclo.save();
+			docEnvSeclo = null;
+		}
+		iterDocEnviadas = null;
+
+		Iterator iterPagos = this.pagos.iterator();
+		while (iterPagos.hasNext()) {
+			PagoSeclo pago = (PagoSeclo) iterPagos.next();
+			pago.save();
+			pago = null;
+		}
+		iterPagos = null;
+
+		Iterator iterRequeridos = this.requeridos.iterator();
+		while (iterRequeridos.hasNext()) {
+			RequeridoSeclo requerido = (RequeridoSeclo) iterRequeridos.next();
+			requerido.save();
+			requerido = null;
+		}
+		iterRequeridos = null;
+		
+		Iterator iterRubroReclamos = this.rubroReclamos.iterator();
+		while (iterRubroReclamos.hasNext()) {
+			RubroReclamoSeclo rubroReclamoSeclo = (RubroReclamoSeclo) iterRubroReclamos.next();
+			rubroReclamoSeclo.save();
+			rubroReclamoSeclo = null;
+		}
+		iterRubroReclamos = null;		
+
+	}
+
+	public static void actualizarMontoPagado(Seclo aSeclo, ISesion aSesion) throws BaseException {
+		DBSeclo.actualizarMontoPagado(aSeclo, aSesion);
+	}
+
+	public static List getSECLOS(String tipo,java.util.Date fecDesde, java.util.Date fecHasta, Money montoDesde, Money montoHasta, String codigoInterno, Boolean soloConAudienPend, List tiposReclamos,
+			List estadosSeclos, List legajos, List empresas, List sectores, List puestos, List estados, ISesion aSesion) throws BaseException {
+		HashTableDatos condiciones = new HashTableDatos();
+		if (fecDesde != null)
+			condiciones.put("FEC_DESDE", fecDesde);
+		if (fecHasta != null)
+			condiciones.put("FEC_HASTA", fecHasta);
+		if (montoDesde != null)
+			condiciones.put("MONTO_DESDE", montoDesde);
+		if (montoHasta != null)
+			condiciones.put("MONTO_HASTA", montoHasta);
+		if (codigoInterno != null)
+			condiciones.put("CODIGO_INTERNO", codigoInterno);
+		if (soloConAudienPend != null)
+			condiciones.put("SOLO_CON_AUDI_PEND", soloConAudienPend);
+		condiciones.put("TIPOS_RECLAMOS", tiposReclamos);
+		condiciones.put("ESTADOS_SECLOS", estadosSeclos);
+		condiciones.put("LEGAJOS", legajos);
+		condiciones.put("EMPRESAS", empresas);
+		condiciones.put("SECTORES", sectores);
+		condiciones.put("PUESTOS", puestos);
+		condiciones.put("ESTADOS", estados);
+		condiciones.put("TIPO", tipo);
+		
+		return DBSeclo.getSeclos(condiciones, aSesion);
+	}
+
+	public String getStringRequeridos() throws BaseException {
+		StringBuffer listaReq = new StringBuffer("");
+		Iterator iterReq = this.getRequeridos().iterator();
+		while (iterReq.hasNext()) {
+			RequeridoSeclo reqSECLO = (RequeridoSeclo) iterReq.next();
+			listaReq.append(reqSECLO.getValor_clasif_empresa().getDescripcion());
+			listaReq.append(Util.ENTER());
+		}
+		return listaReq.toString();
+	}
+	
+	
+	public String getLeyendaRubrosReclamos() throws BaseException {
+		StringBuffer leyenda = new StringBuffer("");
+		Iterator iterRubrosReclamos = this.getRubrosReclamos().iterator();
+		while (iterRubrosReclamos.hasNext()) {
+			RubroReclamoSeclo rubroReclamoSeclo = (RubroReclamoSeclo) iterRubrosReclamos.next();
+			leyenda.append(rubroReclamoSeclo.getRubro_condena().getDescripcion()+Util.ENTER());
+		}
+		return leyenda.toString();
+	}
+
+	public String getLeyendasAudiencias(java.util.Date fecActual) throws BaseException {
+
+		boolean envioAudAnt = false;
+
+		StringBuffer listaAud = new StringBuffer("");
+		Iterator iterAudi = this.getAudiencias().iterator();
+		while (iterAudi.hasNext()) {
+			AudienciaSeclo audiencia = (AudienciaSeclo) iterAudi.next();
+
+			if (audiencia.getFecha().before(fecActual)) {
+
+				if (envioAudAnt == false)
+					listaAud.append(Util.ENTER() + "Hubo audiencias anteriores ... ");
+				envioAudAnt = true;
+				continue;
+			}
+
+			listaAud.append(audiencia.getLeyendaAudiencia() + Util.ENTER());
+		}
+		return listaAud.toString();
+	}
+
+	public String getLeyendasDocEnviada() throws BaseException {
+		StringBuffer listaDocEnv = new StringBuffer("");
+		Iterator iterDocuEnv = this.getDocEnviados().iterator();
+		while (iterDocuEnv.hasNext()) {
+			DocEnvSeclo docEnvSeclo = (DocEnvSeclo) iterDocuEnv.next();
+			listaDocEnv.append(docEnvSeclo.getLeyendaDocuEnv() + Util.ENTER());
+		}
+		return listaDocEnv.toString();
+	}
+
+	public String getLeyendasPagosRealizados() throws BaseException {
+
+		StringBuffer listaPagReal = new StringBuffer("");
+		Iterator iterPagosRealiz = this.getPagosSeclo().iterator();
+		while (iterPagosRealiz.hasNext()) {
+			PagoSeclo pagoSeclo = (PagoSeclo) iterPagosRealiz.next();
+			listaPagReal.append(pagoSeclo.getLeyendaPago() + Util.ENTER());
+		}
+		return listaPagReal.toString();
+	}
+
+	public Money getSaldo() throws BaseException {
+		Money totAPagar = this.getTotalAPagar();
+		Money totPagado = this.getPagado();
+		if (totAPagar == null)
+			totAPagar = new Money(0);
+		if (totPagado == null)
+			totPagado = new Money(0);
+		CalculadorMoney calcSaldo = new CalculadorMoney(totAPagar);
+		calcSaldo.restar(totPagado);
+		return calcSaldo.getResultMoney();
+	}
+
+	public Money getTotalAPagar() throws BaseException {
+
+		CalculadorMoney calcTotal = new CalculadorMoney(new Money(0));
+
+		if (this.getMonto_acuerdo() != null)
+			calcTotal.sumar(this.getMonto_acuerdo());
+
+		if (this.getHono_letrado() != null)
+			calcTotal.sumar(this.getHono_letrado());
+
+		if (this.getHono_conciliado() != null)
+			calcTotal.sumar(this.getHono_conciliado());
+
+		if (this.getOtros_hono() != null)
+			calcTotal.sumar(this.getOtros_hono());
+
+		return calcTotal.getResultMoney();
+	}
+
+}
