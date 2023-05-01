@@ -1,6 +1,6 @@
 package com.srn.erp.Ausentismo.bl;
 
-// comentario
+// comentario, otra prueba
 public class ReglasGrupoRRHH {
   public ReglasGrupoRRHH() { 
   }
